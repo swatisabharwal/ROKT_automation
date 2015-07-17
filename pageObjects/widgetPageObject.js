@@ -11,7 +11,7 @@ widgetPage.switchToWidgetFrame = function(){
        browser.driver.sleep(15000);
        browser.driver.findElement(by.css('.wdHolder>iframe')).isDisplayed().then(function(isVisible){
 	if(isVisible){
-		console.log("Frame Switched");
+		
 		browser.driver.sleep(15000);
 		browser.driver.switchTo().frame(browser.driver.findElement(by.css('.wdHolder>iframe')));
 		console.log("Frame Switched");
@@ -33,7 +33,7 @@ widgetPage.verifyWidgetOverlay = function(){
 	   			}
 	   	   
 	   	   else{
-	   	        console.log("not visible");
+	   	        console.log("<< Overlay is not visible");
 	   	   }
            	
 	});
