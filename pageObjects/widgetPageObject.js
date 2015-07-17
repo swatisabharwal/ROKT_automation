@@ -1,10 +1,5 @@
 require('../node_modules/protractor/node_modules/jasminewd');
 
- // var frameElement_Widget = browser.driver.findElement(by.css('.wdHolder>iframe'));
- // var overlay_Widget = browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
- // var btn_Attending = browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));
-
-
 function widgetPage(){}
 
 widgetPage.switchToWidgetFrame = function(){
