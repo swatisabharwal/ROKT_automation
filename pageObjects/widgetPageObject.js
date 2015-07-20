@@ -1,70 +1,40 @@
-require('../node_modules/protractor/node_modules/jasminewd');
 
-function widgetPage(){}
-
-widgetPage.switchToWidgetFrame = function(){
-       browser.driver.sleep(15000);
-       browser.driver.findElement(by.css('.wdHolder>iframe')).isDisplayed().then(function(isVisible){
-	if(isVisible){
-		
-		browser.driver.sleep(15000);
-		browser.driver.switchTo().frame(browser.driver.findElement(by.css('.wdHolder>iframe')));
-		console.log("Frame Switched");
-	}
-	else{
-		console.log("Frame not switched");	
-	}
-	
- });
-  
+var WidgetPage = function () {
+	//Empty constructor for now, can add piece of code if required
 };
 
-widgetPage.verifyWidgetOverlay = function(){
+ WidgetPage.prototype = Object.create({}, {
+ 	
+ 	// UI Objects of Widget 
+    widgetFrame: { get: function () { return browser.driver.findElement(by.css('.wdHolder>iframe')); }},
+    attendButton: { get: function () { return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')); }},
+    widgetOverlay: { get: function () { return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity')); }},
+    shareLabel: { get: function () { return browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')); }},
+    
+    
+   // Methods around Object -- User actions 
+    switchToWidgetFrame: {
+    	 value: function () {
+    	 	 return browser.driver.switchTo().frame(this.widgetFrame); 
+    	 }
+    },
+    getVisibiltyOfWidgetOverlay: {
+    	 value: function () { 
+    	 	return this.widgetOverlay.isDisplayed();
+    	 }
+    },
+    getShareLabelText: {
+    	 value: function () { 
+    	 	return this.shareLabel.getText(); 
+    	 }
+    },
+    clickOnAttendButton: { 
+    	value: function () { 
+    		return this.attendButton.click();
+    	}
+    }
+    
 
-	browser.driver.sleep(5000);
-    browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity')).isDisplayed().then(function (isVisible){
-           if (isVisible) {
-                console.log(">>Overlay is visible");
-	   			}
-	   	   
-	   	   else{
-	   	        console.log("<< Overlay is not visible");
-	   	   }
-           	
-	});
-};
+});
 
-widgetPage.verifyShareFacebboklabel = function(){
-	browser.driver.sleep(5000);
-    browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')).isDisplayed().then(function (isVisible){
-           if (isVisible) {
-                console.log(">>*****Share to Facebook label is present***");
-                 var label_txt= browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')).getText();
-                 expect(label_txt).toEqual('Share on Facebook');
-	   			}
-	   	   
-	   	   else{
-	   	        console.log("label not visible");
-	   	   }
-           	
-	});
-};
-
-widgetPage.clickOnAttendingButton=function(){
-console.log("click");
-	browser.driver.sleep(5000);
-	browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')).isDisplayed().then(function (isVisible){
-		if(isVisible){
-			console.log("Button appeard");
-			browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')).click();
-		}
-		else
-		{
-			console.log("Button not appearing");
-			
-		}
-
-	});
-};
-
-module.exports = widgetPage;
+module.exports = WidgetPage;
