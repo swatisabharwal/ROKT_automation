@@ -47,7 +47,7 @@ var WidgetPage = function () {
     fbWindowHandler: {
 	  value: function () {
 		var Whandlers =WindowHandlers();
-		return browser.driver.switchTo().window(Whandlers.popuphandler);   
+		return browser.driver.switchTo().window(Whandlers.popup_handlers);   
        }      
    },
     inputFbId: {
