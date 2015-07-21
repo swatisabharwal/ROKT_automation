@@ -1,70 +1,129 @@
-require('../node_modules/protractor/node_modules/jasminewd');
+var WindowHandlers=require('../Utilities/WindowHandlers.js');	
+var WidgetPage = function () {
+	//Empty constructor for now, can add piece of code if required
 
-function widgetPage(){}
-
-widgetPage.switchToWidgetFrame = function(){
-       browser.driver.sleep(15000);
-       browser.driver.findElement(by.css('.wdHolder>iframe')).isDisplayed().then(function(isVisible){
-	if(isVisible){
-		
-		browser.driver.sleep(15000);
-		browser.driver.switchTo().frame(browser.driver.findElement(by.css('.wdHolder>iframe')));
-		console.log("Frame Switched");
-	}
-	else{
-		console.log("Frame not switched");	
-	}
-	
- });
-  
 };
 
-widgetPage.verifyWidgetOverlay = function(){
+ WidgetPage.prototype = Object.create({}, {
+ 	
+ 	// UI Objects of Widget 
+    widgetFrame: { get: function () { return browser.driver.findElement(by.css('.wdHolder>iframe')); }},
+    attendButton: { get: function () { return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')); }},
+    widgetOverlay: { get: function () { return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity')); }},
+    shareLabel: { get: function () { return browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')); }},
+    emailId:       { get: function () { return browser.driver.findElement(by.css('#email'));}},
+    password:      { get: function () { return browser.driver.findElement(by.css('#pass'));}},
+    loginBtn:      { get: function () { return browser.driver.findElement(by.css('#u_0_2')).click();}},
+	send_inviation_btn:{ get: function () { return browser.driver.findElement(by.xpath('//*[@id="ux_smartSignup_facebook_event_message_inner_buttons_send_invitation"]'));}},
+    check_box:     { get: function () { return browser.driver.findElement(by.xpath('//*[@id="ux_iagree_check"]'));}},
+    cont_btn:      { get: function () { return browser.driver.findElement(by.xpath('//button[@class="button submit large ui_smartsignup_buttons_next directive clickable"]'));}},
+    skip_btn:      { get: function () { return browser.driver.findElement(by.xpath('//*[@id="ux_surveyQuestionGroup_holder"]/form/div/div/div[1]/div[2]/button'));}},
+    cont_share_btn:{ get: function () { return browser.driver.findElement(by.xpath('//*[@id="ux_shareandwin_main_sns_skip_button"]'));}},   
+   
+    
+    
+   // Methods around Object -- User actions 
+    switchToWidgetFrame: {
+    	 value: function () {
+    	 	 return browser.driver.switchTo().frame(this.widgetFrame); 
+    	 }
+    },
+    getVisibiltyOfWidgetOverlay: {
+    	 value: function () { 
+    	 	return this.widgetOverlay.isDisplayed();
+    	 }
+    },
+    getShareLabelText: {
+    	 value: function () { 
+    	 	return this.shareLabel.getText(); 
+    	 }
+    },
+    clickOnAttendButton: { 
+    	value: function () { 
+    		return this.attendButton.click();
+    	}
+    },
+    
+    fbWindowHandler: {
+	  value: function () {
+		var Whandlers =WindowHandlers();
+		return browser.driver.switchTo().window(Whandlers.popup_handlers);   
+       }      
+   },
+    inputFbId: {
+        value: function () {
+		return this.emailId.sendKeys("testuser01.automation@gmail.com");
+        }
+    },
+  inputFbPass: {
+        value: function () {
+                return this.password.sendkeys("Qait@123");
+       }
+   },
+clickOnLoginBtn: {
+	  value: function () {
+		return this.loginBtn.click();
+       }
+   },     
+   
+verifySendInvitationButton: {
+	 value: function () {
+		var Whandlers =WindowHandlers();
+		browser.driver.switchTo().frame(this.widgetFrame);
+		return this.send_invitation_btn.isDisplayed();
+     
+      }
+   },
 
-	browser.driver.sleep(5000);
-    browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity')).isDisplayed().then(function (isVisible){
-           if (isVisible) {
-                console.log(">>Overlay is visible");
-	   			}
-	   	   
-	   	   else{
-	   	        console.log("<< Overlay is not visible");
-	   	   }
-           	
-	});
-};
+clickCheckbBox:	{
+	 value: function () {
+		return this.check_box.click();
+     
+      }
+   },
 
-widgetPage.verifyShareFacebboklabel = function(){
-	browser.driver.sleep(5000);
-    browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')).isDisplayed().then(function (isVisible){
-           if (isVisible) {
-                console.log(">>*****Share to Facebook label is present***");
-                 var label_txt= browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text')).getText();
-                 expect(label_txt).toEqual('Share on Facebook');
-	   			}
-	   	   
-	   	   else{
-	   	        console.log("label not visible");
-	   	   }
-           	
-	});
-};
+ verifyContBtn:	{
+	 value: function () {
+		return this.cont_btn.isDisplayed();
+     
+      }
+   },
 
-widgetPage.clickOnAttendingButton=function(){
-console.log("click");
-	browser.driver.sleep(5000);
-	browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')).isDisplayed().then(function (isVisible){
-		if(isVisible){
-			console.log("Button appeard");
-			browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending')).click();
-		}
-		else
-		{
-			console.log("Button not appearing");
-			
-		}
+  clickContBtn:{
+	 value: function () {
+		return this.cont_btn.click();
+     
+      }
+   },
 
-	});
-};
+   verifyOffer:	{
+	 value: function () {
+		return this.skip_btn.isDisplayed();
+     
+      }
+   },
 
-module.exports = widgetPage;
+   clickOnSkip:	{
+	 value: function () {
+		return this.skip_btn.click();
+     
+      }
+   },
+
+    verifyCont:	{
+	 value: function () {
+		return this.cont_share_btn.isDisplayed();
+     
+      }
+   },
+
+ clickOnContBtn:	{
+	 value: function () {
+		return this.cont_share_btn.click();
+     
+      }
+   }
+    
+});
+
+module.exports = WidgetPage;
