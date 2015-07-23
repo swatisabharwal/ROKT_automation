@@ -1,0 +1,9 @@
+var fbSession = function () {
+  browser.driver.ignoreSynchronization = true;
+  browser.driver.get('https://www.facebook.com/');
+  console.log("Launched URL from session");
+  browser.sleep(10000);
+};
+
+module.exports = fbSession;
+//https://www.facebook.com/login.php?next=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer%2F145634995501895%2F%3Fmethod%3DGET%26path%3Dhttps%253A%252F%252Fwww.facebook.com%252Flogin.php%253Fskip_api_login%253D1%2526api_key%253D145634995501895%2526signed_next%253D1%2526next%253Dhttps%25253A%25252F%25252Fwww.facebook.com%25252Fv2.4%25252Fdialog%25252Foauth%25253Fredirect_uri%25253Dhttps%2525253A%2525252F%2525252Fdevelopers.facebook.com%2525252Ftools%2525252Fexplorer%2525252Fcallback%2525253Fmethod%2525253DGET%25252526path%2525253Dhttps%252525253A%252525252F%252525252Fwww.facebook.com%252525252F%252525253Fstype%252525253Dlo%2525252526jlou%252525253DAfdKQrSW0T37NMDAnBGDeKKi47ymL7DBoqyRIPTL7oF229NCLdP23eZcEDlSRmC6FmNHS5pdYYPplYDh4EzTNlbaSlNuAD3cCBQRKymD0APiEg%2525252526smuh%252525253D5794%2525252526lh%252525253DAc99eWFBv1S4xXIy%252526display%25253Dpopup%252526scope%25253Dmanage_pages%252526response_type%25253Dtoken%252526client_id%25253D145634995501895%252526ret%25253Dlogin%2526cancel_url%253Dhttps%25253A%25252F%25252Fdevelopers.facebook.com%25252Ftools%25252Fexplorer%25252Fcallback%25253Fmethod%25253DGET%252526path%25253Dhttps%2525253A%2525252F%2525252Fwww.facebook.com%2525252F%2525253Fstype%2525253Dlo%25252526jlou%2525253DAfdKQrSW0T37NMDAnBGDeKKi47ymL7DBoqyRIPTL7oF229NCLdP23eZcEDlSRmC6FmNHS5pdYYPplYDh4EzTNlbaSlNuAD3cCBQRKymD0APiEg%25252526smuh%2525253D5794%25252526lh%2525253DAc99eWFBv1S4xXIy%252526error%25253Daccess_denied%252526error_code%25253D200%252526error_description%25253DPermissions%25252Berror%252526error_reason%25253Duser_denied%252523_%25253D_%2526display%253Dpopup
