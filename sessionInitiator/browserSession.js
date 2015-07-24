@@ -6,4 +6,5 @@ var browserSession = function () {
   browser.sleep(20000);
 };
 
+
 module.exports = browserSession;

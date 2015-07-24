@@ -86,7 +86,7 @@ var WidgetPage = function () {
     verifySendInvitationButton: {
 	  value: function () {
 	    browser.driver.sleep(5000);   
-		browser.driver.switchTo().frame(this.widgetFrame);
+		//browser.driver.switchTo().frame(this.widgetFrame);
 		return this.send_invitation_btn.isDisplayed();
      
       }
