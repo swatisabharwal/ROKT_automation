@@ -46,5 +46,15 @@
 						console.log("user already logged in");
 
 	  });	 
-	});	     
+	});	 
+	
+	it('5. Click and verify post' , function () {
+		Wpage.sendInvitationButtonClick();
+			 console.log("Send Invitation Button clicked");
+		
+		//Wpage.fbWindowHandler();
+			console.log("moved to pop_upWindow");
+		
+		expect(Wpage.verifyPostOverlay()).toBe(true);
+	});    
  });  

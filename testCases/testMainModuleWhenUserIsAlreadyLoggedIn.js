@@ -4,7 +4,7 @@ var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
 var fbAuthentication = require('../pageObjects/fbAuthenticationPage.js');
 var fbSession = require('../sessionInitiator/fbSession.js');
 
- describe('ROKT Widget Demo Test Using Protractor -- ', function () {
+ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUserIsAlreadyLoggedIn', function () {
 	 
 	 var fbAuthPage= new fbAuthentication();
 	 var Wpage = new WidgetPage();
@@ -27,9 +27,7 @@ var fbSession = require('../sessionInitiator/fbSession.js');
 	   });
 	   
 		 
-		
-	 
-	 
+			 
 	it('1. Verify iFrame and switch to it', function () {	
 		var session = new browserSession();
 		browser.driver.sleep(5000);   

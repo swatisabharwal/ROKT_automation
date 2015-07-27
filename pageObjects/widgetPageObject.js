@@ -18,7 +18,7 @@ var WidgetPage = function () {
     password:      { get: function () { return browser.driver.findElement(by.xpath('//div[@class="form_row clearfix"]/input[@id="pass"]'));}},
     loginBtn:      { get: function () { return browser.driver.findElement(by.xpath('//input[contains(@value,"Log In")]'));}},
 	send_invitation_btn:{ get: function () { return browser.driver.findElement(by.xpath('//button[contains(text(),"Send Invitation")]'));}},   
-   
+    post_overlay: {get:function () {return browser.driver.findElement(by.css("._6l-.__c_"));}},
    
     //var Whandlers =new WindowHandler();
    // Methods around Object -- User actions 
@@ -86,13 +86,23 @@ var WidgetPage = function () {
     verifySendInvitationButton: {
 	  value: function () {
 	    browser.driver.sleep(5000);   
-		//browser.driver.switchTo().frame(this.widgetFrame);
 		return this.send_invitation_btn.isDisplayed();
-     
-      }
-   }
-
+    	}
+    },
+    
+    sendInvitationButtonClick: {
+    	value: function () {
+    		console.log("clicking on send Invitation button");
+    		return this.send_invitation_btn.click();
+    	}
+    },
    
+    verifyPostOverlay: {
+    	value: function () {
+    		console.log("verifying post overlay");
+    		return this.post_overlay.isDisplayed();
+    	}
+    }
 });
 
 module.exports = WidgetPage;

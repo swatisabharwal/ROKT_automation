@@ -54,7 +54,8 @@ var browserSession = require('../sessionInitiator/browserSession.js');
 
 	it('7. Verifying SendInvitation Button ', function () {
 		console.log('verifying invitation btn');
-		browser.driver.sleep(5000);   
+		browser.driver.sleep(5000); 
+		Wpage.switchToWidgetFrame();  
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
 		console.log("Send Invitation Button Verified");	

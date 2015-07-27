@@ -2,7 +2,7 @@ var WidgetPage = require('../pageObjects/WidgetPageObject.js');
 var browserSession = require('../sessionInitiator/browserSession.js');
 var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
 
- describe('ROKT Widget Demo Test Using Protractor -- ', function () {
+ describe('ROKT Widget Demo Test Using Protractor -- File:: testMainSocialShareModule', function () {
   var session = new browserSession();
   var Wpage = new WidgetPage();
   var mainPage = new mainModule();
@@ -77,6 +77,7 @@ var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
 	it('9. Verifying Send Invitation Button ', function () {
 		console.log('verifying invitation btn');
 		browser.driver.sleep(5000);   
+		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
 		console.log("Send Invitation Button Verified");	
