@@ -18,6 +18,7 @@
 
 clickCheckbBox:	{
 	 value: function () {
+	 	console.log('Checked on CheckBox');
 		return this.check_box.click();
      
       }
@@ -25,6 +26,7 @@ clickCheckbBox:	{
 
  verifyContBtn:	{
 	 value: function () {
+	 	console.log("Continue button is available");
 		return this.cont_btn.isDisplayed();
      
       }
@@ -32,6 +34,7 @@ clickCheckbBox:	{
 
   clickContBtn:{
 	 value: function () {
+	 	console.log("clicked on continue button");
 		return this.cont_btn.click();
      
       }
