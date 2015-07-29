@@ -74,7 +74,7 @@ var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
 
 	});
 
-	it('9. Verifying Send Invitation Button ', function () {
+	it('10. Verifying Send Invitation Button ', function () {
 		console.log('verifying invitation btn');
 		browser.driver.sleep(5000);   
 		Wpage.switchToWidgetFrame();
@@ -84,7 +84,7 @@ var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
 
 	});
 	
-	it('10. Verify and Click on Continue button on end widget page of',function(){
+	it('11. Verify and Click on Continue button on end widget page of',function(){
 		browser.driver.sleep(10000);
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();

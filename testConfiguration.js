@@ -3,9 +3,7 @@ var HtmlReporter = require('protractor-html-screenshot-reporter');
 exports.config = {
   directConnect: true,
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./testCases/testMiniModuleWhenUserIsAlreadyLoggedIn.js'],
- //./testCases/fbUiAutomate.js',
- // ,'./testCases/testToValidateAttendingFeature.js'
+  specs: ['./testCases/testMiniFacebookModule.js'],
   capabilities: {
     browserName: 'chrome'
   },

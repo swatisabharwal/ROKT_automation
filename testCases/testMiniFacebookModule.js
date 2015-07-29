@@ -1,7 +1,7 @@
 var WidgetPage = require('../pageObjects/WidgetPageObject.js');
 var browserSession = require('../sessionInitiator/browserSession.js');
 
- describe('ROKT Widget Demo Test Using Protractor -- ', function () {
+ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniFacebookModule', function () {
   var session = new browserSession();
   var Wpage = new WidgetPage();
 		
