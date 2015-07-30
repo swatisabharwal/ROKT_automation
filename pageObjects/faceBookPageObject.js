@@ -5,7 +5,7 @@ var fbAuthentication = function() {
 fbAuthentication.prototype = Object.create({}, {
    /***************************Facebook WEb Elements***************************/	
 	home_tab : { get: function () {return browser.driver.findElement(by.xpath('//a[contains(@href,"https://www.facebook.com/?ref=tn_tnmn")]'));}},
-	click_join_page : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="event_button_bar"]/a[1]'));}},
+	click_join_page : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="event_button_bar"]//a[1]'));}},
 	event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Going")]'));}},
 	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
 	logout_tab : {get : function() {return browser.driver.findElement(by.xpath('//div[contains(text(), "Account Settings")]  '));}},
@@ -14,8 +14,8 @@ fbAuthentication.prototype = Object.create({}, {
 	emailId : {get : function() {return browser.driver.findElement(by.xpath('.//*[@id="email"]'));}},
 	password : {get : function() {return browser.driver.findElement(by.xpath('.//*[@id="pass"]'));}},
 	loginBtn : {get : function() {return browser.driver.findElement(by.xpath('//input[contains(@value,"Log In")]'));}},
-	user_messages : {get : function() {return browser.driver.findElement(by.xpath('//div[@class="linkWrap noCount"]/span[contains(text(),"Messages")]'));}}, 	 
-	select_sender : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Automation TestAccount")]'));}},
+	user_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Messages")]'));}}, 	 
+	select_sender : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Automation shared a link.")]'));}},
 	verify_message : {get : function() {return browser.driver.findElement(by.xpath('//li[@class="webMessengerMessageGroup clearfix"]'));}}, 
 	message_settings : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="u_jsonp_2_s"]'));}}, 
 	clear_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Delete Conversation...")] '));}}, 
@@ -27,7 +27,7 @@ fbAuthentication.prototype = Object.create({}, {
 	inputFbId : {  
 		value : function() {
 			console.log("Enter username to log in to FaceBook");
-			return this.emailId.sendKeys("roktdemo.one@gmail.com");
+			return this.emailId.sendKeys("testuser01.automation@gmail.com");
 
 		}
 	},
@@ -75,25 +75,20 @@ fbAuthentication.prototype = Object.create({}, {
 
 		}
 	},
-
-	logoutBtn : {
-		value : function() {
+		
+	logoutBtn: {
+		value: function (){
 			this.logout_btn.click();
 		}
-	},
-	
+	} ,
+
 	frndId : {
 		value : function() {
 			return this.emailId.sendKeys("roktdemo.one@gmail.com");
 		}
 	},
 	
-	inputFbPass : {
-		value : function() {
-			return this.password.sendKeys("Qait@123");
-		}
-	},
-
+	
 	clickOnFbLoginBtn : {
 		value : function() {
 			this.loginBtn.click();
@@ -135,7 +130,17 @@ fbAuthentication.prototype = Object.create({}, {
 			return this.clear_conversation.click();
 		}
 	},
-
+	
+	appRemove : {
+ 	 value: function () {
+      	this.hidden_app_remove.then(function(elem){
+  		browser.driver.actions().mouseMove(elem).perform().then(function(){
+    	browser.driver.sleep(2000);
+   	    browser.driver.findElement(by.xpath('//div[text()="tripcierge"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
+    });    
+ });
+ }
+ },
 
 });
 module.exports = fbAuthentication; 

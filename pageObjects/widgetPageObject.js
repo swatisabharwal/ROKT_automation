@@ -8,29 +8,10 @@ var WidgetPage = function() {
 WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
-	widgetFrame : {
-		get : function() {
-			return browser.driver.findElement(by.css('.wdHolder>iframe'));
-		}
-	},
-	widgetFrame_sendinvitation : {
-		get : function() {
-			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
-		}
-	},
-	// widgetFrame_inner_sendinvitation: { get: function () { return browser.driver.findElement(by.xpath('//form[@id="uiserver_form"]')); }},
-	
-
-	miniattendButton : {
-		get : function() {
-			return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));
-		}
-	},
-	mainattendButton : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//button[@id="ux_shareandwin_buttons_facebook_event_attending"]'));
-		}
-	},
+	widgetFrame : {get : function() {return browser.driver.findElement(by.css('.wdHolder>iframe'));}},
+	widgetFrame_sendinvitation : {get : function() {return browser.driver.findElement(by.css('.FB_UI_Dialog'));}},
+	miniattendButton : {get : function() {return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));}},
+	mainattendButton : {get : function() {return browser.driver.findElement(by.xpath('//button[@id="ux_shareandwin_buttons_facebook_event_attending"]'));}},
 	widgetOverlay : {
 		get : function() {
 			return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
@@ -68,7 +49,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	post_overlay : {
 		get : function() {
-			return browser.driver.findElement(by.xpath('//div[contains(text(), "Send a Message")]'));
+			return browser.driver.findElement(by.css('.pam'));
 		}
 	},
 	verify_window_event : {
@@ -302,12 +283,7 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
-	appRemove : {
-		value : function() {
-			this.app_remove.click();
-		}
-	},
-
+	
 	removeNow : {
 		value : function() {
 			this.remove_now.click();
@@ -399,17 +375,6 @@ WidgetPage.prototype = Object.create({}, {
 			return this.close_btn.click();
 		}
 	},
-
-	
-	
-	
-	
-	
-	
-
-	
-
-	
 
 });
 

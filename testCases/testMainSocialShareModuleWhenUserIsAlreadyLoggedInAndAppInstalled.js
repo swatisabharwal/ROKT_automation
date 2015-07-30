@@ -11,7 +11,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 	var Wpage = new WidgetPage();
 	var mainPage = new mainModule();
 
-/*	it('1. Login in to Facebook ', function() {
+	it('1. Login in to Facebook ', function() {
 		var fbsession = new fbSession();
 		fbPage.inputFbId().then(function() {
 
@@ -33,7 +33,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 
 	});
 
-	/*it('Removing user form the event list', function() {
+	it('Removing user form the event list', function() {
 	 var fbeventsession = new fbEventSession();
 	 Wpage.clickUndoTab();
 	 browser.driver.sleep(2000);
@@ -43,6 +43,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 
 	 Wpage.clickUndoOk();
 	 });
+	 
 
 	it('3. Verify iFrame and switch to it', function() {
 		var session = new browserSession();
@@ -89,7 +90,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 		browser.driver.sleep(5000);
 
 		Wpage.clickOnMainAttendButton().then(function() {
-			browser.driver.sleep(5000);
+		browser.driver.sleep(5000);
 
 		});
 	});
@@ -103,13 +104,17 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 
 	});
 
-	it('11. Verify that the Window Contains link to ticketmaster event', function() {
+	it('11. Switch to Invitaion frame', function() {
+		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
+		
+		
 	});
 
 	it('12. Enter the friend name to share this event with', function() {
+		
 		Wpage.enterRecepient();
 		browser.driver.sleep(5000);
 		Wpage.clickOnSend();
@@ -137,11 +142,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 		Wpage.clickOnClose().then(function() {
 			console.log("clicking on close");
 		});
-	});*/
+	});
 
 	it('16. Join the event page', function() {
 
 		var fbeventsession = new fbEventSession();
+		browser.driver.sleep(2000);
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
 		expect(fbPage.eventStatus()).toBe(true);
@@ -152,7 +158,9 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 	});
 
 	it('17. Logout from the current user', function() {
+		browser.driver.sleep(5000);
 		fbPage.logoutTab();
+		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
@@ -189,6 +197,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainModuleWhenUser
 		browser.driver.sleep(2000);
 
 		fbPage.clearConversation();
+		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 });
