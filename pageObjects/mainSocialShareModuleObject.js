@@ -13,7 +13,7 @@
     skip_btn:      { get: function () { return browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button'));}},
     cont_share_btn:{ get: function () { return browser.driver.findElement(by.xpath('//div[@ class="ui_shareandwin_main_sns_skip"]/button'));}},
     question:      {get : function()  {return browser.driver.findElements(by.css('.ui_progress_step'));}},
-    mainModuleAttend_btn: {get: function(){return browser.driver.findElement(by.css('#ux_shareandwin_buttons_facebook_event_attending'));}},
+    mainattendButton: {get: function(){return browser.driver.findElement(by.css('#ux_shareandwin_buttons_facebook_event_attending'));}},
 
 
 clickCheckbBox:	{
@@ -41,7 +41,8 @@ clickCheckbBox:	{
    },
 
    verifyOffer:	{
-	 value: function () {
+	 value: function () {			
+ 	    console.log("Verifying that it is an Offer");
 		return this.skip_btn.isDisplayed();
      
       }
@@ -50,9 +51,9 @@ clickCheckbBox:	{
   
   skipOffers: {
   	value: function(){
-    	this.question.then(function(elems){
+  		console.log("Skipping all the offers");
+     	this.question.then(function(elems){
   		var len = elems.length;
-  		console.log("Length is:- "+len);
   		for(var i = 0; i<(len-1) ;i++){
   			browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
   			browser.driver.sleep(2000);
@@ -65,6 +66,7 @@ clickCheckbBox:	{
   	
     verifyContinueShareButton:	{
 	 value: function () {
+  		console.log("Verifying that continue button is displayed");
 		return this.cont_share_btn.isDisplayed();
      
       }
@@ -72,14 +74,23 @@ clickCheckbBox:	{
 
     clickOnContBtnFromEndWidgetPage:	{
 	 value: function () {
-	 return this.cont_share_btn.click();
+     	 console.log("Clicking on continue button");
+	     return this.cont_share_btn.click();
      
       }
    },
    
-   clickOnAttendingBtnFromMainModuleWidgetPage: {
+   verifyMainAttendButton : {
+		value : function() {
+  		    console.log("Verifying main attend button");
+			return this.mainattendButton.isDisplayed();
+		}
+	},
+   
+   clickOnMainAttendButton: {
    	value: function(){
-   	return this.mainModuleAttend_btn.click();	
+   	  		console.log("Clicking on Main Attending Button");
+			return this.mainattendButton.click();	
    	}
    },
    

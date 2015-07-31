@@ -19,7 +19,8 @@ exports.config = {
    onPrepare: function() {
    browser.driver.manage().window().maximize();
     jasmine.getEnv().addReporter(new HtmlReporter({
-         baseDirectory: 'output'
+         baseDirectory: 'output',
+         takeScreenShotsOnlyForFailedSpecs: true
        }));
        
    global.isAngularSite = function(flag){

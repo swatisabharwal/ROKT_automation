@@ -8,10 +8,25 @@ var WidgetPage = function() {
 WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
-	widgetFrame : {get : function() {return browser.driver.findElement(by.css('.wdHolder>iframe'));}},
-	widgetFrame_sendinvitation : {get : function() {return browser.driver.findElement(by.css('.FB_UI_Dialog'));}},
-	miniattendButton : {get : function() {return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));}},
-	mainattendButton : {get : function() {return browser.driver.findElement(by.xpath('//button[@id="ux_shareandwin_buttons_facebook_event_attending"]'));}},
+	widgetFrame : {
+		get : function() {
+			return browser.driver.findElement(by.css('.wdHolder>iframe'));
+		}
+	},
+	widgetFrame_sendinvitation : {
+		get : function() {
+			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
+		}
+	},
+	// widgetFrame_inner_sendinvitation: { get: function () { return browser.driver.findElement(by.xpath('//form[@id="uiserver_form"]')); }},
+	
+
+	miniattendButton : {
+		get : function() {
+			return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));
+		}
+	},
+	
 	widgetOverlay : {
 		get : function() {
 			return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
@@ -49,9 +64,11 @@ WidgetPage.prototype = Object.create({}, {
 
 	post_overlay : {
 		get : function() {
+			browser.driver.sleep(2000);
 			return browser.driver.findElement(by.css('.pam'));
 		}
 	},
+	
 	verify_window_event : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//a[contains(@href,"www.ticketmaster.com")]'));
@@ -93,48 +110,18 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
-	fb_settings_tab : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//div[@id="privacyFlyoutLabel"]'));
-		}
-	},
-	see_more_settings_tab : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//a[contains(text(),"See More Settings")]'));
-		}
-	},
-	user_apps : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//a[contains(@href, "https://www.facebook.com/settings?tab=applications")]'));
-		}
-	},
-	app_remove : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//a[@aria-label="Remove"]/i  '));
-		}
-	},
-	remove_now : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//label[@class="uiButton uiButtonLarge uiButtonConfirm"]/input'));
-		}
-	},
 	
-	undo_tab : {
+	maybe_btn : {
 		get : function() {
-			return browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img'));
+			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
+		}
+    },
+	
+ like_btn : {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
 		}
 	},
-	undo_event : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//span[contains(text(),"Remove me from Guest List")]'));
-		}
-	},
-	undo_ok : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//button[contains(text(), "OK")]'));
-		}
-	},
-
 
 	emailId : {get : function() {return browser.driver.findElement(by.xpath('//div[@class="form_row clearfix"]/input[@id="email"]'));}},
 	password : {get : function() {return browser.driver.findElement(by.xpath('//div[@class="form_row clearfix"]/input[@id="pass"]'));}},
@@ -147,195 +134,181 @@ WidgetPage.prototype = Object.create({}, {
 	
 	// Methods around Object -- User actions
 
+   
+   clickMayebBtn: {
+		value : function() {  		
+		    console.log("Clicking on mini attend button");
+			return this.maybe_btn.click();
+		}
+	},
+
+  clickLikeBtn: {
+		value : function() {  		
+		    console.log("Clicking on mini attend button");
+			return this.like_btn.click();
+		}
+	},
+	
 	switchToWidgetFrame : {
-		value : function() {
+		value : function() {  		
 			console.log("User successfully switched to widget iFrame");
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
 
 	getVisibiltyOfWidgetOverlay : {
-		value : function() {
-			console.log("Widget Overlay is correctly displayed");
+		value : function() {  		
+		 	console.log("Checking if Widget Overlay is correctly displayed");
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
 
-	clickUndoTab : {
-		value : function() {
-			return this.undo_tab.click();
-		}
-	},
-
-	clickUndoEvent : {
-		value : function() {
-			return this.undo_event.click();
-		}
-	},
-
-	clickUndoOk : {
-		value : function() {
-			return this.undo_ok.click();
-		}
-	},
 
 	switchToSendInvitationFrames : {
-		value : function() {
+		value : function() {  		
+		    console.log("Switching to frame for sending invitation");
 			return browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
 		}
 	},
 
 	getShareLabelText : {
-		value : function() {
+		value : function() {  		
+		    console.log("Verifying the Widget Content");
 			return this.shareLabel.getText();
 		}
 	},
 
 	verifyMiniAttendButton : {
-		value : function() {
+		value : function() {  		
+		    console.log("Verifying mini attend Button");
 			return this.miniattendButton.isDisplayed();
 		}
 	},
 
-	verifyMainAttendButton : {
-		value : function() {
-
-			return this.mainattendButton.isDisplayed();
-		}
-	},
-
+	
 	clickOnMiniAttendButton : {
-		value : function() {
+		value : function() {  		
+		    console.log("Clicking on mini attend button");
 			return this.miniattendButton.click();
 		}
 	},
 
-	clickOnMainAttendButton : {
-		value : function() {
-			return this.mainattendButton.click();
-			this.fbWindowHandler;
-			console.log("Attend button is clicked");
-		}
-	},
-
+	
 	fbWindowHandler : {
 		value : function() {
-
+  		
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(5000);
-				console.log("handling");
-				popup_handlers = handles[1];
+				console.log("New window handling");
 				parent_handlers = handles[0];
+				popup_handlers = handles[1];
 				browser.driver.sleep(5000);
 				console.log("moving to current");
 				browser.driver.switchTo().window(popup_handlers).then(function() {
-					console.log("popup window handeled");
+				console.log("popup window handeled");
 				});
 			});
+			
 		}
 	},
 
 	inputFbId : {
-		value : function() {
+		value : function() {  		
+		    console.log("Entering fb Id");
 			return this.emailId.sendKeys("testuser01.automation@gmail.com");
 		}
 	},
-
+	
+    inputFbPass : {
+		value : function() {
+			console.log("Enter password to log in to FaceBook");
+			return this.password.sendKeys("Qait@123");
+		}
+	},
 	
 	clickOnLoginBtn : {
-		value : function() {
+		value : function() {  		
+		    console.log("Clicking on Login button");
 			this.loginBtn.click();
 			browser.driver.switchTo().window(parent_handlers);
 		}
 	},
 
-	
+	clickOnFbLoginBtn : {
+		value : function() {  		
+		    console.log("Clicking on Login button");
+			this.loginBtn.click();
+		}
+	},
 	
 
 	verifyInstallationPage : {
-		value : function() {
-			this.installation_page.isDisplayed();
+		value : function() {  		
+		    console.log("Verifying Installation page is displayed");
+			return this.installation_page.isDisplayed();
 		}
 	},
 
 	clickOkayToInstall : {
-		value : function() {
+		value : function() {  		
+		    console.log("Clicking on okay to install the app");
 			this.okay_to_install.click();
-		}
-	},
+			browser.driver.switchTo().window(parent_handlers);
 
-	fbSettingsTab : {
-		value : function() {
-			return this.fb_settings_tab.click();
-		}
-	},
-
-	seeMoreSettingsTab : {
-		value : function() {
-			this.see_more_settings_tab.click();
-
-		}
-	},
-
-	userApps : {
-		value : function() {
-			this.user_apps.click();
 		}
 	},
 
 	
-	removeNow : {
-		value : function() {
-			this.remove_now.click();
-		}
-	},
-
 	
 
 	enterRecepient : {
-		value : function() {
-			this.recepients.sendKeys('Rokt').then(function() {
-				browser.driver.sleep(2000);
-				browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]')).click();
+		value : function() {  		
 				console.log("Friend is selected");
-			});
-
+     			this.recepients.sendKeys('Rokt').then(function() {
+				browser.driver.sleep(2000);
+				browser.driver.actions().mouseMove(browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]'))).perform().then(function(){
+			    		browser.driver.sleep(1000);
+						browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]')).click();
+					});
+				});
 		}
 	},
 
 	clickOnSend : {
-		value : function() {
+		value : function() {  		
+			console.log("Message is send");
 			browser.driver.sleep(5000);
 			this.send_btn.click();
-			console.log("Message is send");
 
 		}
 	},
 
 	verifySendInvitationButton : {
-		value : function() {
+		value : function() {  		
+		   console.log("Verifying Send Invitation Button");
 			browser.driver.sleep(5000);
 			return this.send_invitation_btn.isDisplayed();
-			console.log("Send Invitation Button Verified");
+			
 		}
 	},
 
 	sendInvitationButtonClick : {
-		value : function() {
+		value : function() {  		
 			console.log("Send Invitation button is clicked");
 			return this.send_invitation_btn.click();
 		}
 	},
 
 	verifyPostOverlay : {
-		value : function() {
+		value : function() {  		
 			console.log("verifying post overlay");
 			return this.post_overlay.isDisplayed();
 		}
 	},
 
 	verifyWindowEvent : {
-		value : function() {
+		value : function() {  	
+     		console.log("Verifying Event Link is Displayed");
 			return this.verify_window_event.isDispalyed();
 
 		}
@@ -343,7 +316,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	clickOnLike : {
 		value : function() {
-			//browser.driver.switchTo.defaultContent();
+			console.log("Clicking On Like");
 			this.switchToWidgetFrame;
 			return this.like_btn.click();
 
@@ -351,30 +324,68 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyContinueShareButton : {
-		value : function() {
+		value : function() {  		
+		    console.log("Verifying Continue Button is Displayed");
 			return this.cont_share_btn.isDisplayed();
 
 		}
 	},
 
 	clickOnContBtnFromEndWidgetPage : {
-		value : function() {
+		value : function() {  		
+		    console.log("Clicking on Continue button");
 			return this.cont_share_btn.click();
 
 		}
 	},
 
 	verifyLinkToTicketmaster : {
-		value : function() {
+		value : function() {  		
+		    console.log("Verifying the ticketmaster link");
 			return this.link_ticketmaster.isDisplayed();
 		}
 	},
 
 	clickOnClose : {
-		value : function() {
+		value : function() {  		
+		    console.log("Clicking on Close");
 			return this.close_btn.click();
 		}
 	},
+
+	
+	installAppThroughMiniShareModule : {
+		value : function() {  		
+		    console.log("Installing the app...");
+			browser.driver.sleep(3000);
+			this.clickOnMiniAttendButton();
+			browser.driver.sleep(3000);
+			browser.driver.getAllWindowHandles().then(function(handles) {
+				browser.driver.sleep(3000);
+				browser.driver.switchTo().window(handles[1]);
+			});
+			//this.fbWindowHandler();
+			this.okay_to_install.click();
+			browser.driver.getAllWindowHandles().then(function(handles) {
+				browser.driver.sleep(3000);
+				browser.driver.switchTo().window(handles[0]);
+			});
+			browser.driver.sleep(3000);
+			this.switchToWidgetFrame();
+		}
+	},
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
 
 });
 
