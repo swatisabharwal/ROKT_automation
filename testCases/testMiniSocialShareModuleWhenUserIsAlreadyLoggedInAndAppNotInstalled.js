@@ -75,7 +75,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	
 
-	it('4. Verify iFrame and switch to it', function() {
+	it('1. Verify iFrame and switch to it', function() {
 		var session = new browserSession();
 		browser.driver.sleep(5000);
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
@@ -84,12 +84,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('5. Verify widget Overlay appears', function() {
+	it('2. Verify widget Overlay appears', function() {
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 
 	});
 	
-	it('6. Verify and Click on Attending button', function() {
+	it('3. Verify and Click on Attending button', function() {
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
 		browser.driver.sleep(2000);
@@ -99,17 +99,17 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		});
 	});
 		
-	it('11. Handling Fb Window ', function () {
+	it('4. Handling Fb Window ', function () {
 		Wpage.fbWindowHandler();
         browser.driver.sleep(5000);   
 	});    
 	
-	it('8. Installing ticketmaster application', function (){
+	it('5. Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	
-	it('9. Verifying Send Invitation Button and click on it', function() {
+	it('6. Verifying Send Invitation Button and click on it', function() {
 		console.log('verifying invitation btn');
 		Wpage.switchToWidgetFrame();
 		browser.driver.sleep(2000);
@@ -119,13 +119,13 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('10. Verify that the Window Contains link to ticketmaster event', function() {
+	it('7. Verify that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 	});
 
-	it('11. Enter the friend name to share this event with', function() {
+	it('8. Enter the friend name to share this event with', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(2000);
 		Wpage.clickOnSend();
@@ -133,7 +133,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 	
-    it('12. Join the event page', function() {
+    it('9. Join the event page', function() {
 		var fbeventsession = new fbEventSession();
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
@@ -144,14 +144,14 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('13. Logout from the current user', function() {
+	it('10. Logout from the current user', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
 
-	it('14. login with friend Id', function() {
+	it('11. login with friend Id', function() {
 		browser.driver.sleep(5000);
 		fbPage.inputFrndFbId();
 		browser.driver.sleep(2000);
@@ -160,7 +160,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		fbPage.clickOnLoginBtn();
 	});
 
-	it('15. Verify message is received by friend user', function() {
+	it('12. Verify message is received by friend user', function() {
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
 		fbPage.selectSender();
@@ -168,7 +168,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('16. Remove Message and log out', function() {
+	it('13. Remove Message and log out', function() {
 		browser.driver.sleep(2000);
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);
@@ -177,7 +177,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		fbPage.clearConversation();
 	});
 	
-	it('13. Logout from the current user', function() {
+	it('14. Logout from the current user', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(2000);
 		fbPage.logoutBtn();

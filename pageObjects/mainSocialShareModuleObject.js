@@ -14,6 +14,7 @@
     cont_share_btn:{ get: function () { return browser.driver.findElement(by.xpath('//div[@ class="ui_shareandwin_main_sns_skip"]/button'));}},
     question:      {get : function()  {return browser.driver.findElements(by.css('.ui_progress_step'));}},
     mainattendButton: {get: function(){return browser.driver.findElement(by.css('#ux_shareandwin_buttons_facebook_event_attending'));}},
+    main_maybeButton :{get: function(){return browser.driver.findElement(by.css('#ux_shareandwin_buttons_facebook_event_maybe'));}},
 
 
 clickCheckbBox:	{
@@ -91,6 +92,20 @@ clickCheckbBox:	{
    	value: function(){
    	  		console.log("Clicking on Main Attending Button");
 			return this.mainattendButton.click();	
+   	}
+   },
+   
+   verifyMainMaybeButton : {
+		value : function() {
+  		    console.log("Verifying main attend button");
+			return this.main_maybeButton.isDisplayed();
+		}
+	},
+   
+   clickOnMainMaybeButton: {
+   	value: function(){
+   	  		console.log("Clicking on Main Attending Button");
+			return this.main_maybeButton.click();	
    	}
    },
    

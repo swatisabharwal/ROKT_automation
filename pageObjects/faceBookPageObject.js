@@ -31,7 +31,11 @@ fbAuthentication.prototype = Object.create({}, {
 	remove_now : {get : function() {return browser.driver.findElement(by.xpath('//label[@class="uiButton uiButtonLarge uiButtonConfirm"]/input'));}},
 	hidden_app_remove : {get : function() {return browser.driver.findElement(by.xpath('//div[contains(text(),"tripcierge")]/../../../preceding-sibling::img'));}},
 	list_eventButtons : {get : function() {return browser.driver.findElements(by.css('#event_button_bar>a'));}},
-	 
+	event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Maybe")]'));}},
+	maybe_event:{get : function() {return browser.driver.findElement(by.css('._54ni.fbEventClassicButton.__MenuItem:nth-child(2)'));}},
+	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
+	user_event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@aria-label="Automation TestAccount (Maybe)"]'));}},
+
 	  
 	   /***********************Actions on Facebook Element************************/
 	  
@@ -120,6 +124,37 @@ fbAuthentication.prototype = Object.create({}, {
 			return this.user_event_status.isDisplayed();
 		}
 	},
+	
+	clickGoingStatus: {
+		value : function() {
+			console.log("Clicking on Going");
+			return this.event_status.click();
+		}
+	},
+	
+	clickMaybeStatus: {
+		value : function() {
+			console.log("Clicking on Maybe");
+			 this.maybe_event.click();
+		}
+	},
+	
+	eventStatusMaybe : {
+		value : function() {
+			console.log("Checking the Event Status Tab");
+			return this.event_status_maybe.isDisplayed();
+		}
+	},
+	
+	userEventStatusMaybe : {
+		value : function() {
+			console.log("Checking the Event Status Of User");
+			return this.user_event_status_maybe.isDisplayed();
+		}
+	},
+
+
+
 	
 	logoutTab : {
 		value : function() {
@@ -271,4 +306,6 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 });
+
+
 module.exports = fbAuthentication; 

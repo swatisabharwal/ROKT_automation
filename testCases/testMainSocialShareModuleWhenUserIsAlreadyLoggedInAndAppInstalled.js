@@ -72,31 +72,31 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
 	});
 
-	it('2. Navigate to ROKT widget home page', function() {
+	it('1. Navigate to ROKT widget home page', function() {
 		var session = new browserSession();
 		browser.driver.sleep(5000);
 	});
 
-	it('3. Verify iFrame and switch to it', function() {
+	it('2. Verify the inner frame and switch to it', function() {
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame().then(function() {
 		});
 
 	});
 
-	it('4. Verify widget Overlay appears', function() {
+	it('3. Verify if widget Overlay appears', function() {
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 
 	});
 
-	it('5. Click on agreement checkbox', function() {
+	it('4. Click on agreement checkbox', function() {
 		mainPage.clickCheckbBox().then(function() {
 
 		});
 
 	});
 
-	it('6. Verify and click on continue', function() {
+	it('5. Verify and click on continue button on widget front page', function() {
 		expect(mainPage.verifyContBtn()).toBe(true);
 		mainPage.clickContBtn().then(function() {
 
@@ -104,17 +104,17 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 
-	it('7. Verify offers section', function() {
+	it('6. Verify offers section', function() {
 		browser.driver.sleep(2000);
 		expect(mainPage.verifyOffer()).toBe(true);
 	});
 
-	it('8. Skip all the offers', function() {
+	it('7. Skip all the offers', function() {
 		browser.driver.sleep(2000);
 		mainPage.skipOffers();	
 	});
 
-	it('9. Verify and Click on Attending button', function() {
+	it('8. Verify and Click on Attending button', function() {
 		browser.driver.sleep(5000);
 		expect(mainPage.verifyMainAttendButton()).toBe(true);
 		browser.driver.sleep(5000);
@@ -122,15 +122,14 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		});
 	});
 
-	it('10. Verifying Send Invitation Button and click on it', function() {
-		console.log('verifying invitation btn');
+	it('9. Verifying Send Invitation Button and click on it', function() {
 		browser.driver.sleep(3000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		Wpage.sendInvitationButtonClick();
 
 	});
 
-	it('11. Switch to Invitaion frame', function() {
+	it('10. Switch to Invitaion frame', function() {
 		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
@@ -139,89 +138,72 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		
 	});
 
-	it('12. Enter the friend name to share this event with', function() {
-		
+	it('11. Enter the friend name to share this event with', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(2000);
 		Wpage.clickOnSend();
 
 	});
 
-	it('13. Verify and Click on Continue button on end widget page of', function() {
+	it('12. Verify and Click on Continue button on end widget', function() {
 		browser.driver.sleep(5000);
-		Wpage.switchToWidgetFrame().then(function() {
-			console.log("User successfully switched to widget iFrame");
-		});
+		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
 	});
 
-	it('14. Verify that the page contains link to ticket master', function() {
+	it('13. Verify event window ', function() {
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
-		console.log("Ticketmaster link verified");
 	});
 
-	it('15. cClick on close button on widget', function() {
+	it('14. Click on close button on widget', function() {
 		browser.driver.sleep(5000);
 		Wpage.clickOnClose().then(function() {
-			console.log("clicking on close");
 		});
 	});
 
-	it('16. Join the event page', function() {
-
+	it('15. Join the event page', function() {
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(2000);
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
 		expect(fbPage.eventStatus()).toBe(true);
-		console.log("joining the event page");
 		expect(fbPage.userEventStatus()).toBe(true);
-		console.log("user going to event");
 
 	});
 
-	it('17. Logout from the current user', function() {
+	it('16. Logout from the current user', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
 
-	it('18. Login with friend Id', function() {
-
+	it('17. Login with friend Id', function() {
 		browser.driver.sleep(5000);
 		fbPage.inputFrndFbId();
 		browser.driver.sleep(2000);
-
 		fbPage.inputFbPass();
 		browser.driver.sleep(2000);
-
 		fbPage.clickOnLoginBtn();
 	});
 
-	it('19. Verify message is received by a friend', function() {
+	it('18. Verify if message is received by that friend', function() {
 		browser.driver.sleep(5000);
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
-
 		fbPage.selectSender();
 		browser.driver.sleep(2000);
-
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('20. Remove Message from friend\'s message box and log out', function() {
-
+	it('19. Remove Message from friend\'s message box and log out', function() {
 		browser.driver.sleep(2000);
-
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);
-
 		fbPage.clearMessages();
 		browser.driver.sleep(2000);
-
 		fbPage.clearConversation();
 		fbPage.logoutTab();
 		fbPage.logoutBtn();

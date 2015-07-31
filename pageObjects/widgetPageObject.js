@@ -117,7 +117,7 @@ WidgetPage.prototype = Object.create({}, {
 		}
     },
 	
- like_btn : {
+  like_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
 		}

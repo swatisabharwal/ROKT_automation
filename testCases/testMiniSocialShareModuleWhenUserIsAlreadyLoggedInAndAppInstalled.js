@@ -74,7 +74,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 	});
 
 
-	it('4. Verify iFrame and switch to it', function() {
+	it('1. Verify inner frame and switch to it', function() {
 		var session = new browserSession();
 		browser.driver.sleep(5000);
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
@@ -83,12 +83,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('5. Verify widget Overlay appears', function() {
+	it('2. Verify if widget Overlay appears', function() {
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 
 	});
 	
-	it('6. Verify and Click on Attending button', function() {
+	it('3. Verify and Click on Attending button', function() {
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
 		browser.driver.sleep(2000);
@@ -98,8 +98,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		});
 	});
 		
-	it('7. Verifying Send Invitation Button and click on it', function() {
-		console.log('verifying invitation btn');
+	it('4. Verifying Send Invitation Button and click on it', function() {
 		browser.driver.sleep(2000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		browser.driver.sleep(2000);
@@ -107,37 +106,35 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('8. Verify that the Window Contains link to ticketmaster event', function() {
+	it('5. Verify that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 	});
 
-	it('9. Enter the friend name to share this event with', function() {
+	it('6. Enter the friend name to share this event with', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(2000);
 		Wpage.clickOnSend();
 		browser.driver.sleep(2000);
 
 	});
-    it('10. Join the event page', function() {
+    it('7. Join the event page', function() {
 		var fbeventsession = new fbEventSession();
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
 		expect(fbPage.eventStatus()).toBe(true);
-		console.log("joining the event page");
 		expect(fbPage.userEventStatus()).toBe(true);
-		console.log("user going to event");
 
 	});
 
-	it('11. Logout from the current user', function() {
+	it('8. Logout from the current user', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(2000);
 		fbPage.logoutBtn();
 	});
 
-	it('12. login with friend Id', function() {
+	it('9. Logged in  with friend Id', function() {
 		browser.driver.sleep(5000);
 		fbPage.inputFrndFbId();
 		browser.driver.sleep(2000);
@@ -145,7 +142,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		fbPage.clickOnLoginBtn();
 	});
 
-	it('13. Verify message is received by friend user', function() {
+	it('10. Verify message is received by friend user', function() {
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
 		fbPage.selectSender();
@@ -153,7 +150,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('14. Remove Message and log out', function() {
+	it('11. Remove Message and log out', function() {
 		browser.driver.sleep(2000);
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);
@@ -164,7 +161,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 	
-	it('11. Logout from the current user', function() {
+	it('12. Logout from the current user', function() {
 		fbPage.logoutTab();
     	browser.driver.sleep(2000);
 		fbPage.logoutBtn();

@@ -86,7 +86,7 @@ var isAppInstalled;
 
 	});	
 			 
-	it('4. Verify iFrame and switch to it', function () {	
+	it('1. Verify inner frame and switch to it', function () {	
 		var session = new browserSession();
 		browser.driver.sleep(5000);   
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
@@ -94,13 +94,13 @@ var isAppInstalled;
 	});
 
 
-  	it('5. Verify widget Overlay appears', function () {
+  	it('2. Verify widget Overlay appears', function () {
   		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
  
 	});
 	
 	
-	it('10. Verify and Click on Attending button', function (){
+	it('3. Verify and Click on Attending button', function (){
  		browser.driver.sleep(5000);
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
 		browser.driver.sleep(5000);
@@ -109,12 +109,12 @@ var isAppInstalled;
 		});
 	
 	   
-	it('11. Handling Fb Window ', function () {
+	it('4. Handling Fb Window ', function () {
 		Wpage.fbWindowHandler();
         browser.driver.sleep(5000);   
 	});    
 	
-	it('12. Entering Fb Credentials ', function () {
+	it('5. Entering Fb Credentials ', function () {
 		Wpage.inputFbId();
         browser.driver.sleep(5000);   
 		Wpage.inputFbPass();
@@ -123,43 +123,35 @@ var isAppInstalled;
         browser.driver.sleep(5000);   
 	});
 	
-/*	it('changing app accessebility', function (){
-		Wpage.editAppInfo();
-        browser.driver.sleep(5000);   
-	    Wpage.editAppFrndOptn();
-        browser.driver.sleep(5000);   
-	});*/
-	
-	it('13. Installing ticketmaster application', function (){
+	it('6. Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	
     
 	
-	it('15. Verifying Send Invitation Button ', function () {
+	it('7. Verifying Send Invitation Button ', function () {
 		browser.driver.sleep(5000);   
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
 	});
 	   
-	  
-	
-	it('16. Verifying Send Invitation Button and click on it', function () {
+	  	
+	it('8. Verifying Send Invitation Button and click on it', function () {
 		browser.driver.sleep(5000);   
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
 		Wpage.sendInvitationButtonClick();
 	});
 	
-	it('17. Verifying that the Window Contains link to ticketmaster event', function() {
+	it('9. Verifying that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 	});
 
-	it('18. Entering the friend name to share this event with', function() {
+	it('10. Entering the friend name to share this event with', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(5000);
 		Wpage.clickOnSend();
@@ -167,7 +159,7 @@ var isAppInstalled;
 	});
 
 	
-    it('22. Joining the event page', function () {
+    it('11. Joining the event page', function () {
 			var fbeventsession=new fbEventSession();
 			fbPage.clickJoinPage();
 			browser.driver.sleep(5000);
@@ -178,7 +170,7 @@ var isAppInstalled;
 	
     });
 		
-		it('Logging out' ,function (){
+	it('12. Logging out' ,function (){
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);   
 		fbPage.logoutBtn();
@@ -186,7 +178,8 @@ var isAppInstalled;
 
 
 	});
-	it('23. login with friend Id',function () {
+	
+	it('13. Login with friend Id',function () {
 	   	browser.driver.sleep(5000); 
 		fbPage.inputFrndFbId();
 		browser.driver.sleep(2000);
@@ -196,7 +189,7 @@ var isAppInstalled;
 		browser.driver.sleep(10000);
 	});
 	
-	it('24. Verifying msg received',function(){
+	it('14. Verifying msg received',function(){
 		fbPage.clickMessages();
 		browser.driver.sleep(5000);
 		fbPage.selectSender();
@@ -204,7 +197,7 @@ var isAppInstalled;
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 	
-	it('25. Removing Mesage', function () {
+	it('15. Removing Mesage', function () {
 		browser.driver.sleep(5000);
 		fbPage.messageSettings();
 		browser.driver.sleep(5000);
@@ -215,12 +208,10 @@ var isAppInstalled;
 		
 	});
 	
-	it('Logging out' ,function (){
+	it('16. Logging out' ,function (){
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);   
-
 		fbPage.logoutBtn();
-
 		browser.driver.sleep(5000);   
 
 

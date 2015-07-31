@@ -73,7 +73,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 
 
-	it('4. Verify iFrame and switch to it', function() {
+	it('1. Verify inner frame and switch to it', function() {
 		var session = new browserSession();
 		browser.driver.sleep(5000);
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
@@ -82,33 +82,33 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 
-	it('5. Verify widget Overlay appears', function() {
+	it('2. Verify widget Overlay appears', function() {
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 
 	});
 
-	it('6. Click on agreement checkbox', function() {
+	it('3. Click on agreement checkbox', function() {
 		mainPage.clickCheckbBox().then(function() {
 
 		});
 	});
 
-	it('7. Verify and click on continue', function() {
+	it('4. Verify and click on continue on widget front page ', function() {
 		expect(mainPage.verifyContBtn()).toBe(true);
 		mainPage.clickContBtn();
 	});
 
-	it('8. Verify offers', function() {
+	it('5. Verify offers', function() {
 		browser.driver.sleep(2000);
 		expect(mainPage.verifyOffer()).toBe(true);
 	});
 
-	it('9. Skip all the offers', function() {
+	it('6. Skip all the offers', function() {
 		browser.driver.sleep(2000);
 		expect(mainPage.skipOffers()).toBe(true);
 	});
 
-	it('10. Verify and Click on Attending button', function() {
+	it('7. Verify and Click on Attending button', function() {
 		browser.driver.sleep(5000);
 		expect(mainPage.verifyMainAttendButton()).toBe(true);
 		browser.driver.sleep(5000);
@@ -118,28 +118,27 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		});
 	});
 	
-	it('12. Handling Fb Window ', function () {
+	it('8. Handling Fb Window ', function () {
 		Wpage.fbWindowHandler();
         browser.driver.sleep(5000);   
 	});    
 	
-	it('13. Installing ticketmaster application', function (){
+	it('9. Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 
-    it('14. Verify and Click on Attending button', function() {
+    it('10. Verify and Click on Attending button', function() {
 		Wpage.switchToWidgetFrame();
 		browser.driver.sleep(5000);
-		//expect(mainPage.verifyMainAttendButton()).toBe(true);
-		//browser.driver.sleep(5000);
-		// mainPage.clickOnMainAttendButton().then(function() {
-		// browser.driver.sleep(5000);
-// 
-		// });
+		expect(mainPage.verifyMainAttendButton()).toBe(true);
+		browser.driver.sleep(5000);
+		 mainPage.clickOnMainAttendButton().then(function() {
+		 browser.driver.sleep(5000);
+		 });
 	});
 	
-	it('12. Verifying Send Invitation Button and click on it', function() {
+	it('11. Verifying Send Invitation Button and click on it', function() {
 		console.log('verifying invitation btn');
 		browser.driver.sleep(5000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
@@ -148,37 +147,37 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 
-	it('13. Verify that the Window Contains link to ticketmaster event', function() {
+	it('12. Verify that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 	});
 
-	it('14. Enter the friend name to share this event with', function() {
+	it('13. Enter the friend name to share this event with', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(5000);
 		Wpage.clickOnSend();
 
 	});
 
-	it('15. Verify and Click on Continue button on end widget page of', function() {
+	it('14. Verify and Click on Continue button on end widget page of', function() {
 		browser.driver.sleep(5000);
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
 	});
 
-	it('16. Verify that the page contains link to ticket master', function() {
+	it('15. Verify that the page contains link to ticket master', function() {
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
 	});
 
-	it('17. click on close', function() {
+	it('16. click on close', function() {
 		browser.driver.sleep(5000);
 		Wpage.clickOnClose();
 	});
 
-	it('18. Join the event page', function() {
+	it('17. Join the event page', function() {
 
 		var fbeventsession = new fbEventSession();
 		fbPage.clickJoinPage();
@@ -188,13 +187,13 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 
-	it('19. Logout from the current user', function() {
+	it('18. Logout from the current user', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
 
-	it('20. login with friend Id', function() {
+	it('19. login with friend Id', function() {
 		browser.driver.sleep(5000);
 		fbPage.inputFbId();
 		browser.driver.sleep(2000);
@@ -203,7 +202,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		fbPage.clickOnLoginBtn();
 	});
 
-	it('21. Verify message is received by friend user', function() {
+	it('20. Verify message is received by friend user', function() {
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
 		fbPage.selectSender();
@@ -211,7 +210,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('22. Remove Message and log out', function() {
+	it('21. Remove Message and log out', function() {
 		browser.driver.sleep(2000);
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);
@@ -220,7 +219,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		fbPage.clearConversation();
 	});
 	
-	it('logging out', function() {
+	it('22. logging out', function() {
 	   fbPage.logoutTab();
 		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
@@ -228,7 +227,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 	
-	it('Close Driver',function(){
+	it('23. Close Driver',function(){
 		browser.driver.close();
 	});
 });
