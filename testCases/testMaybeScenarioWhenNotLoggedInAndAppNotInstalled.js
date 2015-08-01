@@ -5,25 +5,23 @@ var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
 var fbSession = require('../sessionInitiator/fbSession.js');
 var fbEventSession = require('../sessionInitiator/fbEventSession.js');
 
-
-
 var doWeNeedAppInstalled = false;
 var isAppInstalled;
 
 
- describe('ROKT Widget Demo Test Using Protractor -- File: testMaybeScenarioWhenNotLoggedInAndAppNotInstalled', function () {
+ describe('ROKT Widget Demo Test Using Protractor -- File: testMaybeScenarioWhenNotLoggedInAndAppNotInstalled.js', function () {
 	 
 	var fbPage = new faceBookPageObject();
 	 var Wpage = new WidgetPage();
 	 var mainPage = new mainModule();
 	 
 	
-	  it('Pre-requisite : Check if App is installed or not on Facebook and  Remove the user from event attendance list if already joined', function() {
+		it('Pre-requisite : Check if App is installed or not on Facebook and  Remove the user from event attendance list if already joined', function() {
 		var fbsession = new fbSession();
 		fbPage.inputFbId();
 		fbPage.inputFbPass();
-	  fbPage.clickOnLoginBtn();});
-		/*browser.driver.sleep(6000);
+		fbPage.clickOnLoginBtn();
+		browser.driver.sleep(6000);
 		fbPage.fbSettingsTab();
 		browser.driver.sleep(2000);   
 		fbPage.seeMoreSettingsTab();
@@ -32,8 +30,7 @@ var isAppInstalled;
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("Size of App list element:- "+value);
-			
+		
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -41,10 +38,10 @@ var isAppInstalled;
 			}
 			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("App is already in required state, no need to change");
+				console.log("[Info] App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("App should be installed for the scenario but actually it's not, installing it now");
+					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
 					browser.driver.sleep(5000);
 		
@@ -57,40 +54,34 @@ var isAppInstalled;
 				});
 						
 				}else{
-					console.log("App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove();
+					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
-					browser.driver.sleep(2000);
+					browser.driver.sleep(5000);
 				}
 			}
-		});
 		
+		});
+	});
+
+   it('Pre-requisite : Unattending the event and logging out', function (){
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
-	});
-
-
-		 
-  it('Logging out' ,function (){
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);   
-
 		fbPage.logoutBtn();
-
 		browser.driver.sleep(5000);   
 
-
 	});
-				 
+		 
 	it('1. Verify inner frame and switch to it', function () {	
 		var session = new browserSession();
 		browser.driver.sleep(5000);   
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
-		Wpage.switchToWidgetFrame().then(function () {
-		});
+		Wpage.switchToWidgetFrame();
 
 	});
 
@@ -147,6 +138,7 @@ var isAppInstalled;
         browser.driver.sleep(5000);   
 		
 	});
+
 	
 		
 	it('10. Installing ticketmaster application', function (){
@@ -165,7 +157,6 @@ var isAppInstalled;
 	});
 	
 	it('12. Verifying Send Invitation Button ', function () {
-		console.log('verifying invitation btn');
 		browser.driver.sleep(5000);   
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
@@ -211,7 +202,7 @@ var isAppInstalled;
 		browser.driver.sleep(5000);
 		Wpage.clickOnClose();
 			
-	});*/
+	});
 	
     it('19. Join the event page', function () {
 			
@@ -222,7 +213,6 @@ var isAppInstalled;
 			browser.driver.sleep(5000);
 			fbPage.clickMaybeStatus();
 			browser.driver.sleep(5000);
-			console.log("joining the event page");
 			expect(fbPage.eventStatusMaybe()).toBe(true);
 			browser.driver.sleep(5000);
      		expect(fbPage.userEventStatusMaybe()).toBe(true);

@@ -17,8 +17,8 @@ fbAuthentication.prototype = Object.create({}, {
 	loginBtn : {get : function() {return browser.driver.findElement(by.xpath('//input[contains(@value,"Log In")]'));}},
 	user_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Messages")]'));}}, 	 
 	select_sender : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Automation shared a link.")]'));}},
-	verify_message : {get : function() {return browser.driver.findElement(by.xpath('//li[@class="webMessengerMessageGroup clearfix"]'));}}, 
-	message_settings : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="u_jsonp_2_s"]'));}}, 
+	verify_message : {get : function() {return browser.driver.findElement(by.xpath('(//ul[@id="webMessengerRecentMessages"]//div[contains(text(),"ticketmaster.com")])[last()]'));}}, 
+	message_settings : {get : function() {return browser.driver.findElement(by.xpath('//button[contains(.,"New Message")]/following-sibling::div[1]//button'));}}, 
 	clear_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Delete Conversation...")] '));}}, 
 	clear_conversation : {get : function() {return browser.driver.findElement(by.xpath('//label[contains(@class ,"uiButton uiButtonLarge uiButtonConfirm")]'));}},
 	undo_tab : {get : function() {return browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img'));}},
@@ -76,7 +76,6 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	inputFbId : {  
 		value : function() {
-			console.log("Enter username to log in to FaceBook");
 			return this.emailId.sendKeys("testuser01.automation@gmail.com");
 
 		}
@@ -84,13 +83,11 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	inputFbPass : {
 		value : function() {
-			console.log("Enter password to log in to FaceBook");
 			return this.password.sendKeys("Qait@123");
 		}
 	},
 	clickOnLoginBtn : {
 		value : function() {
-			console.log("LoggedIn into FaceBook");
 			return this.loginBtn.click();
 		}
 	},
@@ -99,56 +96,48 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	 verifyHomeTabObFb: {
 		value: function () {
-			console.log("Verifying User is Logged In");
 			return this.home_tab.isDisplayed();
 		}
 	},
 	
 	clickJoinPage : {
 		value : function() {
-			console.log("Clicking on Join");
 			return this.click_join_page.click();
 		}
 	},
 	
 	eventStatus : {
 		value : function() {
-			console.log("Checking the Event Status Tab");
 			return this.event_status.isDisplayed();
 		}
 	},
 
 	userEventStatus : {
 		value : function() {
-			console.log("Checking the Event Status Of User");
 			return this.user_event_status.isDisplayed();
 		}
 	},
 	
 	clickGoingStatus: {
 		value : function() {
-			console.log("Clicking on Going");
 			return this.event_status.click();
 		}
 	},
 	
 	clickMaybeStatus: {
 		value : function() {
-			console.log("Clicking on Maybe");
 			 this.maybe_event.click();
 		}
 	},
 	
 	eventStatusMaybe : {
 		value : function() {
-			console.log("Checking the Event Status Tab");
 			return this.event_status_maybe.isDisplayed();
 		}
 	},
 	
 	userEventStatusMaybe : {
 		value : function() {
-			console.log("Checking the Event Status Of User");
 			return this.user_event_status_maybe.isDisplayed();
 		}
 	},
@@ -170,21 +159,18 @@ fbAuthentication.prototype = Object.create({}, {
 
 	logoutBtn : {
 		value : function() {
-			console.log("Logged Out");
 			this.logout_btn.click();
 		}
 	},
 	
 	inputFrndFbId : {
 		value : function() {
-			console.log("Entering Friend Id");
 			return this.emailId.sendKeys("roktdemo.one@gmail.com");
 		}
 	},
 	
 	 inputFbPass : {
 		value : function() {
-			console.log("Enter password to log in to FaceBook");
 			return this.password.sendKeys("Qait@123");
 		}
 	},
@@ -192,8 +178,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	clickMessages : {
 		value : function() {
-			browser.driver.sleep(6000);
-			console.log("Checking User Messages");
+			browser.driver.sleep(3000);
 			return this.user_messages.then(function(elem){
 				browser.driver.actions().mouseMove(elem).perform();
 				browser.driver.sleep(2000);
@@ -205,7 +190,6 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	selectSender : {
 		value : function() {
-			console.log("Selecting the Sender");
 			browser.driver.sleep(4000);
 			this.select_sender.then(function(elem){
 				browser.driver.actions().mouseMove(elem).perform();
@@ -217,63 +201,54 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	verifyMessage : {
 		value : function() {
-			console.log("Verifying that Message is Received");
 			return this.verify_message.isDisplayed();
 		}
 	},
 	
 	messageSettings : {
 		value : function() {
-			console.log("Clicking on Message Settings");
 			return this.message_settings.click();
 		}
 	},
 	
 	clearMessages : {
 		value : function() {
-			console.log("Clearing User Messages");
 			return this.clear_messages.click();
 		}
 	},
 	
 	clearConversation : {
 		value : function() {
-			console.log("Clearing the Conversation");
 			return this.clear_conversation.click();
 		}
 	},
 
 	clickUndoTab : {
 		value : function() {  		
-		    console.log("Clicking on removing tab");
 			return this.undo_tab.click();
 		}
 	},
 	
 	clickUndoEvent : {
 		value : function() {  		
-		    console.log("Removing from the guess list");
 			return this.undo_event.click();
 		}
 	},
 
 	clickUndoOk : {
 		value : function() {  	
-     		console.log("Removed");
 			return this.undo_ok.click();
 		}
 	},
 
 	fbSettingsTab : {
 		value : function() {  		
-		    console.log("Clicking on Settings Tab");
 			return this.fb_settings_tab.click();
 		}
 	},
 
 	seeMoreSettingsTab : {
 		value : function() {  	
-     		console.log("Clicking on user Settings");
 			this.see_more_settings_tab.click();
 
 		}
@@ -281,26 +256,24 @@ fbAuthentication.prototype = Object.create({}, {
 
 	userApps : {
 		value : function() {  		
-		    console.log("Viewing User Facebook Applications");
 			this.user_apps.click();
 		}
 	},
 
 	appRemove : {
-		 value: function () {
+		 value: function (appName) {
    
    	this.hidden_app_remove.then(function(elem){
    	browser.driver.sleep(2000);
    	browser.driver.actions().mouseMove(elem).perform().then(function(){
     browser.driver.sleep(2000);
-    browser.driver.findElement(by.xpath('//div[text()="tripcierge"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
+    browser.driver.findElement(by.xpath('//div[text()="'+appName+'"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
     });   
    });
   }
  },
 	removeNow : {
 		value : function() {  		
-		    console.log("Removing the App");
 			this.remove_now.click();
 		}
 	},

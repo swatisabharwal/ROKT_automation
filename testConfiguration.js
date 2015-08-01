@@ -3,7 +3,7 @@ var HtmlReporter = require('protractor-html-screenshot-reporter');
 exports.config = {
   directConnect: true,
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./testCases/testMaybeScenarioWhenNotLoggedInAndAppNotInstalled.js'],
+  specs: ['./testCases/testMainSocialShareModuleWhenUserNotLoggedInAndAppInstalled.js'],
   capabilities: {
     browserName: 'chrome'
   },
@@ -23,10 +23,7 @@ exports.config = {
          takeScreenShotsOnlyForFailedSpecs: true
        }));
        
-   global.isAngularSite = function(flag){
-            browser.ignoreSynchronization = !flag;
-   
-  };
+  
   }
 };
 

@@ -1,7 +1,8 @@
 var fbSession = function () {
   browser.driver.ignoreSynchronization = true;
+
+  //browser.driver.get('https://www.facebook.com/');
   browser.driver.get('https://www.facebook.com/');
-  console.log("Launched URL from session");
   browser.sleep(10000);
 };
 

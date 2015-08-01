@@ -32,7 +32,7 @@ var isAppInstalled;
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("Size of App list element:- "+value);
+			console.log("[Info] Size of App list element:- "+value);
 			
 			if(value === 0 ){
 				isAppInstalled = false;
@@ -41,10 +41,10 @@ var isAppInstalled;
 			}
 			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("App is already in required state, no need to change");
+				console.log("[Info] App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("App should be installed for the scenario but actually it's not, installing it now");
+					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
 					browser.driver.sleep(5000);
 		
@@ -57,8 +57,8 @@ var isAppInstalled;
 				});
 						
 				}else{
-					console.log("App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove();
+					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
@@ -121,17 +121,7 @@ var isAppInstalled;
 		
 	});
 		
-
-    it('8. Verify and Click on Attending button', function (){
-	     Wpage.switchToWidgetFrame();  
-		 browser.driver.sleep(5000);
-		 expect(Wpage.verifyMiniAttendButton()).toBe(true);
-		 browser.driver.sleep(5000);
-		 Wpage.clickOnMiniAttendButton().then(function () {
-		 browser.driver.sleep(5000);
-		 });
-	 });
-	
+   
 	it('9. Verifying Send Invitation Button ', function () {
 		browser.driver.sleep(5000);   
 		Wpage.switchToWidgetFrame();

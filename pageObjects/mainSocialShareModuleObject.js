@@ -19,7 +19,6 @@
 
 clickCheckbBox:	{
 	 value: function () {
-	 	console.log('Checked on CheckBox');
 		return this.check_box.click();
      
       }
@@ -27,7 +26,6 @@ clickCheckbBox:	{
 
  verifyContBtn:	{
 	 value: function () {
-	 	console.log("Continue button is available");
 		return this.cont_btn.isDisplayed();
      
       }
@@ -35,7 +33,6 @@ clickCheckbBox:	{
 
   clickContBtn:{
 	 value: function () {
-	 	console.log("clicked on continue button");
 		return this.cont_btn.click();
      
       }
@@ -43,7 +40,6 @@ clickCheckbBox:	{
 
    verifyOffer:	{
 	 value: function () {			
- 	    console.log("Verifying that it is an Offer");
 		return this.skip_btn.isDisplayed();
      
       }
@@ -52,7 +48,6 @@ clickCheckbBox:	{
   
   skipOffers: {
   	value: function(){
-  		console.log("Skipping all the offers");
      	this.question.then(function(elems){
   		var len = elems.length;
   		for(var i = 0; i<(len-1) ;i++){
@@ -67,7 +62,6 @@ clickCheckbBox:	{
   	
     verifyContinueShareButton:	{
 	 value: function () {
-  		console.log("Verifying that continue button is displayed");
 		return this.cont_share_btn.isDisplayed();
      
       }
@@ -75,7 +69,6 @@ clickCheckbBox:	{
 
     clickOnContBtnFromEndWidgetPage:	{
 	 value: function () {
-     	 console.log("Clicking on continue button");
 	     return this.cont_share_btn.click();
      
       }
@@ -83,28 +76,24 @@ clickCheckbBox:	{
    
    verifyMainAttendButton : {
 		value : function() {
-  		    console.log("Verifying main attend button");
 			return this.mainattendButton.isDisplayed();
 		}
 	},
    
    clickOnMainAttendButton: {
    	value: function(){
-   	  		console.log("Clicking on Main Attending Button");
 			return this.mainattendButton.click();	
    	}
    },
    
    verifyMainMaybeButton : {
 		value : function() {
-  		    console.log("Verifying main attend button");
 			return this.main_maybeButton.isDisplayed();
 		}
 	},
    
    clickOnMainMaybeButton: {
    	value: function(){
-   	  		console.log("Clicking on Main Attending Button");
 			return this.main_maybeButton.click();	
    	}
    },

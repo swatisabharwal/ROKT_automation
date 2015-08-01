@@ -71,7 +71,7 @@ WidgetPage.prototype = Object.create({}, {
 	
 	verify_window_event : {
 		get : function() {
-			return browser.driver.findElement(by.xpath('//a[contains(@href,"www.ticketmaster.com")]'));
+			return browser.driver.findElement(by.xpath('(//div[@class="send_dialog"]//a)[last()]'));
 		}
 	},
 	like_btn : {
@@ -123,8 +123,8 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
-	emailId : {get : function() {return browser.driver.findElement(by.xpath('//div[@class="form_row clearfix"]/input[@id="email"]'));}},
-	password : {get : function() {return browser.driver.findElement(by.xpath('//div[@class="form_row clearfix"]/input[@id="pass"]'));}},
+	emailId : {get : function() {return browser.driver.findElement(by.xpath('//input[@id="email"]'));}},
+	password : {get : function() {return browser.driver.findElement(by.xpath('//input[@id="pass"]'));}},
 	
 
 	
@@ -137,28 +137,24 @@ WidgetPage.prototype = Object.create({}, {
    
    clickMayebBtn: {
 		value : function() {  		
-		    console.log("Clicking on mini attend button");
 			return this.maybe_btn.click();
 		}
 	},
 
   clickLikeBtn: {
 		value : function() {  		
-		    console.log("Clicking on mini attend button");
 			return this.like_btn.click();
 		}
 	},
 	
 	switchToWidgetFrame : {
 		value : function() {  		
-			console.log("User successfully switched to widget iFrame");
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
 
 	getVisibiltyOfWidgetOverlay : {
 		value : function() {  		
-		 	console.log("Checking if Widget Overlay is correctly displayed");
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
@@ -166,21 +162,18 @@ WidgetPage.prototype = Object.create({}, {
 
 	switchToSendInvitationFrames : {
 		value : function() {  		
-		    console.log("Switching to frame for sending invitation");
 			return browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
 		}
 	},
 
 	getShareLabelText : {
 		value : function() {  		
-		    console.log("Verifying the Widget Content");
 			return this.shareLabel.getText();
 		}
 	},
 
 	verifyMiniAttendButton : {
 		value : function() {  		
-		    console.log("Verifying mini attend Button");
 			return this.miniattendButton.isDisplayed();
 		}
 	},
@@ -188,7 +181,6 @@ WidgetPage.prototype = Object.create({}, {
 	
 	clickOnMiniAttendButton : {
 		value : function() {  		
-		    console.log("Clicking on mini attend button");
 			return this.miniattendButton.click();
 		}
 	},
@@ -199,14 +191,11 @@ WidgetPage.prototype = Object.create({}, {
   		
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(5000);
-				console.log("New window handling");
 				parent_handlers = handles[0];
 				popup_handlers = handles[1];
 				browser.driver.sleep(5000);
-				console.log("moving to current");
-				browser.driver.switchTo().window(popup_handlers).then(function() {
-				console.log("popup window handeled");
-				});
+				browser.driver.switchTo().window(popup_handlers);
+				
 			});
 			
 		}
@@ -214,45 +203,42 @@ WidgetPage.prototype = Object.create({}, {
 
 	inputFbId : {
 		value : function() {  		
-		    console.log("Entering fb Id");
 			return this.emailId.sendKeys("testuser01.automation@gmail.com");
 		}
 	},
 	
     inputFbPass : {
 		value : function() {
-			console.log("Enter password to log in to FaceBook");
 			return this.password.sendKeys("Qait@123");
 		}
 	},
 	
 	clickOnLoginBtn : {
 		value : function() {  		
-		    console.log("Clicking on Login button");
 			this.loginBtn.click();
+			browser.driver.sleep(5000);
 			browser.driver.switchTo().window(parent_handlers);
 		}
 	},
 
 	clickOnFbLoginBtn : {
 		value : function() {  		
-		    console.log("Clicking on Login button");
-			this.loginBtn.click();
+			this.loginBtn.click().then(function(){
+			});
 		}
 	},
 	
 
 	verifyInstallationPage : {
 		value : function() {  		
-		    console.log("Verifying Installation page is displayed");
 			return this.installation_page.isDisplayed();
 		}
 	},
 
 	clickOkayToInstall : {
 		value : function() {  		
-		    console.log("Clicking on okay to install the app");
 			this.okay_to_install.click();
+			browser.driver.sleep(5000);
 			browser.driver.switchTo().window(parent_handlers);
 
 		}
@@ -263,7 +249,6 @@ WidgetPage.prototype = Object.create({}, {
 
 	enterRecepient : {
 		value : function() {  		
-				console.log("Friend is selected");
      			this.recepients.sendKeys('Rokt').then(function() {
 				browser.driver.sleep(2000);
 				browser.driver.actions().mouseMove(browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]'))).perform().then(function(){
@@ -276,7 +261,6 @@ WidgetPage.prototype = Object.create({}, {
 
 	clickOnSend : {
 		value : function() {  		
-			console.log("Message is send");
 			browser.driver.sleep(5000);
 			this.send_btn.click();
 
@@ -285,7 +269,6 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifySendInvitationButton : {
 		value : function() {  		
-		   console.log("Verifying Send Invitation Button");
 			browser.driver.sleep(5000);
 			return this.send_invitation_btn.isDisplayed();
 			
@@ -294,29 +277,28 @@ WidgetPage.prototype = Object.create({}, {
 
 	sendInvitationButtonClick : {
 		value : function() {  		
-			console.log("Send Invitation button is clicked");
 			return this.send_invitation_btn.click();
 		}
 	},
 
 	verifyPostOverlay : {
 		value : function() {  		
-			console.log("verifying post overlay");
 			return this.post_overlay.isDisplayed();
 		}
 	},
 
 	verifyWindowEvent : {
 		value : function() {  	
-     		console.log("Verifying Event Link is Displayed");
-			return this.verify_window_event.isDispalyed();
+			console.log("verifying ticketmaster link ");
+			this.verify_window_event.getAttribute('href').then(function(elem){
+				console.log("elem:- "+elem);
+			});
 
 		}
 	},
 
 	clickOnLike : {
 		value : function() {
-			console.log("Clicking On Like");
 			this.switchToWidgetFrame;
 			return this.like_btn.click();
 
@@ -325,7 +307,6 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifyContinueShareButton : {
 		value : function() {  		
-		    console.log("Verifying Continue Button is Displayed");
 			return this.cont_share_btn.isDisplayed();
 
 		}
@@ -333,7 +314,6 @@ WidgetPage.prototype = Object.create({}, {
 
 	clickOnContBtnFromEndWidgetPage : {
 		value : function() {  		
-		    console.log("Clicking on Continue button");
 			return this.cont_share_btn.click();
 
 		}
@@ -341,14 +321,12 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifyLinkToTicketmaster : {
 		value : function() {  		
-		    console.log("Verifying the ticketmaster link");
 			return this.link_ticketmaster.isDisplayed();
 		}
 	},
 
 	clickOnClose : {
 		value : function() {  		
-		    console.log("Clicking on Close");
 			return this.close_btn.click();
 		}
 	},
@@ -356,7 +334,6 @@ WidgetPage.prototype = Object.create({}, {
 	
 	installAppThroughMiniShareModule : {
 		value : function() {  		
-		    console.log("Installing the app...");
 			browser.driver.sleep(3000);
 			this.clickOnMiniAttendButton();
 			browser.driver.sleep(3000);

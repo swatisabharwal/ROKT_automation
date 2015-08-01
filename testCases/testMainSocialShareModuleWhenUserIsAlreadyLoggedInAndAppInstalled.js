@@ -18,7 +18,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	
 	
 	
-	it('Pre-requisite : Check if App is installed or not on Facebook and  Remove the user from event attendance list if already joined', function() {
+	it('Pre-requisite (1) : Check if App is installed or not on Facebook and  Remove the user from event attendance list if already joined', function() {
 		var fbsession = new fbSession();
 		fbPage.inputFbId();
 		fbPage.inputFbPass();
@@ -32,7 +32,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("Size of App list element:- "+value);
+			console.log("[Info] Size of App list element:- "+value);
 			
 			if(value === 0 ){
 				isAppInstalled = false;
@@ -41,13 +41,11 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 			}
 			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("App is already in required state, no need to change");
+				console.log("[Info] App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("App should be installed for the scenario but actually it's not, installing it now");
-					var session = new browserSession();
-					browser.driver.sleep(5000);
-		
+					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
+					var session = new browserSession();		
 					Wpage.switchToWidgetFrame().then(function(){
 						
 					var wP = new WidgetPage();
@@ -57,8 +55,8 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 				});
 						
 				}else{
-					console.log("App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove();
+					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
@@ -66,70 +64,56 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 			}
 		});
 		
+	});
+	
+	it('Pre-requisite (2): Already Logged in and unattending the event', function (){
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
 	});
 
-	it('1. Navigate to ROKT widget home page', function() {
+	it('1. STEP : Navigate to ROKT widget home page', function() {
 		var session = new browserSession();
 		browser.driver.sleep(5000);
 	});
 
-	it('2. Verify the inner frame and switch to it', function() {
+	it('2. STEP : Verify Widget Overlay', function() {
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
-		Wpage.switchToWidgetFrame().then(function() {
-		});
-
-	});
-
-	it('3. Verify if widget Overlay appears', function() {
+		Wpage.switchToWidgetFrame();
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 
 	});
 
-	it('4. Click on agreement checkbox', function() {
-		mainPage.clickCheckbBox().then(function() {
-
-		});
-
-	});
-
-	it('5. Verify and click on continue button on widget front page', function() {
+	it('4. STEP : Accepts Terms And Conditions and Continuex', function() {
+		mainPage.clickCheckbBox();
 		expect(mainPage.verifyContBtn()).toBe(true);
-		mainPage.clickContBtn().then(function() {
-
-		});
+		mainPage.clickContBtn();
 
 	});
 
-	it('6. Verify offers section', function() {
+	it('6. STEP : Verify offers section and Skip all available Offers', function() {
 		browser.driver.sleep(2000);
 		expect(mainPage.verifyOffer()).toBe(true);
-	});
-
-	it('7. Skip all the offers', function() {
 		browser.driver.sleep(2000);
 		mainPage.skipOffers();	
 	});
 
-	it('8. Verify and Click on Attending button', function() {
+	it('8. STEP : Verify Attending button and Click on it', function() {
 		browser.driver.sleep(5000);
 		expect(mainPage.verifyMainAttendButton()).toBe(true);
 		browser.driver.sleep(5000);
-		mainPage.clickOnMainAttendButton().then(function() {
-		});
+		mainPage.clickOnMainAttendButton();
 	});
 
-	it('9. Verifying Send Invitation Button and click on it', function() {
+	it('9. STEP : Verify Send Invitation Button and click on it', function() {
 		browser.driver.sleep(3000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		Wpage.sendInvitationButtonClick();
 
 	});
 
-	it('10. Switch to Invitaion frame', function() {
+	it('10. STEP : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
@@ -138,59 +122,52 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		
 	});
 
-	it('11. Enter the friend name to share this event with', function() {
+	it('11. STEP : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(2000);
 		Wpage.clickOnSend();
 
 	});
 
-	it('12. Verify and Click on Continue button on end widget', function() {
+	it('12. STEP : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		browser.driver.sleep(5000);
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
-	});
-
-	it('13. Verify event window ', function() {
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
-	});
-
-	it('14. Click on close button on widget', function() {
 		browser.driver.sleep(5000);
-		Wpage.clickOnClose().then(function() {
-		});
+		Wpage.clickOnClose();
 	});
 
-	it('15. Join the event page', function() {
+	it('15. STEP : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(2000);
+
+	it('STEP : Verify that user is able to join the event' ,function (){
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
-
 	});
 
-	it('16. Logout from the current user', function() {
+	it('16. STEP : Logout from facebook', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
 
-	it('17. Login with friend Id', function() {
-		browser.driver.sleep(5000);
+	it('17. STEP : Login on facebook as the friend with whom event invitation is shared', function() {
+		browser.driver.sleep(2000);
 		fbPage.inputFrndFbId();
-		browser.driver.sleep(2000);
 		fbPage.inputFbPass();
-		browser.driver.sleep(2000);
 		fbPage.clickOnLoginBtn();
+		browser.driver.sleep(5000);
 	});
 
-	it('18. Verify if message is received by that friend', function() {
-		browser.driver.sleep(5000);
+	it('18. STEP : Verify if message is received by that friend', function() {
+		
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
 		fbPage.selectSender();
@@ -198,7 +175,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('19. Remove Message from friend\'s message box and log out', function() {
+	it('19. STEP : Remove Message from friend message box and log out', function() {
 		browser.driver.sleep(2000);
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);

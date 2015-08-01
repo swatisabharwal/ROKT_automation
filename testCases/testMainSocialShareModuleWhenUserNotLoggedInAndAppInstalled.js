@@ -12,7 +12,7 @@ var doWeNeedAppInstalled = true;
 var isAppInstalled;
 
  describe('ROKT Widget Demo Test Using Protractor -- File:: testMainSocialShareModuleWhenUserNotLoggedInAndAppInstalled', function () {
-  var session = new browserSession();
+ 
   var Wpage = new WidgetPage();
   var mainPage = new mainModule();
   var fbPage = new faceBookPageObject();
@@ -35,7 +35,7 @@ var isAppInstalled;
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("Size of App list element:- "+value);
+			console.log("[Info] Size of App list element:- "+value);
 			
 			if(value === 0 ){
 				isAppInstalled = false;
@@ -44,10 +44,10 @@ var isAppInstalled;
 			}
 			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("App is already in required state, no need to change");
+				console.log("[Info] App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("App should be installed for the scenario but actually it's not, installing it now");
+					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
 					browser.driver.sleep(5000);
 		
@@ -60,8 +60,8 @@ var isAppInstalled;
 				});
 						
 				}else{
-					console.log("App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove();
+					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
@@ -125,7 +125,7 @@ var isAppInstalled;
 		
 	it('7. Click \'Attending\' Button and validate Facebook Auth screen ', function () {
         browser.driver.sleep(5000);   
-  		mainPage.clickOnAttendingBtnFromMainModuleWidgetPage();
+  		mainPage.clickOnMainMaybeButton();
         browser.driver.sleep(5000);   
   
 	});
@@ -157,22 +157,26 @@ var isAppInstalled;
 		});
 	});
 	
-	it('11. Verifying Send Invitation Button ', function () {
-		browser.driver.sleep(5000);   
+	it('11. Verifying Send Invitation Button and click on it', function() {
+		browser.driver.sleep(5000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
-        browser.driver.sleep(5000);   
+		browser.driver.sleep(5000);
+		Wpage.sendInvitationButtonClick();
 
 	});
+
 	
 	it('12. Verifying that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
+		
 	});
 
 	it('13. Entering the friend name to share this event with', function() {
 		Wpage.enterRecepient();
-		browser.driver.sleep(5000);
+		
+		expect(Wpage.verifyWindowEvent()).toBe(true);
 		Wpage.clickOnSend();
 		browser.driver.sleep(5000);
 
@@ -192,11 +196,10 @@ var isAppInstalled;
 
 	it('16. Clicking on close', function() {
 		browser.driver.sleep(5000);
-		Wpage.clickOnClose().then(function() {
-		});
+		Wpage.clickOnClose();
 	});
 	
-    it('17. Joining the event page', function () {
+   it('20. Joining the event page', function () {
 			var fbeventsession=new fbEventSession();
 			fbPage.clickJoinPage();
 			browser.driver.sleep(5000);
@@ -206,9 +209,18 @@ var isAppInstalled;
 			expect(fbPage.userEventStatus()).toBe(true);
 		
     });
-	
-	it('18. Login with friend Id',function () {
-		var fbsession = new fbSession();
+		
+	it('21. Logging out' ,function (){
+		fbPage.logoutTab();
+		browser.driver.sleep(5000);   
+		fbPage.logoutBtn();
+		browser.driver.sleep(5000);   
+
+
+	});
+	it('22. login with friend Id',function () {
+	    	
+		browser.driver.sleep(5000); 
 		fbPage.inputFrndFbId();
 		browser.driver.sleep(2000);
 		fbPage.inputFbPass();
@@ -217,7 +229,8 @@ var isAppInstalled;
 		browser.driver.sleep(10000);
 	});
 	
-	it('19. Verifying msg received',function(){
+	it('23. Verifying message received',function(){
+	   	console.log("verifying message");
 		fbPage.clickMessages();
 		browser.driver.sleep(5000);
 		fbPage.selectSender();
@@ -225,7 +238,8 @@ var isAppInstalled;
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 	
-	it('20. Removing Mesage', function () {
+	it('24. Removing Mesage', function () {
+		console.log("removing msg");
 		browser.driver.sleep(5000);
 		fbPage.messageSettings();
 		browser.driver.sleep(5000);
@@ -233,13 +247,18 @@ var isAppInstalled;
 		browser.driver.sleep(5000);
 		fbPage.clearConversation();
 		browser.driver.sleep(5000);
+		
 	});
+	
+	it('25. Logging out' ,function (){
+		fbPage.logoutTab();
+		browser.driver.sleep(5000);   
 
-    it('21. logging out', function() {
-	    fbPage.logoutTab();
-		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
-		browser.driver.sleep(5000);
+
+		browser.driver.sleep(5000);   
+
 
 	});
+	
 });

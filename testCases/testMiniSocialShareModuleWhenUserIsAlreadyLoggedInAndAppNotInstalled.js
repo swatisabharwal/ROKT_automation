@@ -33,7 +33,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("Size of App list element:- "+value);
+			console.log("[Info] Size of App list element:- "+value);
 			
 			if(value === 0 ){
 				isAppInstalled = false;
@@ -42,10 +42,10 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 			}
 			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("App is already in required state, no need to change");
+				console.log("[Info] App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("App should be installed for the scenario but actually it's not, installing it now");
+					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
 					browser.driver.sleep(5000);
 		
@@ -58,8 +58,8 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 				});
 						
 				}else{
-					console.log("App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove();
+					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
@@ -67,13 +67,15 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 			}
 		});
 		
+		
+	});
+
+	it('Pre-requisite : Already Logged in and unattending the event', function (){
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
 	});
-
-	
 
 	it('1. Verify iFrame and switch to it', function() {
 		var session = new browserSession();
