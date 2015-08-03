@@ -7,7 +7,6 @@ fbAuthentication.prototype = Object.create({}, {
 	home_tab : { get: function () {return browser.driver.findElement(by.xpath('//a[contains(@href,"https://www.facebook.com/?ref=tn_tnmn")]'));}},
 	click_join_page : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="event_button_bar"]/a[1]'));}},
 	event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Going")]'));}},
-
 	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
 	logout_tab : {get : function() {return browser.driver.findElement(by.css('#pageLoginAnchor'));}},
 	logout_btn : {get : function() {return browser.driver.findElement(by.xpath('//li[@class="_54ni navSubmenu __MenuItem"][9]'));}},
@@ -91,10 +90,8 @@ fbAuthentication.prototype = Object.create({}, {
 			return this.loginBtn.click();
 		}
 	},
-	
-	
-	
-	 verifyHomeTabObFb: {
+
+    verifyHomeTabObFb: {
 		value: function () {
 			return this.home_tab.isDisplayed();
 		}
@@ -141,9 +138,6 @@ fbAuthentication.prototype = Object.create({}, {
 			return this.user_event_status_maybe.isDisplayed();
 		}
 	},
-
-
-
 	
 	logoutTab : {
 		value : function() {
@@ -152,7 +146,6 @@ fbAuthentication.prototype = Object.create({}, {
    				browser.driver.actions().mouseMove(element).perform();
    				browser.driver.sleep(2000);
    				browser.driver.findElement(by.css('#pageLoginAnchor')).click();
- 
 			});
 		}
 	},
@@ -169,12 +162,11 @@ fbAuthentication.prototype = Object.create({}, {
 		}
 	},
 	
-	 inputFbPass : {
+    inputFbPass : {
 		value : function() {
 			return this.password.sendKeys("Qait@123");
 		}
 	},
-	
 	
 	clickMessages : {
 		value : function() {
@@ -183,7 +175,6 @@ fbAuthentication.prototype = Object.create({}, {
 				browser.driver.actions().mouseMove(elem).perform();
 				browser.driver.sleep(2000);
 				browser.driver.findElement(by.xpath('//span[contains(text(),"Messages")]')).click();
-				//}}, 	 
 			});
 		}
 	},
@@ -262,16 +253,15 @@ fbAuthentication.prototype = Object.create({}, {
 
 	appRemove : {
 		 value: function (appName) {
-   
-   	this.hidden_app_remove.then(function(elem){
-   	browser.driver.sleep(2000);
-   	browser.driver.actions().mouseMove(elem).perform().then(function(){
-    browser.driver.sleep(2000);
-    browser.driver.findElement(by.xpath('//div[text()="'+appName+'"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
-    });   
-   });
-  }
- },
+       	this.hidden_app_remove.then(function(elem){
+   	                                browser.driver.sleep(2000);
+									browser.driver.actions().mouseMove(elem).perform().then(function(){
+									browser.driver.findElement(by.xpath('//div[text()="'+appName+'"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
+								});   
+					});
+			}	
+	},
+	
 	removeNow : {
 		value : function() {  		
 			this.remove_now.click();

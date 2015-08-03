@@ -1,10 +1,9 @@
 var WidgetPage = function() {
-	//Empty constructor for now, can add piece of code if required
-	//var Whandlers =new WindowHandler();
 	var popup_handlers;
 	var parent_handlers;
 	var handlers = {};
 };
+
 WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
@@ -13,14 +12,13 @@ WidgetPage.prototype = Object.create({}, {
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
+	
 	widgetFrame_sendinvitation : {
 		get : function() {
 			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
 		}
 	},
-	// widgetFrame_inner_sendinvitation: { get: function () { return browser.driver.findElement(by.xpath('//form[@id="uiserver_form"]')); }},
 	
-
 	miniattendButton : {
 		get : function() {
 			return browser.driver.findElement(by.css('#ux_smartSignup_facebook_event_message_inner_buttons_attending'));
@@ -32,12 +30,12 @@ WidgetPage.prototype = Object.create({}, {
 			return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
 		}
 	},
+	
 	shareLabel : {
 		get : function() {
 			return browser.driver.findElement(by.css('.ui_smartSignup_facebook_event_message_header_text'));
 		}
 	},
-
 	
 	loginBtn : {
 		get : function() {
@@ -50,6 +48,7 @@ WidgetPage.prototype = Object.create({}, {
 			return browser.driver.findElement(by.xpath('//a[contains(text(), "Edit the info you provide")]'));
 		}
 	},
+
 	okay_to_install : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//button[contains(text(), "Okay")]'));
@@ -71,77 +70,87 @@ WidgetPage.prototype = Object.create({}, {
 	
 	verify_window_event : {
 		get : function() {
-			return browser.driver.findElement(by.xpath('(//div[@class="send_dialog"]//a)[last()]'));
+			return browser.driver.findElement(by.xpath('(//div[@class="pam"]//div[@class="send_dialog"]//tr[last()]//a)[3]'));
 		}
 	},
+
 	like_btn : {
 		get : function() {
 			return browser.driver.findElement(by.css('.pluginConnectButton>a:first-child'));
 		}
 	},
+
 	cont_share_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//div[@ class="ui_shareandwin_main_sns_skip"]/button'));
 		}
 	},
+
 	link_ticketmaster : {
 		get : function() {
 			return browser.driver.findElement(by.xpath(' //span[contains(text(), "Go to my Ticketmaster")]'));
 		}
 	},
+
 	recepients : {
-		get : function() {
+    	get : function() {
 			return browser.driver.findElement(by.xpath('//div[@class="innerWrap"]/input'));
 		}
 	},
+
 	friend_name : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//span[contains(text(), "Roktdemo On")]'));
 		}
 	},
+
 	send_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//label[@id="publish"]/input'));
 		}
 	},
+
 	close_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
 		}
 	},
 
-	
 	maybe_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
 		}
     },
 	
-  like_btn : {
+    like_btn : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
 		}
 	},
 
-	emailId : {get : function() {return browser.driver.findElement(by.xpath('//input[@id="email"]'));}},
-	password : {get : function() {return browser.driver.findElement(by.xpath('//input[@id="pass"]'));}},
+	emailId : {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//input[@id="email"]'));
+		}
+	},
+	
+	password : {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//input[@id="pass"]'));
+		}
+	},
 	
 
-	
-	
-	
-
-	
 	// Methods around Object -- User actions
 
    
-   clickMayebBtn: {
+    clickMayebBtn: {
 		value : function() {  		
 			return this.maybe_btn.click();
 		}
 	},
 
-  clickLikeBtn: {
+    clickLikeBtn: {
 		value : function() {  		
 			return this.like_btn.click();
 		}
@@ -158,7 +167,6 @@ WidgetPage.prototype = Object.create({}, {
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
-
 
 	switchToSendInvitationFrames : {
 		value : function() {  		
@@ -188,16 +196,14 @@ WidgetPage.prototype = Object.create({}, {
 	
 	fbWindowHandler : {
 		value : function() {
-  		
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(5000);
 				parent_handlers = handles[0];
 				popup_handlers = handles[1];
+				
 				browser.driver.sleep(5000);
 				browser.driver.switchTo().window(popup_handlers);
-				
 			});
-			
 		}
 	},
 
@@ -216,8 +222,11 @@ WidgetPage.prototype = Object.create({}, {
 	clickOnLoginBtn : {
 		value : function() {  		
 			this.loginBtn.click();
-			browser.driver.sleep(5000);
-			browser.driver.switchTo().window(parent_handlers);
+			browser.driver.sleep(2000);
+			browser.driver.getAllWindowHandles().then(function(handles) {
+				browser.driver.sleep(3000);
+				browser.driver.switchTo().window(handles[0]);
+			});
 		}
 	},
 
@@ -238,14 +247,13 @@ WidgetPage.prototype = Object.create({}, {
 	clickOkayToInstall : {
 		value : function() {  		
 			this.okay_to_install.click();
-			browser.driver.sleep(5000);
-			browser.driver.switchTo().window(parent_handlers);
-
+			browser.driver.sleep(3000);
+			browser.driver.getAllWindowHandles().then(function(handles) {
+				browser.driver.sleep(3000);
+				browser.driver.switchTo().window(handles[0]);
+			});
 		}
 	},
-
-	
-	
 
 	enterRecepient : {
 		value : function() {  		
@@ -263,15 +271,13 @@ WidgetPage.prototype = Object.create({}, {
 		value : function() {  		
 			browser.driver.sleep(5000);
 			this.send_btn.click();
-
-		}
+    	}
 	},
 
 	verifySendInvitationButton : {
 		value : function() {  		
 			browser.driver.sleep(5000);
 			return this.send_invitation_btn.isDisplayed();
-			
 		}
 	},
 
@@ -289,11 +295,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifyWindowEvent : {
 		value : function() {  	
-			console.log("verifying ticketmaster link ");
-			this.verify_window_event.getAttribute('href').then(function(elem){
-				console.log("elem:- "+elem);
-			});
-
+			return this.verify_window_event.isDisplayed();
 		}
 	},
 
@@ -301,21 +303,18 @@ WidgetPage.prototype = Object.create({}, {
 		value : function() {
 			this.switchToWidgetFrame;
 			return this.like_btn.click();
-
 		}
 	},
 
 	verifyContinueShareButton : {
 		value : function() {  		
 			return this.cont_share_btn.isDisplayed();
-
 		}
 	},
 
 	clickOnContBtnFromEndWidgetPage : {
 		value : function() {  		
 			return this.cont_share_btn.click();
-
 		}
 	},
 
@@ -331,7 +330,6 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
-	
 	installAppThroughMiniShareModule : {
 		value : function() {  		
 			browser.driver.sleep(3000);
@@ -341,7 +339,6 @@ WidgetPage.prototype = Object.create({}, {
 				browser.driver.sleep(3000);
 				browser.driver.switchTo().window(handles[1]);
 			});
-			//this.fbWindowHandler();
 			this.okay_to_install.click();
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(3000);

@@ -1,9 +1,9 @@
-var WidgetPage = require('../pageObjects/WidgetPageObject.js');
-var browserSession = require('../sessionInitiator/browserSession.js');
-var mainModule = require('../pageObjects/mainSocialShareModuleObject.js');
+var WidgetPage         = require('../pageObjects/WidgetPageObject.js');
+var browserSession     = require('../sessionInitiator/browserSession.js');
+var mainModule         = require('../pageObjects/mainSocialShareModuleObject.js');
 var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
-var fbSession = require('../sessionInitiator/fbSession.js');
-var fbEventSession = require('../sessionInitiator/fbEventSession.js');
+var fbSession          = require('../sessionInitiator/fbSession.js');
+var fbEventSession     = require('../sessionInitiator/fbEventSession.js');
 
 
 
@@ -13,12 +13,12 @@ var isAppInstalled;
 
  describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareModuleWhenUserNotAlreadyLoggedInAndAppInstalled', function () {
 	 
-	 var fbPage = new faceBookPageObject();
-	 var Wpage = new WidgetPage();
-	 var mainPage = new mainModule();
+	var fbPage = new faceBookPageObject();
+	var Wpage = new WidgetPage();
+	var mainPage = new mainModule();
 	 
 	 
-	  it('Pre-requisite : Check if App is installed or not on Facebook and  Remove the user from event attendance list if already joined', function() {
+	it('Pre-requisite (1) : Check if App is installed or not on Facebook and  if installed Remove it', function() {
 		var fbsession = new fbSession();
 		fbPage.inputFbId();
 		fbPage.inputFbPass();
@@ -32,32 +32,25 @@ var isAppInstalled;
 		browser.driver.sleep(2000); 
 
 		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
-			console.log("[Info] Size of App list element:- "+value);
-			
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
 				isAppInstalled = true;
 			}
-			
 			if(isAppInstalled === doWeNeedAppInstalled){
-				console.log("[Info] App is already in required state, no need to change");
+				console.log("[Info] : App is already in required state, no need to change");
 			}else{
 				if(doWeNeedAppInstalled){
-					console.log("[Info] App should be installed for the scenario but actually it's not, installing it now");
+					console.log("[Info] : App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
 					browser.driver.sleep(5000);
-		
 					Wpage.switchToWidgetFrame().then(function(){
-						
 					var wP = new WidgetPage();
 					wP.installAppThroughMiniShareModule();
 					expect(wP.verifySendInvitationButton()).toBe(true);
-					
 				});
-						
 				}else{
-					console.log("[Info] App should not be installed for the scenario but actually it's there, un-installing it now");
+					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
 					fbPage.appRemove("tripcierge");
 					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
@@ -66,146 +59,113 @@ var isAppInstalled;
 			}
 		});
 		
-		var fbeventsession = new fbEventSession();
+	});
+
+    it('Pre-requisite (2) : Logging Out and Unattending the event', function (){
+	   var fbeventsession = new fbEventSession();
 		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
+		fbPage.logoutTab();
+        browser.driver.sleep(2000);
+        fbPage.logoutBtn();
+    });
+   
+	it('STEP (1) : Navigate to ROKT widget home page', function() {
+		var session = new browserSession();
+		browser.driver.sleep(5000);
 	});
 
-   
-  
-
-    it('Logging Out', function (){
-	   fbPage.logoutTab();
-       browser.driver.sleep(2000);
-       fbPage.logoutBtn();
-   });
-   
-	it('1. Verify inner frame and switch to it', function () {	
-		var session = new browserSession();
-		browser.driver.sleep(5000);   
+	it('STEP (2) : Verify Widget Overlay', function() {
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame();
-
+		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
-
-
-  	it('2. Verify widget Overlay appears', function () {
-  		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
-  		  
-	});
-				
-	it('3. Verify and Click on Attending button', function (){
- 		browser.driver.sleep(5000);
+	
+	it('STEP (3) : Verify Attending button and Click on it', function() {
+		browser.driver.sleep(2000);
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
-		browser.driver.sleep(5000);
-		Wpage.clickOnMiniAttendButton().then(function () {
-		browser.driver.sleep(5000);
-		});
+		browser.driver.sleep(2000);
+		Wpage.clickOnMiniAttendButton();
 	});
-	
-	   
-	it('4. Handling Fb Window ', function () {
+		   
+	it('STEP (4) : Entering UserId and Password into facebook PopUp window ', function () {
 		Wpage.fbWindowHandler();
-        browser.driver.sleep(5000);   
-		
-	});    
-	
-	it('5. Entering Fb Credentials ', function () {
+        browser.driver.sleep(5000);  
 		Wpage.inputFbId();
         browser.driver.sleep(5000);   
 		Wpage.inputFbPass();
         browser.driver.sleep(5000);   
 		Wpage.clickOnLoginBtn();
         browser.driver.sleep(5000);   
-		
 	});
 		
-   
-	it('9. Verifying Send Invitation Button ', function () {
+  	it('STEP (5) : Verify Send Invitation Button and Click on it', function () {
 		browser.driver.sleep(5000);   
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
         browser.driver.sleep(5000);   
-		});
-	   
-	  
-	
-	it('10. Verifying Send Invitation Button and click on it', function () {
-		browser.driver.sleep(5000);   
-		expect(Wpage.verifySendInvitationButton()).toBe(true);
-        browser.driver.sleep(5000);   
 		Wpage.sendInvitationButtonClick();
-		});
+	});
 	
-	it('11. Verifying that the Window Contains link to ticketmaster event', function() {
+	it('STEP (6) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
-		});
+	});
 
-	it('12. Entering the friend name to share this event with', function() {
+	it('STEP (7) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(5000);
 		Wpage.clickOnSend();
 		browser.driver.sleep(5000);
-		});
+	});
 
 	
-    it('13. Joining the event page', function () {
-			var fbeventsession=new fbEventSession();
-			fbPage.clickJoinPage();
-			browser.driver.sleep(5000);
-			expect(fbPage.eventStatus()).toBe(true);
-			browser.driver.sleep(5000);
-			browser.driver.sleep(5000);
-			expect(fbPage.userEventStatus()).toBe(true);
-			
-    });
+    it('STEP (8) : Navigate to facebook event page', function() {
+		var fbeventsession = new fbEventSession();
+		browser.driver.sleep(2000);
+    });		
+	
+	it('STEP (9) : Verify that user is able to join the event' ,function (){
+		fbPage.clickJoinPage();
+		browser.driver.sleep(5000);
+		expect(fbPage.eventStatus()).toBe(true);
+		expect(fbPage.userEventStatus()).toBe(true);
+	});
 
-	it('14. Logging out' ,function (){
+	it('STEP (10) : Logout from facebook', function() {
 		fbPage.logoutTab();
-		browser.driver.sleep(5000);   
+		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
-		browser.driver.sleep(5000);   
-
+		browser.driver.sleep(5000);
 	});
 
-	it('15. login with friend Id',function () {
-	    browser.driver.sleep(5000); 
+	it('STEP (11) : Login on facebook as the friend with whom event invitation is shared', function() {
+		browser.driver.sleep(2000);
 		fbPage.inputFrndFbId();
-		browser.driver.sleep(2000);
 		fbPage.inputFbPass();
-		browser.driver.sleep(2000);
 		fbPage.clickOnLoginBtn();
-		browser.driver.sleep(10000);
+		browser.driver.sleep(5000);
 	});
-	
-	it('16. Verifying msg received',function(){
-	   	fbPage.clickMessages();
-		browser.driver.sleep(5000);
+
+	it('STEP (12) : Verify if message is received by that friend', function() {
+		fbPage.clickMessages();
+		browser.driver.sleep(2000);
 		fbPage.selectSender();
-		browser.driver.sleep(5000);
+		browser.driver.sleep(2000);
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
-	
-	it('17. Removing Mesage and logging out', function () {
-		browser.driver.sleep(5000);
-		fbPage.messageSettings();
-		browser.driver.sleep(5000);
-		fbPage.clearMessages();
-		browser.driver.sleep(5000);
-		fbPage.clearConversation();
-		browser.driver.sleep(5000);
-	});
-	
-	it('18. Logging out' ,function (){
-		fbPage.logoutTab();
-		browser.driver.sleep(5000);   
-		fbPage.logoutBtn();
-		browser.driver.sleep(5000);   
 
+	it('STEP (13) : Remove Message from friend message box and log out', function() {
+		browser.driver.sleep(2000);
+		fbPage.messageSettings();
+		browser.driver.sleep(2000);
+		fbPage.clearMessages();
+		browser.driver.sleep(2000);
+		fbPage.clearConversation();
+		fbPage.logoutTab();
+		fbPage.logoutBtn();
 	});
 	
 });
-
