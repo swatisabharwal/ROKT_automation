@@ -117,7 +117,6 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	});
 	
 	it('STEP (8) : Verifying Send Invitation Button and click on it', function() {
-		console.log('verifying invitation btn');
 		browser.driver.sleep(5000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		browser.driver.sleep(5000);
@@ -129,7 +128,8 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
-		expect(Wpage.verifyPostOverlay()).toBe(true);
+		expect(Wpage.verifyPostOverlay()).toBe(true);	
+		expect(Wpage.verifyWindowEvent()).toBe(true);
 	});
 
 	it('STEP (10) : Enter friend name to share this event with on "Send a Message" window', function() {
