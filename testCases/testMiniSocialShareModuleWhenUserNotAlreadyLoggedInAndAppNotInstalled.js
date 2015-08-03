@@ -65,6 +65,9 @@ var isAppInstalled;
 		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
+		fbPage.logoutTab();
+        browser.driver.sleep(2000);
+        fbPage.logoutBtn();
     }); 
 
 	it('STEP (1) : Navigate to ROKT widget home page', function() {
@@ -85,7 +88,7 @@ var isAppInstalled;
 		Wpage.clickOnMiniAttendButton();
 	});	
 	   
-	it('STEP (6) : Entering UserId and Password into facebook PopUp window ', function () {
+	it('STEP (4) : Entering UserId and Password into facebook PopUp window ', function () {
 		Wpage.fbWindowHandler();
         browser.driver.sleep(5000);   
 	    Wpage.inputFbId();
@@ -96,51 +99,53 @@ var isAppInstalled;
         browser.driver.sleep(5000);   
 	});
 	
-	it('STEP (7) : Installing ticketmaster application', function (){
+	it('STEP (5) : Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	
-    it('STEP (8) : Verify Send Invitation Button and Click on it', function() {
+    it('STEP (6) : Verify Send Invitation Button and Click on it', function() {
+		Wpage.switchToWidgetFrame();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		browser.driver.sleep(2000);
 		Wpage.sendInvitationButtonClick();
-	});
 
-	it('STEP (9) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
+	});
+	
+	it('STEP (7) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 	});
 
-	it('STEP (10) : Enter friend name to share this event with on "Send a Message" window', function() {
+	it('STEP (8) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		browser.driver.sleep(2000);
 		Wpage.clickOnSend();
 		browser.driver.sleep(2000);
 	});
 	
-    it('STEP (11) : Navigate to facebook event page', function() {
+    it('STEP (9) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(2000);
     });		
 	
-	it('STEP (12) : Verify that user is able to join the event' ,function (){
+	it('STEP (10) : Verify that user is able to join the event' ,function (){
 		fbPage.clickJoinPage();
 		browser.driver.sleep(5000);
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 
-	it('STEP (13) : Logout from facebook', function() {
+	it('STEP (11) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 		browser.driver.sleep(5000);
 	});
 
-	it('STEP (14) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (12) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(2000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -148,7 +153,7 @@ var isAppInstalled;
 		browser.driver.sleep(5000);
 	});
 
-	it('STEP (15) : Verify if message is received by that friend', function() {
+	it('STEP (13) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		browser.driver.sleep(2000);
 		fbPage.selectSender();
@@ -156,7 +161,7 @@ var isAppInstalled;
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (16) : Remove Message from friend message box and log out', function() {
+	it('STEP (14) : Remove Message from friend message box and log out', function() {
 		browser.driver.sleep(2000);
 		fbPage.messageSettings();
 		browser.driver.sleep(2000);

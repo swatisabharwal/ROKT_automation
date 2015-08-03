@@ -95,7 +95,7 @@ var isAppInstalled;
 		
 	it('STEP (5) : Verify Attending button and Click on it', function () {
         browser.driver.sleep(5000);   
-  		mainPage.clickOnMainMaybeButton();
+  		mainPage.clickOnMainAttendButton();
         browser.driver.sleep(5000);   
 	});
 	

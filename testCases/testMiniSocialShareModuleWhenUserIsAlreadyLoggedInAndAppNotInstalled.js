@@ -74,7 +74,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	it('STEP (2) : Verify Widget Overlay', function() {
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
-		Wpage.switchToWidgetFrame().then(function() {
+		Wpage.switchToWidgetFrame();
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
 	
@@ -93,7 +93,6 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 	});
 	
 	it('STEP (5) : Verify Send Invitation Button and Click on it', function() {
-		console.log('verifying invitation btn');
 		Wpage.switchToWidgetFrame();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
@@ -102,7 +101,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-	it('STEP (6) : Verify Ticketmaster Event Link on "Send a Message" window'', function() {
+	it('STEP (6) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(2000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
@@ -119,6 +118,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
     it('STEP (8) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		browser.driver.sleep(2000);
+	});
 
 	it('STEP (9) : Verify that user is able to join the event' ,function (){
 		fbPage.clickJoinPage();
