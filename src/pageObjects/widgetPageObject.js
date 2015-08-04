@@ -8,13 +8,13 @@ WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
 	widgetFrame : {
-		get : function() {browser.driver.sleep(3000);
+		get : function() {
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
 	
 	widgetFrame_sendinvitation : {
-		get : function() {browser.driver.sleep(3000);
+		get : function() {
 			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
 		}
 	},
@@ -63,13 +63,13 @@ WidgetPage.prototype = Object.create({}, {
 
 	post_overlay : {
 		get : function() {
-			browser.driver.sleep(3000);
+			
 			return browser.driver.findElement(by.css('.pam'));
 		}
 	},
 	
 	verify_window_event : {
-		get : function() {	browser.driver.sleep(3000);
+		get : function() {	
 			return browser.driver.findElement(by.xpath('(//div[@class="pam"]//div[@class="send_dialog"]//tr[last()]//a)[3]'));
 		}
 	},
@@ -140,13 +140,52 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 	
+	post_window_frame: {
+		get : function() {
+			return browser.driver.findElement(by.xpath(' '));
+		}
+	},
+	
+    post_message: {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//textarea [@id="feedform_user_message"]'));
+		}
+	},
+		
+    post_send: {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//input[@value="Share"]'));
+		}
+	},
+
+
 
 	// Methods around Object -- User actions
 
-   
-    clickMayebBtn: {
-		value : function() {  				browser.driver.sleep(1000);
 
+	switchPostWindow: {
+		value : function() { browser.driver.sleep(2000);
+			    browser.driver.switchTo().frame(post_window_frame);
+		}
+	},
+		
+	postMessage: {
+		value : function() { browser.driver.sleep(2000);
+			return this.post_message.sendKeys("ticketmaster post");
+		}
+	},
+
+	clickPostSend: {
+		value : function() { browser.driver.sleep(2000);
+			return this.post_send.click();
+		}
+	},
+
+	
+	
+	
+    clickMayebBtn: {
+		value : function() {browser.driver.sleep(2000);
 			return this.maybe_btn.click();
 		}
 	},
@@ -158,13 +197,13 @@ WidgetPage.prototype = Object.create({}, {
 	},
 	
 	switchToWidgetFrame : {
-		value : function() {  	browser.driver.sleep(4000);	
+		value : function() {  	browser.driver.sleep(5000);	
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
 
 	getVisibiltyOfWidgetOverlay : {
-		value : function() {  	browser.driver.sleep(4000);	
+		value : function() {  	browser.driver.sleep(5000);	
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
@@ -239,11 +278,17 @@ WidgetPage.prototype = Object.create({}, {
 	
 
 	verifyInstallationPage : {
-		value : function() {  browser.driver.sleep(2000);   
+		value : function() {  browser.driver.sleep(3000);   
  		return this.installation_page.isDisplayed();
 		}
 	},
-
+    
+	clickOkay: {
+		value : function() {  		
+			this.okay_to_install.click();
+		}
+	},
+	
 	clickOkayToInstall : {
 		value : function() {  		
 			this.okay_to_install.click();
@@ -269,20 +314,20 @@ WidgetPage.prototype = Object.create({}, {
 
 	clickOnSend : {
 		value : function() {  		
-			browser.driver.sleep(2000);
+			browser.driver.sleep(3000);
 			this.send_btn.click();
     	}
 	},
 
 	verifySendInvitationButton : {
 		value : function() {  		
-			browser.driver.sleep(2000);
+			browser.driver.sleep(3000);
 			return this.send_invitation_btn.isDisplayed();
 		}
 	},
 
 	sendInvitationButtonClick : {
-		value : function() {  		
+		value : function() {  browser.driver.sleep(2000);
 			return this.send_invitation_btn.click();
 		}
 	},

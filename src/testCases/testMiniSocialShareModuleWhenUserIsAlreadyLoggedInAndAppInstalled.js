@@ -66,12 +66,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	it('STEP (1) : Navigate to ROKT widget home page', function() {
 		var session = new browserSession();
-		
-	});
+		browser.driver.sleep(5000);
+    });
 
 	it('STEP (2) : Verify Widget Overlay', function() {
-		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(2000);
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
 	
@@ -79,12 +79,22 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
 		Wpage.clickOnMiniAttendButton();
 	});
+	
+	it('STEP (4) : Share post on facebook ', function (){
+   		browser.driver.sleep(5000);
+		Wpage.switchToSendInvitationFrames();
+		browser.driver.sleep(5000);
+        Wpage.postMessage();
+		Wpage.clickPostSend();
+	});
 		
 	it('STEP (4) : Verify Send Invitation Button and Click on it', function() {
-		expect(Wpage.verifySendInvitationButton()).toBe(true);
+		Wpage.switchToWidgetFrame();
+        expect(Wpage.verifySendInvitationButton()).toBe(true);
+		browser.driver.sleep(2000);
 		Wpage.sendInvitationButtonClick();
 	});
-
+ 	
 	it('STEP (5) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(3000);
@@ -99,19 +109,25 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 	
     it('STEP (7) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
-		
-    });		
+	});		
 	
 	it('STEP (8) : Verify that user is able to join the event' ,function (){
-		fbPage.clickJoinPage();
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
+	
+	it('STEP : Verify the event post on user profile',function(){
+		fbPage.clickOnUserPorifleTab();
+		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
+		fbPage.clickOnFbPostOptionTab();
+		fbPage.clickOnFbPostDeleteTab();
+		fbPage.clickOnFbPostDeleteNowButton();
 
-	it('STEP (9) : Logout from facebook', function() {
+	});
+
+    it('STEP (9) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
-		
 	});
 
 	it('STEP (10) : Login on facebook as the friend with whom event invitation is shared', function() {
@@ -129,11 +145,8 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 	});
 
 	it('STEP (12) : Remove Message from friend message box and log out', function() {
-		
 		fbPage.messageSettings();
-		
 		fbPage.clearMessages();
-		
 		fbPage.clearConversation();
 		fbPage.logoutTab();
 		fbPage.logoutBtn();

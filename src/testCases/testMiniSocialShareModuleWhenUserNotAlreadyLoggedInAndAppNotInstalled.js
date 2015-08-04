@@ -28,7 +28,7 @@ var isAppInstalled;
 		fbPage.userApps();
 		browser.driver.sleep(2000); 
 
-		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot('Ticketmaster').then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -48,7 +48,7 @@ var isAppInstalled;
 				});
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove('tripcierge');
+					fbPage.appRemove('Ticketmaster');
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
 				}
@@ -71,7 +71,6 @@ var isAppInstalled;
 	});
 
 	it('STEP (2) : Verify Widget Overlay', function() {
-		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
@@ -88,10 +87,21 @@ var isAppInstalled;
      	Wpage.clickOnFbLoginBtn();
            
 	});
-	
+		
 	it('STEP (5) : Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
+		Wpage.clickOkay();
+   		browser.driver.sleep(5000);
 		Wpage.clickOkayToInstall();
+	});
+	
+	it('STEP (4) : Share post on facebook ', function (){
+   		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(5000);
+		Wpage.switchToSendInvitationFrames();
+		browser.driver.sleep(5000);
+        Wpage.postMessage();
+		Wpage.clickPostSend();
 	});
 	
     it('STEP (6) : Verify Send Invitation Button and Click on it', function() {
@@ -111,7 +121,7 @@ var isAppInstalled;
 	it('STEP (8) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		Wpage.clickOnSend();
-	});
+	});/*
 	
     it('STEP (9) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
@@ -151,6 +161,6 @@ var isAppInstalled;
 		fbPage.clearConversation();
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
-	});
+	});*/
 	
 });

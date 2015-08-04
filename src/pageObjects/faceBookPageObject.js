@@ -28,17 +28,50 @@ fbAuthentication.prototype = Object.create({}, {
 	user_apps : {get : function() {return browser.driver.findElement(by.xpath('//a[contains(@href, "https://www.facebook.com/settings?tab=applications")]'));}},
 	app_remove : {get : function() {return browser.driver.findElement(by.xpath('//a[@aria-label="Remove"]/i  '));}},
 	remove_now : {get : function() {return browser.driver.findElement(by.xpath('//label[@class="uiButton uiButtonLarge uiButtonConfirm"]/input'));}},
-	hidden_app_remove : {get : function() {return browser.driver.findElement(by.xpath('//div[contains(text(),"tripcierge")]/../../../preceding-sibling::img'));}},
+	hidden_app_remove : {get : function() {return browser.driver.findElement(by.xpath('//div[contains(text(),"Ticketmaster")]/../../../preceding-sibling::img'));}},
 	list_eventButtons : {get : function() {return browser.driver.findElements(by.css('#event_button_bar>a'));}},
 	event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Maybe")]'));}},
 	maybe_event:{get : function() {return browser.driver.findElement(by.css('._54ni.fbEventClassicButton.__MenuItem:nth-child(2)'));}},
 	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
 	user_event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@aria-label="Automation TestAccount (Maybe)"]'));}},
-
-	  
+    
+	user_profile: {get : function() {return browser.driver.findElement(by.xpath('//a[@title="Profile"]'));}},
+	ticketmaster_post_fb_link: {get : function() {return browser.driver.findElement(by.xpath('(//span[contains(text(),"Ticketmaster")])[1]'));}},
+    fb_post_options: {get : function() {return browser.driver.findElement(by.xpath('(//a[@aria-label="Story options"])[1]'));}},
+    fb_post_delete: {get : function() {return browser.driver.findElement(by.xpath('//li[@data-feed-option-name="FeedDeleteOption"]'));}},
+	fb_post_delete_now : {get : function() {return browser.driver.findElement(by.xpath('//button[contains(text(),"Delete Post")]'));}},
 	   /***********************Actions on Facebook Element************************/
 	  
-	  
+	clickOnUserPorifleTab: {
+		value : function() {browser.driver.sleep(2000);
+			return this.user_profile.click();
+		}
+	},
+
+	verifyTicketmasterLinkOnProfile:{
+		value : function() {browser.driver.sleep(2000);
+			return this.ticketmaster_post_fb_link.isDisplayed();
+		}
+	},
+	
+	clickOnFbPostOptionTab:{
+		value : function() {browser.driver.sleep(2000);
+			return this.fb_post_options.click();
+		}
+	},
+	
+	clickOnFbPostDeleteTab:{
+		value : function() {browser.driver.sleep(1000);
+			return this.fb_post_delete.click();
+		}
+	},
+	
+	clickOnFbPostDeleteNowButton:{
+		value : function() {browser.driver.sleep(2000);
+			return this.fb_post_delete_now.click();
+		}
+	},
+	
 	checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready : {  
 		value : function() {browser.driver.sleep(1000);
 			var lengthOfEventBar;
