@@ -21,15 +21,13 @@ var isAppInstalled;
 		fbPage.inputFbId();
 		fbPage.inputFbPass();
 		fbPage.clickOnLoginBtn();
-		browser.driver.sleep(6000);
 		fbPage.fbSettingsTab();
-		browser.driver.sleep(2000);   
 		fbPage.seeMoreSettingsTab();
-		browser.driver.sleep(2000);   
-		fbPage.userApps();
-		browser.driver.sleep(2000); 
+		browser.driver.sleep(2000);
+ 		fbPage.userApps();
+		browser.driver.sleep(2000);
 
-		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
+					fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -41,7 +39,7 @@ var isAppInstalled;
 				if(doWeNeedAppInstalled){
 					console.log("[Info] : App should be installed for the scenario but actually it's not, installing it now");
 					var session = new browserSession();
-					browser.driver.sleep(5000);
+					
 					Wpage.switchToWidgetFrame().then(function(){
      				var wP = new WidgetPage();
 					wP.installAppThroughMiniShareModule();
@@ -50,9 +48,9 @@ var isAppInstalled;
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
 					fbPage.appRemove("tripcierge");
-					browser.driver.sleep(5000);   
 					fbPage.removeNow();		 
-					browser.driver.sleep(5000);
+					browser.driver.sleep(2000);
+
 				}
 			}
 		});
@@ -60,23 +58,22 @@ var isAppInstalled;
 
     it('Pre-requisite (2) : Unattending the event and logging out', function (){
 		var fbeventsession = new fbEventSession();
-		browser.driver.sleep(6000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
 		fbPage.logoutTab();
-		browser.driver.sleep(5000);   
 		fbPage.logoutBtn();
-		browser.driver.sleep(5000);   
+		   
 	});
 	
 	it('STEP (1) : Navigate to ROKT widget home page', function() {
 		var session = new browserSession();
-		browser.driver.sleep(5000);
+		
 	});
 	
 	it('STEP (2) : Verify Widget Overlay', function () {	
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
-		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(2000);
+        Wpage.switchToWidgetFrame();
   		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
 	
@@ -87,30 +84,23 @@ var isAppInstalled;
 	});
 
 	it('STEP (4) : Verify offers section and Skip all available Offers',function(){
-		browser.driver.sleep(2000);
 		expect(mainPage.verifyOffer()).toBe(true);
-		browser.driver.sleep(2000);
 		expect(mainPage.skipOffers()).toBe(true);
 	});
 	
-	it('STEP (5) : Verify Attending button and Click on it ', function (){
- 		browser.driver.sleep(5000);
-		expect(mainPage.verifyMainMaybeButton()).toBe(true);
-		browser.driver.sleep(5000);
+	it('STEP (5) : Verify Maybe button and Click on it ', function (){
+ 		expect(mainPage.verifyMainMaybeButton()).toBe(true);
 		mainPage.clickOnMainMaybeButton();
-		browser.driver.sleep(5000);
+		
 	});
 	
 	   
 	it('STEP (6) : Entering UserId and Password into facebook PopUp window ', function () {
 		Wpage.fbWindowHandler();
-        browser.driver.sleep(5000);   
-		Wpage.inputFbId();
-        browser.driver.sleep(5000);   
-		Wpage.inputFbPass();
-        browser.driver.sleep(5000);   
-		Wpage.clickOnFbLoginBtn();
-        browser.driver.sleep(5000);   
+        Wpage.inputFbId();
+        Wpage.inputFbPass();
+        Wpage.clickOnFbLoginBtn();
+           
 	});
 		
 	it('STEP (7) : Installing ticketmaster application', function (){
@@ -120,90 +110,74 @@ var isAppInstalled;
 	
     it('STEP (8) : Verify and Click on Attending button', function (){
 		Wpage.switchToWidgetFrame();  
-		browser.driver.sleep(5000);
 		expect(mainPage.verifyMainAttendButton()).toBe(true);
-		browser.driver.sleep(5000);
 		mainPage.clickOnMainAttendButton();
 	});
 	
 	it('STEP (9) : Verifying Send Invitation Button and click on it', function () {
-		browser.driver.sleep(5000);   
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
-        browser.driver.sleep(5000);   
-		Wpage.sendInvitationButtonClick();
+        Wpage.sendInvitationButtonClick();
 	});
 	
 	it('STEP (10) : Verifying that the Window Contains link to ticketmaster event', function() {
 		Wpage.switchToSendInvitationFrames();
-		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 
 	it('STEP (11) : Enter friend name to share this event with on "Send a Message" window"', function() {
 		Wpage.enterRecepient();
-		browser.driver.sleep(5000);
 		Wpage.clickOnSend();
-		browser.driver.sleep(5000);
 	});
 
     it('STEP (12) : Verify and Click on Continue button on the end widget page', function() {
-		browser.driver.sleep(5000);
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
 	});
 
 	it('STEP (13) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
-		browser.driver.sleep(5000);
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
-		browser.driver.sleep(5000);
 		Wpage.clickOnClose();
 	});
 
 	it('STEP (14) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
-		browser.driver.sleep(2000);
+		
     });		
 	
 	it('STEP (15) : Verify that user is able to join the event' ,function (){
 		fbPage.clickJoinPage();
 		fbPage.clickGoingStatus();
 		fbPage.clickMaybeStatus();
-		browser.driver.sleep(5000);
 		expect(fbPage.eventStatusMaybe()).toBe(true);
 		expect(fbPage.user_event_status_maybe()).toBe(true);
 	});
 
 	it('STEP (16) : Logout from facebook', function() {
 		fbPage.logoutTab();
-		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
-		browser.driver.sleep(5000);
+		
 	});
 
 	it('STEP (17) : Login on facebook as the friend with whom event invitation is shared', function() {
-		browser.driver.sleep(2000);
-		fbPage.inputFrndFbId();
+		browser.driver.sleep(3000);
+    	fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
 		fbPage.clickOnLoginBtn();
-		browser.driver.sleep(5000);
+		browser.driver.sleep(3000);
+
 	});
 
 	it('STEP (18) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
-		browser.driver.sleep(2000);
 		fbPage.selectSender();
-		browser.driver.sleep(2000);
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
 	it('STEP (19) : Remove Message from friend message box and log out', function() {
-		browser.driver.sleep(2000);
 		fbPage.messageSettings();
-		browser.driver.sleep(2000);
 		fbPage.clearMessages();
-		browser.driver.sleep(2000);
 		fbPage.clearConversation();
 		fbPage.logoutTab();
 		fbPage.logoutBtn();

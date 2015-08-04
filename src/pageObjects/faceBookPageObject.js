@@ -40,7 +40,7 @@ fbAuthentication.prototype = Object.create({}, {
 	  
 	  
 	checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready : {  
-		value : function() {
+		value : function() {browser.driver.sleep(1000);
 			var lengthOfEventBar;
 			this.list_eventButtons.then(function(elem){
 				lengthOfEventBar = elem.length;	
@@ -49,9 +49,9 @@ fbAuthentication.prototype = Object.create({}, {
 				}else{
 					console.log("No Join button on facebook events page, need to remove user from the guest list");
 					browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img')).click().then(function(){
-						browser.driver.sleep(3000);
+						//browser.driver.sleep(2000);
 						browser.driver.findElement(by.xpath('//span[contains(text(),"Remove me from Guest List")]')).click().then(function(){
-							browser.driver.sleep(5000);
+							browser.driver.sleep(2000);
 							browser.driver.findElement(by.xpath('//button[contains(text(), "OK")]')).click();
 							console.log("User removed from guest list");
 						});
@@ -64,7 +64,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	
 	checkAppAlreadyInstalledOrNot : {  
-		value : function(nameOfApp) {
+		value : function(nameOfApp) {browser.driver.sleep(2000); 
 			console.log("App to be searched on fb:- "+nameOfApp);
 			return browser.driver.findElements(by.xpath('//div[@id="SettingsPage_Content"]//div[text()="'+nameOfApp+'"]')).then(function(elem){
 				return elem.length;
@@ -92,19 +92,20 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
     verifyHomeTabObFb: {
-		value: function () {
+		value: function () {browser.driver.sleep(3000);
 			return this.home_tab.isDisplayed();
 		}
 	},
 	
 	clickJoinPage : {
-		value : function() {
+		value : function() {browser.driver.sleep(2000);
 			return this.click_join_page.click();
 		}
 	},
 	
 	eventStatus : {
-		value : function() {
+		value : function() {		browser.driver.sleep(2000);
+
 			return this.event_status.isDisplayed();
 		}
 	},
@@ -116,19 +117,21 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	clickGoingStatus: {
-		value : function() {
+		value : function() {		browser.driver.sleep(2000);
+
 			return this.event_status.click();
 		}
 	},
 	
 	clickMaybeStatus: {
-		value : function() {
+		value : function() {browser.driver.sleep(2000);
 			 this.maybe_event.click();
 		}
 	},
 	
 	eventStatusMaybe : {
-		value : function() {
+		value : function() {		browser.driver.sleep(2000);
+
 			return this.event_status_maybe.isDisplayed();
 		}
 	},
@@ -140,8 +143,8 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	logoutTab : {
-		value : function() {
-			browser.driver.sleep(1000);
+		value : function() {browser.driver.sleep(3000);
+			
 			this.logout_tab.then(function(element){
    				browser.driver.actions().mouseMove(element).perform();
    				browser.driver.sleep(2000);
@@ -181,7 +184,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	selectSender : {
 		value : function() {
-			browser.driver.sleep(4000);
+			browser.driver.sleep(2000);
 			this.select_sender.then(function(elem){
 				browser.driver.actions().mouseMove(elem).perform();
 				browser.driver.sleep(2000);
@@ -191,25 +194,29 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	verifyMessage : {
-		value : function() {
+		value : function() {		browser.driver.sleep(1000);
+
 			return this.verify_message.isDisplayed();
 		}
 	},
 	
 	messageSettings : {
-		value : function() {
+		value : function() {		browser.driver.sleep(2000);
+
 			return this.message_settings.click();
 		}
 	},
 	
 	clearMessages : {
-		value : function() {
+		value : function() {		browser.driver.sleep(1000);
+
 			return this.clear_messages.click();
 		}
 	},
 	
 	clearConversation : {
-		value : function() {
+		value : function() {		browser.driver.sleep(2000);
+
 			return this.clear_conversation.click();
 		}
 	},
@@ -233,13 +240,15 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 	fbSettingsTab : {
-		value : function() {  		
+		value : function() {  
+		    browser.driver.sleep(2000);		
 			return this.fb_settings_tab.click();
 		}
 	},
 
 	seeMoreSettingsTab : {
-		value : function() {  	
+		value : function() {  			browser.driver.sleep(2000);   
+
 			this.see_more_settings_tab.click();
 
 		}
@@ -263,7 +272,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	removeNow : {
-		value : function() {  		
+		value : function() {  browser.driver.sleep(3000);		
 			this.remove_now.click();
 		}
 	},

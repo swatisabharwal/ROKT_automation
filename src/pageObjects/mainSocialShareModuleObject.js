@@ -68,18 +68,18 @@ var mainModule = function () {
     },
 
     verifyOffer:	{
-	    value: function () {
+	    value: function () {browser.driver.sleep(2000);
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
-  	    value: function(){
+  	    value: function(){browser.driver.sleep(2000);
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     browser.driver.sleep(2000);
+  			     browser.driver.sleep(1000);
   		        }
         	 });
   	         return true;
@@ -87,7 +87,8 @@ var mainModule = function () {
     },
   	
     verifyContinueShareButton:	{
-	    value: function () {
+	    value: function () {		browser.driver.sleep(5000);
+
 		     return this.cont_share_btn.isDisplayed();
         }
     },
@@ -99,25 +100,26 @@ var mainModule = function () {
     },
    
     verifyMainAttendButton : {
-		value : function() {
+		value : function() {browser.driver.sleep(2000);
 			 return this.mainattendButton.isDisplayed();
 		}
 	},
    
     clickOnMainAttendButton: {
-   	    value: function(){
+   	    value: function(){		browser.driver.sleep(3000);
+
 			 return this.mainattendButton.click();	
    	    }
     },
    
     verifyMainMaybeButton : {
-		value : function() {
+		value : function() {browser.driver.sleep(2000);
 			 return this.main_maybeButton.isDisplayed();
 		}
 	},
    
     clickOnMainMaybeButton: {
-   	    value: function(){
+   	    value: function(){browser.driver.sleep(2000);
 			 return this.main_maybeButton.click();	
    	  }
     },
