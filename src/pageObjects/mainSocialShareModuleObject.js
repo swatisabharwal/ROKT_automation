@@ -8,13 +8,13 @@ var mainModule = function () {
  	
 	check_box:{ 
 	    get: function () { 
-		     return browser.driver.findElement(by.xpath('//input[@id="ux_iagree_check"]'));
+		     return browser.driver.findElement(by.xpath('//div [@class="ui_iagree_checkbox"]/span [@class="fancycheckbox unchecked"]'));
 		}
 	},
 	
     cont_btn:{ 
 	    get: function () { 
-	         return browser.driver.findElement(by.xpath('//div[@id="ux_smartsignup_layout_buttons"]/button'));
+	         return browser.driver.findElement(by.xpath('//button[contains(text(),"Continue")]'));
 	   }
 	},
 	
@@ -50,13 +50,13 @@ var mainModule = function () {
 
 
     clickCheckbBox:	{
-	    value: function () {
+	    value: function () {browser.driver.sleep(2000);
 		     return this.check_box.click();
         }
     },
 
     verifyContBtn:	{
-	    value: function () {
+	    value: function () {browser.driver.sleep(3000);
 	         return this.cont_btn.isDisplayed();
         }
     },
@@ -68,18 +68,18 @@ var mainModule = function () {
     },
 
     verifyOffer:	{
-	    value: function () {browser.driver.sleep(2000);
+	    value: function () {browser.driver.sleep(5000);
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
-  	    value: function(){browser.driver.sleep(2000);
+  	    value: function(){browser.driver.sleep(6000);
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     browser.driver.sleep(1000);
+  			     browser.driver.sleep(3000);
   		        }
         	 });
   	         return true;
@@ -87,8 +87,7 @@ var mainModule = function () {
     },
   	
     verifyContinueShareButton:	{
-	    value: function () {		browser.driver.sleep(5000);
-
+	    value: function () {browser.driver.sleep(5000);
 		     return this.cont_share_btn.isDisplayed();
         }
     },
@@ -106,8 +105,7 @@ var mainModule = function () {
 	},
    
     clickOnMainAttendButton: {
-   	    value: function(){		browser.driver.sleep(3000);
-
+   	    value: function(){browser.driver.sleep(3000);
 			 return this.mainattendButton.click();	
    	    }
     },

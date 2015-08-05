@@ -27,7 +27,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		fbPage.userApps();
 		browser.driver.sleep(2000);
 
-		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot('Ticketmaster').then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -47,7 +47,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
      			});
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove("tripcierge");
+					fbPage.appRemove("Ticketmaster");
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000); 
 
@@ -83,50 +83,68 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		
 	it('STEP (4) : Installing ticketmaster application', function () {
 		Wpage.fbWindowHandler();
-        expect(Wpage.verifyInstallationPage()).toBe(true);
+        Wpage.clickOkay();
+		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	
-	it('STEP (5) : Verify Send Invitation Button and Click on it', function() {
+	it('STEP (5) : Share post on facebook ', function (){
+   		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(5000);
+		Wpage.switchToSendInvitationFrames();
+		browser.driver.sleep(5000);
+        Wpage.postMessage();
+		Wpage.clickPostSend();
+	});
+	
+	it('STEP (6) : Verify Send Invitation Button and Click on it', function() {
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		Wpage.sendInvitationButtonClick();
 
 	});
 
-	it('STEP (6) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
+	it('STEP (7) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(3000); 
 		expect(Wpage.verifyPostOverlay()).toBe(true);	
 		expect(Wpage.verifyWindowEvent()).toBe(true);
 	});
 
-	it('STEP (7) : Enter friend name to share this event with on "Send a Message" window', function() {
+	it('STEP (8) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		Wpage.clickOnSend();
 		
 
 	});
 	
-    it('STEP (8) : Navigate to facebook event page', function() {
+    it('STEP (9) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		
 	});
 
-	it('STEP (9) : Verify that user is able to join the event' ,function (){
-		fbPage.clickJoinPage();
+	it('STEP (10) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
+	
+	it('STEP (11): Verify the event post on user profile',function(){
+		fbPage.clickOnUserPorifleTab();
+		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
+		expect(fbPage.verifyFbPostMessage()).toBe(true);
+		fbPage.clickOnFbPostOptionTab();
+		fbPage.clickOnFbPostDeleteTab();
+		fbPage.clickOnFbPostDeleteNowButton();
 
-	it('STEP (10) : Logout from facebook', function() {
-		fbPage.logoutTab();
-		
-		fbPage.logoutBtn();
-		
 	});
 
-	it('STEP (11) : Login on facebook as the friend with whom event invitation is shared', function() {
+
+	it('STEP (12) : Logout from facebook', function() {
+		fbPage.logoutTab();
+		fbPage.logoutBtn();
+	});
+
+	it('STEP (13) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -134,13 +152,13 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		browser.driver.sleep(3000);
 	});
 
-	it('STEP (12) : Verify if message is received by that friend', function() {
+	it('STEP (14) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (13) : Remove Message from friend message box and log out', function() {
+	it('STEP (15) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

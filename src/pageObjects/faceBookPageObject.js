@@ -40,8 +40,17 @@ fbAuthentication.prototype = Object.create({}, {
     fb_post_options: {get : function() {return browser.driver.findElement(by.xpath('(//a[@aria-label="Story options"])[1]'));}},
     fb_post_delete: {get : function() {return browser.driver.findElement(by.xpath('//li[@data-feed-option-name="FeedDeleteOption"]'));}},
 	fb_post_delete_now : {get : function() {return browser.driver.findElement(by.xpath('//button[contains(text(),"Delete Post")]'));}},
-	   /***********************Actions on Facebook Element************************/
+    fb_post_message: 	{get : function() {return browser.driver.findElement(by.xpath('//p[contains(text(), "ticketmaster post")]'));}},
+	/***********************Actions on Facebook Element************************/
 	  
+	verifyFbPostMessage :{
+		value : function() {browser.driver.sleep(2000);
+			return this.fb_post_message.isDisplayed();
+			}
+	},
+	
+	 
+	
 	clickOnUserPorifleTab: {
 		value : function() {browser.driver.sleep(2000);
 			return this.user_profile.click();
@@ -51,7 +60,7 @@ fbAuthentication.prototype = Object.create({}, {
 	verifyTicketmasterLinkOnProfile:{
 		value : function() {browser.driver.sleep(2000);
 			return this.ticketmaster_post_fb_link.isDisplayed();
-		}
+			}
 	},
 	
 	clickOnFbPostOptionTab:{
@@ -73,20 +82,20 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready : {  
-		value : function() {browser.driver.sleep(1000);
+		value : function() {browser.driver.sleep(3000);
 			var lengthOfEventBar;
 			this.list_eventButtons.then(function(elem){
 				lengthOfEventBar = elem.length;	
 				if(lengthOfEventBar > 0 ){
-					console.log("Join button on facebook events page is already present, no need of removing user");
+					console.log("[INFO] : Join button on facebook events page is already present, no need of removing user");
 				}else{
-					console.log("No Join button on facebook events page, need to remove user from the guest list");
+					console.log("[INFO] ; No Join button on facebook events page, need to remove user from the guest list");
 					browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img')).click().then(function(){
-						//browser.driver.sleep(2000);
+						browser.driver.sleep(2000);
 						browser.driver.findElement(by.xpath('//span[contains(text(),"Remove me from Guest List")]')).click().then(function(){
 							browser.driver.sleep(2000);
 							browser.driver.findElement(by.xpath('//button[contains(text(), "OK")]')).click();
-							console.log("User removed from guest list");
+							console.log("[INFO] : User removed from guest list");
 						});
 					});					
 				}
@@ -97,8 +106,8 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	
 	checkAppAlreadyInstalledOrNot : {  
-		value : function(nameOfApp) {browser.driver.sleep(2000); 
-			console.log("App to be searched on fb:- "+nameOfApp);
+		value : function(nameOfApp) {browser.driver.sleep(3000); 
+			console.log("[INFO] : App to be searched on fb:- "+nameOfApp);
 			return browser.driver.findElements(by.xpath('//div[@id="SettingsPage_Content"]//div[text()="'+nameOfApp+'"]')).then(function(elem){
 				return elem.length;
 			});
@@ -137,8 +146,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	eventStatus : {
-		value : function() {		browser.driver.sleep(2000);
-
+		value : function() {browser.driver.sleep(2000);
 			return this.event_status.isDisplayed();
 		}
 	},
@@ -150,8 +158,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	clickGoingStatus: {
-		value : function() {		browser.driver.sleep(2000);
-
+		value : function() {browser.driver.sleep(2000);
 			return this.event_status.click();
 		}
 	},
@@ -163,21 +170,19 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	eventStatusMaybe : {
-		value : function() {		browser.driver.sleep(2000);
-
+		value : function() {browser.driver.sleep(2000);
 			return this.event_status_maybe.isDisplayed();
 		}
 	},
 	
 	userEventStatusMaybe : {
-		value : function() {
+		value : function() {browser.driver.sleep(2000);
 			return this.user_event_status_maybe.isDisplayed();
 		}
 	},
 	
 	logoutTab : {
 		value : function() {browser.driver.sleep(3000);
-			
 			this.logout_tab.then(function(element){
    				browser.driver.actions().mouseMove(element).perform();
    				browser.driver.sleep(2000);
@@ -187,7 +192,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 	logoutBtn : {
-		value : function() {
+		value : function() { browser.driver.sleep(2000);
 			this.logout_btn.click();
 		}
 	},
@@ -227,29 +232,25 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	
 	verifyMessage : {
-		value : function() {		browser.driver.sleep(1000);
-
+		value : function() {browser.driver.sleep(1000);
 			return this.verify_message.isDisplayed();
 		}
 	},
 	
 	messageSettings : {
-		value : function() {		browser.driver.sleep(2000);
-
+		value : function() {browser.driver.sleep(2000);
 			return this.message_settings.click();
 		}
 	},
 	
 	clearMessages : {
-		value : function() {		browser.driver.sleep(1000);
-
+		value : function() {browser.driver.sleep(1000);
 			return this.clear_messages.click();
 		}
 	},
 	
 	clearConversation : {
-		value : function() {		browser.driver.sleep(2000);
-
+		value : function() {browser.driver.sleep(2000);
 			return this.clear_conversation.click();
 		}
 	},
@@ -280,8 +281,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 	seeMoreSettingsTab : {
-		value : function() {  			browser.driver.sleep(2000);   
-
+		value : function() { browser.driver.sleep(2000);   
 			this.see_more_settings_tab.click();
 
 		}

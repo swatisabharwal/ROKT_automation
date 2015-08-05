@@ -28,7 +28,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
     	fbPage.userApps();
 		browser.driver.sleep(2000);
 
-		fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot('Ticketmaster').then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -48,7 +48,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 				});
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove("tripcierge");
+					fbPage.appRemove("Ticketmaster");
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
 
@@ -71,6 +71,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	it('STEP (2) : Verify Widget Overlay', function() {
 		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(2000);
 	    expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
 
@@ -94,16 +95,22 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	it('STEP (6) : Installing ticketmaster application', function (){
 		Wpage.fbWindowHandler();
     	expect(Wpage.verifyInstallationPage()).toBe(true);
-		Wpage.clickOkayToInstall();
-	});
-
-    it('STEP (7) : Verify and Click on Attending button', function() {
-		Wpage.switchToWidgetFrame();
-		expect(mainPage.verifyMainAttendButton()).toBe(true);
-	   	mainPage.clickOnMainAttendButton();
+		Wpage.clickOkay();
+		browser.driver.sleep(2000);
+    	Wpage.clickOkayToInstall();
 	});
 	
+	it('STEP (7) : Share post on facebook ', function (){
+   		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(3000);
+		Wpage.switchToSendInvitationFrames();
+		browser.driver.sleep(2000);
+        Wpage.postMessage();
+		Wpage.clickPostSend();
+	});
+    
 	it('STEP (8) : Verifying Send Invitation Button and click on it', function() {
+		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
 		Wpage.sendInvitationButtonClick();
     });
@@ -137,7 +144,6 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
     });
 	
     it('STEP (14) : Verify that user is able to join the event' ,function (){
-		fbPage.clickJoinPage();
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});

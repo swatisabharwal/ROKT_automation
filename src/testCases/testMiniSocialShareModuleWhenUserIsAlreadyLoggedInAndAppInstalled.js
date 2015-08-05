@@ -88,35 +88,34 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		Wpage.clickPostSend();
 	});
 		
-	it('STEP (4) : Verify Send Invitation Button and Click on it', function() {
+	it('STEP (5) : Verify Send Invitation Button and Click on it', function() {
 		Wpage.switchToWidgetFrame();
         expect(Wpage.verifySendInvitationButton()).toBe(true);
 		browser.driver.sleep(2000);
 		Wpage.sendInvitationButtonClick();
 	});
  	
-	it('STEP (5) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
+	it('STEP (6) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
-		browser.driver.sleep(3000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);	
 		expect(Wpage.verifyWindowEvent()).toBe(true);
 	});
 
-	it('STEP (6) : Enter friend name to share this event with on "Send a Message" window', function() {
+	it('STEP (7) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		Wpage.clickOnSend();
 	});
 	
-    it('STEP (7) : Navigate to facebook event page', function() {
+    it('STEP (8) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 	});		
 	
-	it('STEP (8) : Verify that user is able to join the event' ,function (){
+	it('STEP (9) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 	
-	it('STEP : Verify the event post on user profile',function(){
+	it('STEP (10): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
 		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
 		fbPage.clickOnFbPostOptionTab();
@@ -125,12 +124,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	});
 
-    it('STEP (9) : Logout from facebook', function() {
+    it('STEP (11) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 
-	it('STEP (10) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (12) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -138,13 +137,13 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		browser.driver.sleep(3000);
 	});
 
-	it('STEP (11) : Verify if message is received by that friend', function() {
+	it('STEP (13) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (12) : Remove Message from friend message box and log out', function() {
+	it('STEP (14) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

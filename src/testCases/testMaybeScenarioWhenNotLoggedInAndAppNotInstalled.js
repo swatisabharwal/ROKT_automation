@@ -27,7 +27,7 @@ var isAppInstalled;
  		fbPage.userApps();
 		browser.driver.sleep(2000);
 
-					fbPage.checkAppAlreadyInstalledOrNot('tripcierge').then(function(value){
+					fbPage.checkAppAlreadyInstalledOrNot('Ticketmaster').then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
@@ -47,7 +47,7 @@ var isAppInstalled;
 				});
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
-					fbPage.appRemove("tripcierge");
+					fbPage.appRemove("Ticketmaster");
 					fbPage.removeNow();		 
 					browser.driver.sleep(2000);
 
@@ -105,62 +105,63 @@ var isAppInstalled;
 		
 	it('STEP (7) : Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
-		Wpage.clickOkayToInstall();
+		Wpage.clickOkay();
+		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
+        Wpage.clickOkayToInstall();
 	});
 	
-    it('STEP (8) : Verify and Click on Attending button', function (){
-		Wpage.switchToWidgetFrame();  
-		expect(mainPage.verifyMainAttendButton()).toBe(true);
-		mainPage.clickOnMainAttendButton();
-	});
-	
-	it('STEP (9) : Verifying Send Invitation Button and click on it', function () {
+	it('STEP (8) : Verifying Send Invitation Button and click on it', function() {
+		Wpage.switchToWidgetFrame();
+		browser.driver.sleep(6000);
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
-        Wpage.sendInvitationButtonClick();
-	});
-	
-	it('STEP (10) : Verifying that the Window Contains link to ticketmaster event', function() {
-		Wpage.switchToSendInvitationFrames();
-		expect(Wpage.verifyPostOverlay()).toBe(true);
-		expect(fbPage.userEventStatus()).toBe(true);
+		Wpage.sendInvitationButtonClick();
 	});
 
-	it('STEP (11) : Enter friend name to share this event with on "Send a Message" window"', function() {
+	it('STEP (9) : Verifying that the Window Contains link to ticketmaster event', function() {
+		Wpage.switchToSendInvitationFrames();
+		browser.driver.sleep(3000);
+		expect(Wpage.verifyPostOverlay()).toBe(true);	
+		expect(Wpage.verifyWindowEvent()).toBe(true);
+	});
+
+	it('STEP (10) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
+		expect(Wpage.verifyWindowEvent()).toBe(true);
 		Wpage.clickOnSend();
 	});
 
-    it('STEP (12) : Verify and Click on Continue button on the end widget page', function() {
+	
+	
+    it('STEP (11) : Verify and Click on Continue button on the end widget page', function() {
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
 	});
 
-	it('STEP (13) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
+	it('STEP (12) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
+		browser.driver.sleep(2000);
 		Wpage.clickOnClose();
 	});
 
-	it('STEP (14) : Navigate to facebook event page', function() {
+	it('STEP (10) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		
     });		
 	
-	it('STEP (15) : Verify that user is able to join the event' ,function (){
-		fbPage.clickJoinPage();
-		fbPage.clickGoingStatus();
-		fbPage.clickMaybeStatus();
+	it('STEP (13) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatusMaybe()).toBe(true);
-		expect(fbPage.user_event_status_maybe()).toBe(true);
+		browser.driver.sleep(2000);
+		expect(fbPage.userEventStatusMaybe()).toBe(true);
 	});
-
-	it('STEP (16) : Logout from facebook', function() {
+	 
+	it('STEP (14) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 		
 	});
 
-	it('STEP (17) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (15) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
     	fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -169,13 +170,13 @@ var isAppInstalled;
 
 	});
 
-	it('STEP (18) : Verify if message is received by that friend', function() {
+	it('STEP (16) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (19) : Remove Message from friend message box and log out', function() {
+	it('STEP (17) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

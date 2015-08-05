@@ -8,13 +8,14 @@ WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
 	widgetFrame : {
-		get : function() {
+		get : function() {browser.driver.sleep(5000);
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
 	
 	widgetFrame_sendinvitation : {
 		get : function() {
+			browser.driver.sleep(5000);	
 			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
 		}
 	},
@@ -87,7 +88,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	link_ticketmaster : {
-		get : function() {
+		get : function() { browser.driver.sleep(2000);
 			return browser.driver.findElement(by.xpath(' //span[contains(text(), "Go to my Ticketmaster")]'));
 		}
 	},
@@ -111,8 +112,8 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	close_btn : {
-		get : function() {
-			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
+		get : function() { browser.driver.sleep(2000);
+			return browser.driver.findElement(by.xpath('//button[contains(text(),"Close")]'));
 		}
 	},
 
@@ -157,12 +158,23 @@ WidgetPage.prototype = Object.create({}, {
 			return browser.driver.findElement(by.xpath('//input[@value="Share"]'));
 		}
 	},
-
+    
+	manage_your_events: {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//a[contains(text(), "Choose what you allow")]'));
+		}
+	},
 
 
 	// Methods around Object -- User actions
 
-
+   verifyManageYourEventsWindow: {
+		value : function() {  	browser.driver.sleep(5000);	
+			return this.manage_your_events.isDisplayed();
+		}
+	},
+   
+   
 	switchPostWindow: {
 		value : function() { browser.driver.sleep(2000);
 			    browser.driver.switchTo().frame(post_window_frame);
@@ -209,26 +221,26 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	switchToSendInvitationFrames : {
-		value : function() {  		
+		value : function() {  browser.driver.sleep(2000);		
 			return browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
 		}
 	},
 
 	getShareLabelText : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			return this.shareLabel.getText();
 		}
 	},
 
 	verifyMiniAttendButton : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			return this.miniattendButton.isDisplayed();
 		}
 	},
 
 	
 	clickOnMiniAttendButton : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			return this.miniattendButton.click();
 		}
 	},
@@ -270,7 +282,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	clickOnFbLoginBtn : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			this.loginBtn.click().then(function(){
 			});
 		}
@@ -284,13 +296,13 @@ WidgetPage.prototype = Object.create({}, {
 	},
     
 	clickOkay: {
-		value : function() {  		
+		value : function() {  browser.driver.sleep(2000);		
 			this.okay_to_install.click();
 		}
 	},
 	
 	clickOkayToInstall : {
-		value : function() {  		
+		value : function() {browser.driver.sleep(2000); 	
 			this.okay_to_install.click();
 			browser.driver.sleep(2000);
 			browser.driver.getAllWindowHandles().then(function(handles) {
@@ -301,7 +313,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	enterRecepient : {
-		value : function() {  		
+		value : function() {  browser.driver.sleep(2000);		
      			this.recepients.sendKeys('Rokt').then(function() {
 				browser.driver.sleep(2000);
 				browser.driver.actions().mouseMove(browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]'))).perform().then(function(){
@@ -339,7 +351,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyWindowEvent : {
-		value : function() {  	
+		value : function() {  	browser.driver.sleep(2000);
 			return this.verify_window_event.isDisplayed();
 		}
 	},
@@ -352,13 +364,13 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyContinueShareButton : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			return this.cont_share_btn.isDisplayed();
 		}
 	},
 
 	clickOnContBtnFromEndWidgetPage : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			return this.cont_share_btn.click();
 		}
 	},
@@ -370,19 +382,21 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	clickOnClose : {
-		value : function() {  		
+		value : function() { browser.driver.sleep(2000); 		
 			return this.close_btn.click();
 		}
 	},
 
 	installAppThroughMiniShareModule : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(2000);	
 			this.clickOnMiniAttendButton();
 			browser.driver.sleep(3000);
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(2000);
 				browser.driver.switchTo().window(handles[1]);
 			});
+			this.okay_to_install.click();
+			browser.driver.sleep(2000);
 			this.okay_to_install.click();
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(2000);

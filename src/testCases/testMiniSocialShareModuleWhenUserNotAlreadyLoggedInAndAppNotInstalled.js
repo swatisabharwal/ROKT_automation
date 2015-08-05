@@ -95,7 +95,7 @@ var isAppInstalled;
 		Wpage.clickOkayToInstall();
 	});
 	
-	it('STEP (4) : Share post on facebook ', function (){
+	it('STEP (6) : Share post on facebook ', function (){
    		Wpage.switchToWidgetFrame();
 		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
@@ -104,43 +104,43 @@ var isAppInstalled;
 		Wpage.clickPostSend();
 	});
 	
-    it('STEP (6) : Verify Send Invitation Button and Click on it', function() {
+    it('STEP (7) : Verify Send Invitation Button and Click on it', function() {
 		Wpage.switchToWidgetFrame();
     	expect(Wpage.verifySendInvitationButton()).toBe(true);
 		Wpage.sendInvitationButtonClick();
 
 	});
 	
-	it('STEP (7) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
+	it('STEP (8) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(3000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);	
 		expect(Wpage.verifyWindowEvent()).toBe(true);
 	});
 
-	it('STEP (8) : Enter friend name to share this event with on "Send a Message" window', function() {
+	it('STEP (9) : Enter friend name to share this event with on "Send a Message" window', function() {
 		Wpage.enterRecepient();
 		Wpage.clickOnSend();
 	});/*
 	
-    it('STEP (9) : Navigate to facebook event page', function() {
+    it('STEP (10) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		
     });		
 	
-	it('STEP (10) : Verify that user is able to join the event' ,function (){
+	it('STEP (11) : Verify that user is able to join the event' ,function (){
 		fbPage.clickJoinPage();
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 
-	it('STEP (11) : Logout from facebook', function() {
+	it('STEP (12) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 		
 	});
 
-	it('STEP (12) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (13) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -149,13 +149,13 @@ var isAppInstalled;
 		
 	});
 
-	it('STEP (13) : Verify if message is received by that friend', function() {
+	it('STEP (14) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (14) : Remove Message from friend message box and log out', function() {
+	it('STEP (15) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();
