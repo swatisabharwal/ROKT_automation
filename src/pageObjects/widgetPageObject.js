@@ -123,12 +123,12 @@ WidgetPage.prototype = Object.create({}, {
 		}
     },
 	
-    like_btn : {
+    widget_like_btn : {
 		get : function() {
-			return browser.driver.findElement(by.xpath('//div[@class="buttonsContainer"]/button'));
+			return browser.driver.findElement(by.xpath('//a[contains(text(),"Like Page")]'));
 		}
 	},
-
+	
 	emailId : {
 		get : function() {
 			return browser.driver.findElement(by.xpath('//input[@id="email"]'));
@@ -165,6 +165,12 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
+	widgetLikeBtnFrame: {
+		get : function() {
+			return browser.driver.findElement(by.xpath('//div[@ class="ui_shareandwin_app_info_inner"]//iframe[contains(@title,"like_box")]'));
+		}
+	},
+	
 
 	// Methods around Object -- User actions
 
@@ -202,9 +208,16 @@ WidgetPage.prototype = Object.create({}, {
 		}
 	},
 
-    clickLikeBtn: {
-		value : function() {  		
-			return this.like_btn.click();
+    switchToWidgetLikeBtnFrame: {
+		value: function() { browser.driver.sleep(2000);
+			return browser.driver.switchTo().frame(this.widgetLikeBtnFrame);
+		}
+	},
+	
+	clickLikeBtn: {
+	    value : function() {  	 browser.driver.sleep(2000);	
+			this.widget_like_btn.click();
+	       browser.driver.switchTo().defaultContent();
 		}
 	},
 	

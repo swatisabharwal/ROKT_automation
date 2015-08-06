@@ -4,6 +4,8 @@ var mainModule         = require('../pageObjects/mainSocialShareModuleObject.js'
 var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
 var fbSession          = require('../sessionInitiator/fbSession.js');
 var fbEventSession     = require('../sessionInitiator/fbEventSession.js');
+var fbTicketMasterSession  = require('../sessionInitiator/fbTicketmasterPage.js');
+
 
 
 var doWeNeedAppInstalled = true;
@@ -124,43 +126,57 @@ var isAppInstalled;
 		Wpage.clickOnSend();
 	});
 
-	it('STEP (11) : Verify and Click on Continue button on end widget page', function() {
+	it('STEP (11) : Like button is clicked on main social share module', function() {
+		Wpage.switchToWidgetFrame();
+        Wpage.switchToWidgetLikeBtnFrame();
+		Wpage.clickLikeBtn();
+	});
+	
+	it('STEP (12) : Verify and Click on Continue button on end widget page', function() {
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
 	});
 
-	it('STEP (12) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
+	it('STEP (13) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
 		Wpage.clickOnClose();
 	});
 	
-	it('STEP (13) : Navigate to facebook event page', function() {
+	it('STEP (14) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 	});	
 	
-    it('STEP (14) : Verify that user is able to join the event', function () {
+    it('STEP (15) : Verify that user is able to join the event', function () {
 		expect(fbPage.eventStatus()).toBe(true);
 		expect(fbPage.userEventStatus()).toBe(true);
     });
 	
-	it('STEP (15): Verify the event post on user profile',function(){
+	it('STEP (16): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
 		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
 		expect(fbPage.verifyFbPostMessage()).toBe(true);
 		fbPage.clickOnFbPostOptionTab();
+    	browser.driver.sleep(2000);
 		fbPage.clickOnFbPostDeleteTab();
+    	browser.driver.sleep(2000);
 		fbPage.clickOnFbPostDeleteNowButton();
 
 	});
+	
+	it('STEP (17) : Verify that user is able to Like the event ', function (){
+		var fbticketmastersession = fbTicketMasterSession();
+		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		fbPage.clickToUnlike();
+	});
 
 		
-	it('STEP (16) : Logout from facebook', function (){
+	it('STEP (18) : Logout from facebook', function (){
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 
-	it('STEP (17) : Login on facebook as the friend with whom event invitation is shared',function () {
+	it('STEP (19) : Login on facebook as the friend with whom event invitation is shared',function () {
     	browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -168,13 +184,13 @@ var isAppInstalled;
         browser.driver.sleep(3000);	
 	});
 	
-	it('STEP (18) : Verify if message is received by that friend',function(){
+	it('STEP (20) : Verify if message is received by that friend',function(){
 	   	fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 	
-	it('STEP (19) : Remove Message from friend message box and log out', function () {
+	it('STEP (21) : Remove Message from friend message box and log out', function () {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

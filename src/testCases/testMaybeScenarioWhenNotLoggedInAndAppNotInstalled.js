@@ -4,6 +4,7 @@ var mainModule         = require('../pageObjects/mainSocialShareModuleObject.js'
 var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
 var fbSession          = require('../sessionInitiator/fbSession.js');
 var fbEventSession     = require('../sessionInitiator/fbEventSession.js');
+var fbTicketMasterSession  = require('../sessionInitiator/fbTicketmasterPage.js');
 
 
 var doWeNeedAppInstalled = false;
@@ -154,14 +155,20 @@ var isAppInstalled;
 		browser.driver.sleep(2000);
 		expect(fbPage.userEventStatusMaybe()).toBe(true);
 	});
+	
+	it('STEP (14) : Verify that user is able to Like the event ', function (){
+		var fbticketmastersession = fbTicketMasterSession();
+		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		fbPage.clickToUnlike();
+	});
 	 
-	it('STEP (14) : Logout from facebook', function() {
+	it('STEP (15) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 		
 	});
 
-	it('STEP (15) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (16) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
     	fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -170,13 +177,13 @@ var isAppInstalled;
 
 	});
 
-	it('STEP (16) : Verify if message is received by that friend', function() {
+	it('STEP (17) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (17) : Remove Message from friend message box and log out', function() {
+	it('STEP (18) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

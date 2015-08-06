@@ -79,7 +79,7 @@ var mainModule = function () {
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     browser.driver.sleep(3000);
+  			     browser.driver.sleep(5000);
   		        }
         	 });
   	         return true;

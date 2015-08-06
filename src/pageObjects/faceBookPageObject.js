@@ -41,16 +41,34 @@ fbAuthentication.prototype = Object.create({}, {
     fb_post_delete: {get : function() {return browser.driver.findElement(by.xpath('//li[@data-feed-option-name="FeedDeleteOption"]'));}},
 	fb_post_delete_now : {get : function() {return browser.driver.findElement(by.xpath('//button[contains(text(),"Delete Post")]'));}},
     fb_post_message: 	{get : function() {return browser.driver.findElement(by.xpath('//p[contains(text(), "ticketmaster post")]'));}},
+	fb_ticketmaster_fb_event_Liked_btn:  {get : function() {return browser.driver.findElement(by.xpath('//span [@id="pagesHeaderLikeButton"]/button[contains(text(),"Liked")]'));}},
+	unlike_btn: {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Unlike")]'));}},
 	/***********************Actions on Facebook Element************************/
 	  
+	verifyTicketmasterFbPageLikeBtnStatus:{
+		value : function() {
+			browser.driver.sleep(2000);
+			return this.fb_ticketmaster_fb_event_Liked_btn.isDisplayed();
+		}
+	},
+	
+	clickToUnlike:{
+		value : function(){browser.driver.sleep(2000);
+			this.fb_ticketmaster_fb_event_Liked_btn.then(function(elem){
+            	browser.driver.actions().mouseMove(elem).perform();
+				browser.driver.sleep(2000);
+                browser.driver.findElement(by.xpath('//span[contains(text(),"Unlike")]')).click();
+		});
+		
+		}
+	},
+	
 	verifyFbPostMessage :{
 		value : function() {browser.driver.sleep(2000);
 			return this.fb_post_message.isDisplayed();
 			}
 	},
-	
-	 
-	
+		
 	clickOnUserPorifleTab: {
 		value : function() {browser.driver.sleep(2000);
 			return this.user_profile.click();
