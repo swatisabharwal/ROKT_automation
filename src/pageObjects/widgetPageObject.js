@@ -1,3 +1,4 @@
+var dataObject         = require('../dataFile/dataObject.json');
 var WidgetPage = function() {
 	var popup_handlers;
 	var parent_handlers;
@@ -8,14 +9,14 @@ WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
 	widgetFrame : {
-		get : function() {browser.driver.sleep(5000);
+		get : function() {
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
 	
 	widgetFrame_sendinvitation : {
 		get : function() {
-			browser.driver.sleep(5000);	
+				
 			return browser.driver.findElement(by.css('.FB_UI_Dialog'));
 		}
 	},
@@ -88,7 +89,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	link_ticketmaster : {
-		get : function() { browser.driver.sleep(2000);
+		get : function() { 
 			return browser.driver.findElement(by.xpath(' //span[contains(text(), "Go to my Ticketmaster")]'));
 		}
 	},
@@ -112,7 +113,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	close_btn : {
-		get : function() { browser.driver.sleep(2000);
+		get : function() { 
 			return browser.driver.findElement(by.xpath('//button[contains(text(),"Close")]'));
 		}
 	},
@@ -183,19 +184,19 @@ WidgetPage.prototype = Object.create({}, {
    
    
 	switchPostWindow: {
-		value : function() { browser.driver.sleep(2000);
+		value : function() { 
 			    browser.driver.switchTo().frame(post_window_frame);
 		}
 	},
 		
 	postMessage: {
-		value : function() { browser.driver.sleep(2000);
-			return this.post_message.sendKeys("ticketmaster post");
+		value : function() { browser.driver.sleep(5000);
+			return this.post_message.sendKeys(dataObject.message);
 		}
 	},
 
 	clickPostSend: {
-		value : function() { browser.driver.sleep(2000);
+		value : function() { 
 			return this.post_send.click();
 		}
 	},
@@ -204,99 +205,98 @@ WidgetPage.prototype = Object.create({}, {
 	
 	
     clickMayebBtn: {
-		value : function() {browser.driver.sleep(2000);
+		value : function() {
 			return this.maybe_btn.click();
 		}
 	},
 
     switchToWidgetLikeBtnFrame: {
-		value: function() { browser.driver.sleep(2000);
+		value: function() { 
 			return browser.driver.switchTo().frame(this.widgetLikeBtnFrame);
 		}
 	},
 	
 	clickLikeBtn: {
-	    value : function() {  	 browser.driver.sleep(2000);	
+	    value : function() {  	 	
 			this.widget_like_btn.click();
 	       browser.driver.switchTo().defaultContent();
 		}
 	},
 	
 	switchToWidgetFrame : {
-		value : function() {  	browser.driver.sleep(5000);	
+		value : function() {  		
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
 
 	getVisibiltyOfWidgetOverlay : {
-		value : function() {  	browser.driver.sleep(5000);	
+		value : function() {  		
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
 
 	switchToSendInvitationFrames : {
-		value : function() {  browser.driver.sleep(2000);		
+		value : function() {  		
 			return browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
 		}
 	},
 
 	getShareLabelText : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			return this.shareLabel.getText();
 		}
 	},
 
 	verifyMiniAttendButton : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			return this.miniattendButton.isDisplayed();
 		}
 	},
 
 	
 	clickOnMiniAttendButton : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			return this.miniattendButton.click();
 		}
 	},
 
 	
 	fbWindowHandler : {
-		value : function() {browser.driver.sleep(2000);
+		value : function() {
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				browser.driver.sleep(3000);
 				parent_handlers = handles[0];
 				popup_handlers = handles[1];
-				browser.driver.sleep(2000);
 				browser.driver.switchTo().window(popup_handlers);
 			});
 		}
 	},
 
 	inputFbId : {
-		value : function() {  		browser.driver.sleep(2000); 
-			return this.emailId.sendKeys("testuser01.automation@gmail.com");
+		value : function() {  		 
+			return this.emailId.sendKeys(dataObject.User.testuser.userId);
 		}
 	},
 	
     inputFbPass : {
-		value : function() {browser.driver.sleep(2000); 
-			return this.password.sendKeys("Qait@123");
+		value : function() { 
+			return this.password.sendKeys(dataObject.User.testuser.pass);
 		}
 	},
 	
 	clickOnLoginBtn : {
 		value : function() {  		
 			this.loginBtn.click();
-			browser.driver.sleep(2000);
+			
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(2000);
+				
 				browser.driver.switchTo().window(handles[0]);
 			});
 		}
 	},
 
 	clickOnFbLoginBtn : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			this.loginBtn.click().then(function(){
 			});
 		}
@@ -310,29 +310,31 @@ WidgetPage.prototype = Object.create({}, {
 	},
     
 	clickOkay: {
-		value : function() {  browser.driver.sleep(2000);		
+		value : function() {  		
 			this.okay_to_install.click();
 		}
 	},
 	
 	clickOkayToInstall : {
-		value : function() {browser.driver.sleep(2000); 	
+		value : function() { 	
 			this.okay_to_install.click();
-			browser.driver.sleep(2000);
+			browser.driver.sleep(5000);
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(2000);
+				browser.driver.sleep(3000);
 				browser.driver.switchTo().window(handles[0]);
+				browser.driver.sleep(3000);
 			});
 		}
 	},
 
 	enterRecepient : {
-		value : function() {  browser.driver.sleep(2000);		
-     			this.recepients.sendKeys('Rokt').then(function() {
-				browser.driver.sleep(2000);
+		value : function() {  		
+     			this.recepients.sendKeys(dataObject.User.testuser.frnd).then(function() {
+				browser.driver.sleep(3000);
 				browser.driver.actions().mouseMove(browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]'))).perform().then(function(){
-			    		browser.driver.sleep(1000);
+			    browser.driver.sleep(3000);		
 						browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]')).click();
+				browser.driver.sleep(3000);	
 					});
 				});
 		}
@@ -353,7 +355,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	sendInvitationButtonClick : {
-		value : function() {  browser.driver.sleep(2000);
+		value : function() {  
 			return this.send_invitation_btn.click();
 		}
 	},
@@ -365,7 +367,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyWindowEvent : {
-		value : function() {  	browser.driver.sleep(2000);
+		value : function() {  	
 			return this.verify_window_event.isDisplayed();
 		}
 	},
@@ -378,45 +380,45 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyContinueShareButton : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			return this.cont_share_btn.isDisplayed();
 		}
 	},
 
 	clickOnContBtnFromEndWidgetPage : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			return this.cont_share_btn.click();
 		}
 	},
 
 	verifyLinkToTicketmaster : {
-		value : function() {browser.driver.sleep(2000);
+		value : function() {
 			return this.link_ticketmaster.isDisplayed();
 		}
 	},
 
 	clickOnClose : {
-		value : function() { browser.driver.sleep(2000); 		
+		value : function() {  		
 			return this.close_btn.click();
 		}
 	},
 
 	installAppThroughMiniShareModule : {
-		value : function() {  	browser.driver.sleep(2000);	
+		value : function() {  		
 			this.clickOnMiniAttendButton();
 			browser.driver.sleep(3000);
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(2000);
+				
 				browser.driver.switchTo().window(handles[1]);
 			});
 			this.okay_to_install.click();
-			browser.driver.sleep(2000);
+			browser.driver.sleep(5000);
 			this.okay_to_install.click();
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(2000);
+				
 				browser.driver.switchTo().window(handles[0]);
 			});
-			browser.driver.sleep(2000);
+			
 			this.switchToWidgetFrame();
 		}
 	},

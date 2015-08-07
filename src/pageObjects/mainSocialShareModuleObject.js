@@ -1,3 +1,4 @@
+var dataObject         = require('../dataFile/dataObject.json');
 var mainModule = function () {
     var popup_handlers;
 	var parent_handlers;
@@ -50,13 +51,13 @@ var mainModule = function () {
 
 
     clickCheckbBox:	{
-	    value: function () {browser.driver.sleep(2000);
+	    value: function () {
 		     return this.check_box.click();
         }
     },
 
     verifyContBtn:	{
-	    value: function () {browser.driver.sleep(3000);
+	    value: function () {
 	         return this.cont_btn.isDisplayed();
         }
     },
@@ -68,18 +69,18 @@ var mainModule = function () {
     },
 
     verifyOffer:	{
-	    value: function () {browser.driver.sleep(5000);
+	    value: function () {
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
-  	    value: function(){browser.driver.sleep(6000);
+  	    value: function(){
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     browser.driver.sleep(5000);
+  			     
   		        }
         	 });
   	         return true;
@@ -87,7 +88,7 @@ var mainModule = function () {
     },
   	
     verifyContinueShareButton:	{
-	    value: function () {browser.driver.sleep(5000);
+	    value: function () {
 		     return this.cont_share_btn.isDisplayed();
         }
     },
@@ -99,25 +100,25 @@ var mainModule = function () {
     },
    
     verifyMainAttendButton : {
-		value : function() {browser.driver.sleep(2000);
+		value : function() {
 			 return this.mainattendButton.isDisplayed();
 		}
 	},
    
     clickOnMainAttendButton: {
-   	    value: function(){browser.driver.sleep(3000);
+   	    value: function(){
 			 return this.mainattendButton.click();	
    	    }
     },
    
     verifyMainMaybeButton : {
-		value : function() {browser.driver.sleep(2000);
+		value : function() {
 			 return this.main_maybeButton.isDisplayed();
 		}
 	},
    
     clickOnMainMaybeButton: {
-   	    value: function(){browser.driver.sleep(2000);
+   	    value: function(){
 			 return this.main_maybeButton.click();	
    	  }
     },
