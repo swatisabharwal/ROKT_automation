@@ -139,12 +139,6 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 	
-	it('STEP (13) : Verify that user is able to Like the event ', function (){
-		var fbticketmastersession = fbTicketMasterSession();
-		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
-		fbPage.clickToUnlike();
-	});
-	
 	it('STEP (14): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
 		browser.driver.sleep(3000);
@@ -157,13 +151,20 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	});
 
-
-	it('STEP (15) : Logout from facebook', function() {
+    it('STEP (15) : Verify that user is able to Like the event ', function (){
+		var fbticketmastersession = fbTicketMasterSession();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
+		fbPage.clickToUnlike();
+	});
+	
+	it('STEP (16) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 
-	it('STEP (16) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (17) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -171,13 +172,13 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		browser.driver.sleep(3000);
 	});
 
-	it('STEP (17) : Verify if message is received by that friend', function() {
+	it('STEP (18) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (18) : Remove Message from friend message box and log out', function() {
+	it('STEP (19) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

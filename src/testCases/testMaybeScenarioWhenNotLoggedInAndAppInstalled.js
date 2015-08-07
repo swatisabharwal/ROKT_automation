@@ -117,14 +117,18 @@ var isAppInstalled;
 		Wpage.enterRecepient();
 		Wpage.clickOnSend();
 	});
+	
+	it('STEP (10) : Like button is clicked on main social share module', function() {
+		Wpage.switchToWidgetFrame();
+        Wpage.switchToWidgetLikeBtnFrame();
+		Wpage.clickLikeBtn();
+	});
 
-	it('STEP (10) : Verify and Click on Continue button on end widget page', function() {
+	
+	it('STEP (11) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
-	});
-
-	it('STEP (11) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
 		Wpage.clickOnClose();
 	});
@@ -140,7 +144,9 @@ var isAppInstalled;
 	
 	it('STEP (14) : Verify that user is able to Like the event ', function (){
 		var fbticketmastersession = fbTicketMasterSession();
-		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
 		fbPage.clickToUnlike();
 	});
 	

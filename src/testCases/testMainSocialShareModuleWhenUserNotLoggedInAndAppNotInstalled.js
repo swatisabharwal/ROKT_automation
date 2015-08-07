@@ -21,7 +21,7 @@ var isAppInstalled;
 		var fbsession = new fbSession();
 		fbPage.inputFbId();
 		fbPage.inputFbPass();
-		fbPage.clickOnLoginBtn();
+	    fbPage.clickOnLoginBtn();
 		fbPage.fbSettingsTab();
 		fbPage.seeMoreSettingsTab();
 		browser.driver.sleep(2000);
@@ -108,6 +108,7 @@ var isAppInstalled;
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkay();
 		browser.driver.sleep(2000);
+		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	
@@ -168,9 +169,17 @@ var isAppInstalled;
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 
-	it('STEP (17): Verify the event post on user profile',function(){
+	it('STEP (17) : Verify that user is able to Like the event ', function (){
+		var fbticketmastersession = fbTicketMasterSession();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
+		fbPage.clickToUnlike();
+	});
+	
+	
+	it('STEP (18): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
-		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
 		expect(fbPage.verifyFbPostMessage()).toBe(true);
 		fbPage.clickOnFbPostOptionTab();
     	browser.driver.sleep(2000);
@@ -180,20 +189,19 @@ var isAppInstalled;
 
 	});
 
-	it('STEP (18) : Verify that user is able to Like the event ', function (){
+	it('STEP (19) : Verify that user is able to Like the event ', function (){
 		var fbticketmastersession = fbTicketMasterSession();
-		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
 		fbPage.clickToUnlike();
 	});
-	
-	
 		
-	it('STEP (19) : Logout from facebook', function() {
+		
+	it('STEP (20) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 
-	it('STEP (20) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (21) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -201,7 +209,7 @@ var isAppInstalled;
 		browser.driver.sleep(3000);
 	});
 
-	it('STEP (21) : Verify if message is received by that friend', function() {
+	it('STEP (22) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);

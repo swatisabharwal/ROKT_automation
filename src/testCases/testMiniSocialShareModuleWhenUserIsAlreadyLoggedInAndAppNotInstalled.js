@@ -83,8 +83,10 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		
 	it('STEP (4) : Installing ticketmaster application', function () {
 		Wpage.fbWindowHandler();
-        Wpage.clickOkay();
-		expect(Wpage.verifyInstallationPage()).toBe(true);
+        expect(Wpage.verifyInstallationPage()).toBe(true);
+		Wpage.clickOkay();
+		browser.driver.sleep(2000);
+		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	

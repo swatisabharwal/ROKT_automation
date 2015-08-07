@@ -152,9 +152,17 @@ var isAppInstalled;
 		expect(fbPage.userEventStatus()).toBe(true);
     });
 	
-	it('STEP (16): Verify the event post on user profile',function(){
+	it('STEP (16) : Verify that user is able to Like the event ', function (){
+		var fbticketmastersession = fbTicketMasterSession();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
+		fbPage.clickToUnlike();
+	});
+	
+	
+	it('STEP (17): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
-		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
 		expect(fbPage.verifyFbPostMessage()).toBe(true);
 		fbPage.clickOnFbPostOptionTab();
     	browser.driver.sleep(2000);
@@ -164,19 +172,19 @@ var isAppInstalled;
 
 	});
 	
-	it('STEP (17) : Verify that user is able to Like the event ', function (){
+	it('STEP (18) : Verify that user is able to Like the event ', function (){
 		var fbticketmastersession = fbTicketMasterSession();
 		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
 		fbPage.clickToUnlike();
 	});
 
 		
-	it('STEP (18) : Logout from facebook', function (){
+	it('STEP (19) : Logout from facebook', function (){
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 	});
 
-	it('STEP (19) : Login on facebook as the friend with whom event invitation is shared',function () {
+	it('STEP (20) : Login on facebook as the friend with whom event invitation is shared',function () {
     	browser.driver.sleep(3000);
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -184,13 +192,13 @@ var isAppInstalled;
         browser.driver.sleep(3000);	
 	});
 	
-	it('STEP (20) : Verify if message is received by that friend',function(){
+	it('STEP (21) : Verify if message is received by that friend',function(){
 	   	fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 	
-	it('STEP (21) : Remove Message from friend message box and log out', function () {
+	it('STEP (22) : Remove Message from friend message box and log out', function () {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

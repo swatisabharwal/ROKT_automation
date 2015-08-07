@@ -91,7 +91,8 @@ var isAppInstalled;
 	it('STEP (5) : Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkay();
-   		browser.driver.sleep(5000);
+   		browser.driver.sleep(2000);
+		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
 		Wpage.clickOkayToInstall();
 	});
 	

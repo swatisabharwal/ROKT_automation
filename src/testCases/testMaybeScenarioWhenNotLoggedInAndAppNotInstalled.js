@@ -107,6 +107,7 @@ var isAppInstalled;
 	it('STEP (7) : Installing ticketmaster application', function (){
 		expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkay();
+		browser.driver.sleep(2000);
 		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
         Wpage.clickOkayToInstall();
 	});
@@ -131,44 +132,47 @@ var isAppInstalled;
 		Wpage.clickOnSend();
 	});
 
+	it('STEP (11) : Like button is clicked on main social share module', function() {
+		Wpage.switchToWidgetFrame();
+        Wpage.switchToWidgetLikeBtnFrame();
+		Wpage.clickLikeBtn();
+	});	
 	
-	
-    it('STEP (11) : Verify and Click on Continue button on the end widget page', function() {
+   	it('STEP (12) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		Wpage.switchToWidgetFrame();
 		expect(mainPage.verifyContinueShareButton()).toBe(true);
 		mainPage.clickOnContBtnFromEndWidgetPage();
-	});
-
-	it('STEP (12) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
 		browser.driver.sleep(2000);
 		Wpage.clickOnClose();
 	});
 
-	it('STEP (10) : Navigate to facebook event page', function() {
+	it('STEP (13) : Navigate to facebook event page', function() {
 		var fbeventsession = new fbEventSession();
 		
     });		
 	
-	it('STEP (13) : Verify that user is able to join the event' ,function (){
+	it('STEP (14) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatusMaybe()).toBe(true);
 		browser.driver.sleep(2000);
 		expect(fbPage.userEventStatusMaybe()).toBe(true);
 	});
 	
-	it('STEP (14) : Verify that user is able to Like the event ', function (){
+	it('STEP (15) : Verify that user is able to Like the event ', function (){
 		var fbticketmastersession = fbTicketMasterSession();
-		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
 		fbPage.clickToUnlike();
 	});
 	 
-	it('STEP (15) : Logout from facebook', function() {
+	it('STEP (26) : Logout from facebook', function() {
 		fbPage.logoutTab();
 		fbPage.logoutBtn();
 		
 	});
 
-	it('STEP (16) : Login on facebook as the friend with whom event invitation is shared', function() {
+	it('STEP (17) : Login on facebook as the friend with whom event invitation is shared', function() {
 		browser.driver.sleep(3000);
     	fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
@@ -177,13 +181,13 @@ var isAppInstalled;
 
 	});
 
-	it('STEP (17) : Verify if message is received by that friend', function() {
+	it('STEP (18) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
 		fbPage.selectSender();
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
-	it('STEP (18) : Remove Message from friend message box and log out', function() {
+	it('STEP (19) : Remove Message from friend message box and log out', function() {
 		fbPage.messageSettings();
 		fbPage.clearMessages();
 		fbPage.clearConversation();

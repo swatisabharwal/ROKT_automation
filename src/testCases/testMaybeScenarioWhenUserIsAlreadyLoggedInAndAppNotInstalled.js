@@ -119,13 +119,16 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMaybeScenarioWhenU
 		Wpage.clickOnSend();
 	});
 
-	it('STEP (10) : Verify and Click on Continue button on the end widget page', function() {
+	it('STEP (10) : Like button is clicked on main social share module', function() {
 		Wpage.switchToWidgetFrame();
-    	expect(mainPage.verifyContinueShareButton()).toBe(true);
-		mainPage.clickOnContBtnFromEndWidgetPage();
+        Wpage.switchToWidgetLikeBtnFrame();
+		Wpage.clickLikeBtn();
 	});
 
 	it('STEP (11) : Verify "Go To My Ticketmaster" link and Close the widget', function() {
+		Wpage.switchToWidgetFrame();
+    	expect(mainPage.verifyContinueShareButton()).toBe(true);
+		mainPage.clickOnContBtnFromEndWidgetPage();
 		expect(Wpage.verifyLinkToTicketmaster()).toBe(true);
 		Wpage.clickOnClose();
 	});
@@ -142,7 +145,9 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMaybeScenarioWhenU
 	
 	it('STEP (14) : Verify that user is able to Like the event ', function (){
 		var fbticketmastersession = fbTicketMasterSession();
-		fbPage.verifyTicketmasterFbPageLikeBtnStatus();
+		browser.driver.sleep(2000);
+		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
+		browser.driver.sleep(2000);
 		fbPage.clickToUnlike();
 	});
 	

@@ -99,7 +99,8 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
     	expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkay();
 		browser.driver.sleep(2000);
-    	Wpage.clickOkayToInstall();
+    	expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
+		Wpage.clickOkayToInstall();
 	});
 	
 	it('STEP (7) : Share post on facebook ', function (){
@@ -158,8 +159,9 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 
 	it('STEP (16) : Verify that user event appears in "Liked" state', function (){
 		var fbticketmastersession = fbTicketMasterSession();
+		browser.driver.sleep(2000);
 		expect(fbPage.verifyTicketmasterFbPageLikeBtnStatus()).toBe(true);
-		browser.driver.sleep(3000);
+		browser.driver.sleep(2000);
 		fbPage.clickToUnlike();
 	
 	});
