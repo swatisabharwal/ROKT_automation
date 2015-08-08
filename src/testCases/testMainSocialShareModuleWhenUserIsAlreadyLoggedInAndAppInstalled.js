@@ -158,7 +158,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		var ssession = new singleSession(dataObject.url.fbEventUrl);
 	});
 
-	it('STEP (12) : Verify that user is able to join the event' ,function (){
+	it('STEP (13) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatus()).toBe(true);
 		browser.driver.sleep(5000);
 		expect(fbPage.userEventStatus()).toBe(true);
