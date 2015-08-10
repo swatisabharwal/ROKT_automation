@@ -14,7 +14,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	var Wpage = new WidgetPage();
 	var mainPage = new mainModule();
 		
-	it('Pre-requisite (1) : Check if App is installed or not on Facebook and if installed Remove it ', function() {
+	it('Pre-requisite (1) : Check if App is installed or not on Facebook and if installed do nothing ', function() {
 		var ssession = new singleSession(dataObject.url.fbUrl);
 		fbPage.inputFbId();
 		browser.driver.sleep(2000);
@@ -28,7 +28,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 		browser.driver.sleep(5000);
 		fbPage.userApps();
 			
-		fbPage.checkAppAlreadyInstalledOrNot(dataObject.url.fbUrl).then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot(dataObject.app).then(function(value){
 			console.log("[Info] : Size of App list element:- "+value);
 			if(value === 0 ){
 				isAppInstalled = false;

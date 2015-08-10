@@ -32,7 +32,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
     	fbPage.userApps();
 		
 
-		fbPage.checkAppAlreadyInstalledOrNot(dataObject.url.fbUrl).then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot(dataObject.app).then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{

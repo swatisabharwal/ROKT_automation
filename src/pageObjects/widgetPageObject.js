@@ -9,7 +9,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
 	widgetFrame : {
-		get : function() {
+		get : function() {browser.driver.sleep(5000);
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
@@ -28,7 +28,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 	
 	widgetOverlay : {
-		get : function() {
+		get : function() {browser.driver.sleep(5000);
 			return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
 		}
 	},
@@ -224,7 +224,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 	
 	switchToWidgetFrame : {
-		value : function() {  		
+		value : function() {  	browser.driver.sleep(5000);	
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},

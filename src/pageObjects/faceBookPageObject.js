@@ -57,7 +57,7 @@ fbAuthentication.prototype = Object.create({}, {
 		value : function(){
 			this.fb_ticketmaster_fb_event_Liked_btn.then(function(elem){
             	browser.driver.actions().mouseMove(elem).perform();
-				
+				browser.driver.sleep(5000);
                 browser.driver.findElement(by.xpath('//span[contains(text(),"Unlike")]')).click();
 		});
 		

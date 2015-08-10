@@ -69,18 +69,18 @@ var mainModule = function () {
     },
 
     verifyOffer:	{
-	    value: function () {
+	    value: function () {browser.driver.sleep(5000);
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
-  	    value: function(){
+  	    value: function(){browser.driver.sleep(5000);
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     
+  			     browser.driver.sleep(5000);
   		        }
         	 });
   	         return true;

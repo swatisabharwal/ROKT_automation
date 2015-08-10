@@ -29,7 +29,7 @@ var isAppInstalled;
 		browser.driver.sleep(5000);
 		fbPage.userApps();
 				
-		fbPage.checkAppAlreadyInstalledOrNot(dataObject.url.fbUrl).then(function(value){
+		fbPage.checkAppAlreadyInstalledOrNot(dataObject.app).then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
 			}else{
