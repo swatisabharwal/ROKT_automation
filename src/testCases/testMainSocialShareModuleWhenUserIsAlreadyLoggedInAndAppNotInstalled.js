@@ -2,6 +2,7 @@ var WidgetPage         = require('../pageObjects/WidgetPageObject.js');
 var mainModule         = require('../pageObjects/mainSocialShareModuleObject.js');
 var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
 var dataObject         = require('../dataFile/dataObject.json');
+var singleSession      = require('../sessionInitiator/Session.js');
 
 
 

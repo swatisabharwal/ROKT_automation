@@ -1,6 +1,7 @@
 var WidgetPage         = require('../pageObjects/WidgetPageObject.js');
 var mainModule         = require('../pageObjects/mainSocialShareModuleObject.js');
 var faceBookPageObject = require('../pageObjects/faceBookPageObject.js');
+var singleSession      = require('../sessionInitiator/Session.js');
 var dataObject         = require('../dataFile/dataObject.json');
 
 var doWeNeedAppInstalled = true;
