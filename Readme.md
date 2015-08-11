@@ -19,7 +19,7 @@ Steps for execution
     STEP 3: Type command "protractor testConfiguration.js" and press enter.
     STEP 4: To run multiple test classes :-
 Go to src/testCases/.  
-Copy the full path along with name of required test class(eg:   	 “./src/testCases/testMainSocialShareModuleWhenUserNotLoggedInAndAppNotInstalled.js" ).
+Copy the full path along with name of required test class(eg:   	 â€œ./src/testCases/testMainSocialShareModuleWhenUserNotLoggedInAndAppNotInstalled.js" ).
 Out of the src folder 
 Open testConfiguration file and paste the name of the file in the "spec : []" attribute and follow the same process to execute 
 
