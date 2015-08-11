@@ -8,17 +8,19 @@ Tools Needed :
 Nodejs v0.12.7
 npm 2.11.3 
 Protractor 1.6.1
+protractor-html-screenshot-reporter
 
 Steps for execution
+Once you clone this repository, follow the steps below for executing the scripts
 
     STEP 1: Open the initial folder containing file "testConfigration.js"
     
+    STEP 2: Provide path of the test class to be executed in testConfigration.js file by updating the entry 'specs', for example ----> ['./src/testCases/testMainSocialShareModuleWhenUserIsAlreadyLoggedInAndAppInstalled.js']. Change the file name based on scenario you want to execute (all test classes are placed in /src/testCases folder)
+    
     STEP 2: Open Command Prompt at the same location
     
-    STEP 3: Type command "protractor testConfiguration.js" and press 		enter
+    STEP 3: Type command "protractor testConfiguration.js" and press enter
     
-    STEP 4: To run multiple test classes:- 
-
-	Go to src/testCases/.  
-	Copy the full path along with name of required test class(eg:   	 	“./src/testCases/testMainSocialShareModuleWhenUserNotLoggedInAndApp	NotInstalled.js" ).
-	Out of the src folder, open testConfiguration file and paste the 	name of the file in the "spec : []" attribute and follow the same 	process to execute 
+    Execution for the desired test scenario will be started. Once the execution completes, a folder named 'output' gets generated in the root folder of project (/ROKT_automation) inside which a report.html file is created - the execution report in an easily readable HTML format
+   
+    STEP 4: To run multiple test classes one after the other, just add paths to all test classes separated by a ',' (comma) against the same entry 'specs' inside testConfiguration.js and remaining process is the same
