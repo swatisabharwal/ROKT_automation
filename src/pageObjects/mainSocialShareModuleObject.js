@@ -20,6 +20,8 @@ var mainModule = function () {
 	   }
 	},
 	
+	
+	
     skip_btn:{ 
 	    get: function () { 
 		     return browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button'));
@@ -65,23 +67,37 @@ var mainModule = function () {
 
     clickContBtn:{
 	    value: function () {
+	    	 browser.driver.sleep(2000);
+	    	 //browser.driver.executeScript("arguments[0].scrollIntoView(true);",this.cont_btn);
 		     return this.cont_btn.click();
         }
     },
 
+	logoutTab : {
+		value : function() {
+			this.logout_tab.then(function(element){
+   				browser.driver.actions().mouseMove(element).perform();
+				browser.driver.sleep(2000);
+				browser.driver.executeScript("arguments[0].scrollIntoView(true);",element);
+				return browser.driver.findElement(by.css('#pageLoginAnchor')).click();
+			});
+		}
+	},
     verifyOffer:	{
 	    value: function () {
+	    	browser.driver.sleep(1000);
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
   	    value: function(){
+  	    	 browser.driver.sleep(1000);
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
-  			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     
+  		     	 browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
+  			     browser.driver.sleep(1000);
   		        }
         	 });
   	         return true;

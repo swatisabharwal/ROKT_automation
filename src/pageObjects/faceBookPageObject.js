@@ -96,6 +96,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	clickOnFbPostDeleteNowButton:{
 		value : function() {
+			browser.driver.sleep(2000);
 			return this.fb_post_delete_now.click();
 		}
 	},
@@ -207,7 +208,7 @@ fbAuthentication.prototype = Object.create({}, {
 		value : function() {
 			this.logout_tab.then(function(element){
    				browser.driver.actions().mouseMove(element).perform();
-				browser.driver.sleep(1000);
+				browser.driver.sleep(2000);
 				browser.driver.executeScript("arguments[0].scrollIntoView(true);",element);
 				return browser.driver.findElement(by.css('#pageLoginAnchor')).click();
 			});

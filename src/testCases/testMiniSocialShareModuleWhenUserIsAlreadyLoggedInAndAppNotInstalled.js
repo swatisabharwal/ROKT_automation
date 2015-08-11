@@ -18,17 +18,12 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
     it('Pre-requisite (1) : Check if App is installed or not on Facebook and  if installed Remove it', function() {
 		var ssession = new singleSession(dataObject.url.fbUrl);
 		fbPage.inputFbId();
-		browser.driver.sleep(2000);
 		fbPage.inputFbPass();
-		browser.driver.sleep(2000);
 		fbPage.clickOnLoginBtn();
-		browser.driver.sleep(5000);
 		fbPage.fbSettingsTab();
 		fbPage.seeMoreSettingsTab();
-		browser.driver.sleep(5000);  
 		fbPage.userApps();
-		browser.driver.sleep(5000);
-
+		
 		fbPage.checkAppAlreadyInstalledOrNot(dataObject.app).then(function(value){
 			if(value === 0 ){
 				isAppInstalled = false;
@@ -41,21 +36,17 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 				if(doWeNeedAppInstalled){
 					console.log("[Info] : App should be installed for the scenario but actually it's not, installing it now");
 					var ssession = new singleSession(dataObject.url.AppUrl);
-					browser.driver.sleep(5000);
 					Wpage.switchToWidgetFrame().then(function(){
 					var wP = new WidgetPage();
-					browser.driver.sleep(5000);
+					browser.driver.sleep(2000);
 					wP.installAppThroughMiniShareModule();
 					expect(wP.verifySendInvitationButton()).toBe(true);
      			});
 				}else{
 					console.log("[Info] : App should not be installed for the scenario but actually it's there, un-installing it now");
 					fbPage.appRemove(dataObject.app);
-					browser.driver.sleep(5000);
 					fbPage.removeNow();		 
-					browser.driver.sleep(5000);
-
-				}
+					}
 			}
 		});
 		
@@ -64,11 +55,9 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	it('Pre-requisite (2) : Already Logged in and unattending the event', function (){
 		var ssession = new singleSession(dataObject.url.fbEventUrl);
-		browser.driver.sleep(5000);
 		expect(fbPage.verifyHomeTabObFb()).toBe(true);
 		fbPage.checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready();
-		browser.driver.sleep(5000);
-	});
+		});
 	
     it('STEP (1) : Navigate to ROKT widget home page', function() {
 		var ssession = new singleSession(dataObject.url.AppUrl);
@@ -76,65 +65,46 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 	});
 
 	it('STEP (2) : Verify Widget Overlay', function() {
-		browser.driver.sleep(5000);
-		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});
 	
 	it('STEP (3) : Verify Attending button and Click on it', function() {
 		expect(Wpage.verifyMiniAttendButton()).toBe(true);
-		browser.driver.sleep(5000);
 		Wpage.clickOnMiniAttendButton();
 	});
 		
 	it('STEP (4) : Installing ticketmaster application', function () {
-		browser.driver.sleep(5000);
 		Wpage.fbWindowHandler();
-        browser.driver.sleep(5000);
-		expect(Wpage.verifyInstallationPage()).toBe(true);
-		browser.driver.sleep(5000);
+        expect(Wpage.verifyInstallationPage()).toBe(true);
 		Wpage.clickOkay();
 		expect(Wpage.verifyManageYourEventsWindow()).toBe(true);
-		browser.driver.sleep(5000);
 		Wpage.clickOkayToInstall();
 	});
 	
 	it('STEP (5) : Share post on facebook ', function (){
-   		browser.driver.sleep(5000);
-		Wpage.switchToWidgetFrame();
-		browser.driver.sleep(5000);
+   		Wpage.switchToWidgetFrame();
 		Wpage.switchToSendInvitationFrames();
-		browser.driver.sleep(5000);
-        Wpage.postMessage();
-		browser.driver.sleep(5000);
+		Wpage.postMessage();
 		Wpage.clickPostSend();
 	});
 	
 	it('STEP (6) : Verify Send Invitation Button and Click on it', function() {
-		browser.driver.sleep(5000);
 		Wpage.switchToWidgetFrame();
 		expect(Wpage.verifySendInvitationButton()).toBe(true);
-		browser.driver.sleep(5000);
 		Wpage.sendInvitationButtonClick();
 
 	});
 
 	it('STEP (7) : Verify Ticketmaster Event Link on "Send a Message" window', function() {
-		browser.driver.sleep(5000);
 		Wpage.switchToSendInvitationFrames();
-		browser.driver.sleep(5000); 
 		expect(Wpage.verifyPostOverlay()).toBe(true);	
 		expect(Wpage.verifyWindowEvent()).toBe(true);
 	});
 
 	it('STEP (8) : Enter friend name to share this event with on "Send a Message" window', function() {
-		browser.driver.sleep(5000);
 		Wpage.enterRecepient();
-		browser.driver.sleep(5000);
-		Wpage.clickOnSend();
-		
-
+	    Wpage.clickOnSend();
 	});
 	
     it('STEP (9) : Navigate to facebook event page', function() {
@@ -144,27 +114,21 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 
 	it('STEP (10) : Verify that user is able to join the event' ,function (){
 		expect(fbPage.eventStatus()).toBe(true);
-		browser.driver.sleep(5000);
 		expect(fbPage.userEventStatus()).toBe(true);
 	});
 	
 	it('STEP (11): Verify the event post on user profile',function(){
 		fbPage.clickOnUserPorifleTab();
-		browser.driver.sleep(5000);
 		expect(fbPage.verifyTicketmasterLinkOnProfile()).toBe(true);
 		expect(fbPage.verifyFbPostMessage()).toBe(true);
 		fbPage.clickOnFbPostOptionTab();
-		browser.driver.sleep(5000);
 		fbPage.clickOnFbPostDeleteTab();
-		browser.driver.sleep(5000);
 		fbPage.clickOnFbPostDeleteNowButton();
-		browser.driver.sleep(5000);
 	});
 
 
 	it('STEP (12) : Logout from facebook', function() {
 		fbPage.logoutTab();
-		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 	});
 
@@ -172,27 +136,19 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMiniSocialShareMod
 		fbPage.inputFrndFbId();
 		fbPage.inputFbPass();
 		fbPage.clickOnLoginBtn();
-		browser.driver.sleep(5000);
 	});
 
 	it('STEP (14) : Verify if message is received by that friend', function() {
 		fbPage.clickMessages();
-		browser.driver.sleep(5000);
 		fbPage.selectSender();
-		browser.driver.sleep(5000);
 		expect(fbPage.verifyMessage()).toBe(true);
 	});
 
 	it('STEP (15) : Remove Message from friend message box and log out', function() {
-		browser.driver.sleep(5000);
 		fbPage.messageSettings();
-		browser.driver.sleep(5000);
 		fbPage.clearMessages();
-		browser.driver.sleep(5000);
 		fbPage.clearConversation();
-		browser.driver.sleep(5000);
 		fbPage.logoutTab();
-		browser.driver.sleep(5000);
 		fbPage.logoutBtn();
 	});
 

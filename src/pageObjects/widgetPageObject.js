@@ -226,12 +226,14 @@ WidgetPage.prototype = Object.create({}, {
 	
 	switchToWidgetFrame : {
 		value : function() { 	
+			browser.driver.sleep(2000);
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
 
 	getVisibiltyOfWidgetOverlay : {
 		value : function() {  		
+			browser.driver.sleep(5000);
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
@@ -288,10 +290,8 @@ WidgetPage.prototype = Object.create({}, {
 	clickOnLoginBtn : {
 		value : function() {  		
 			this.loginBtn.click();
-			
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				
-				browser.driver.switchTo().window(handles[0]);
+			browser.driver.switchTo().window(handles[0]);
 			});
 		}
 	},
@@ -349,13 +349,14 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifySendInvitationButton : {
 		value : function() {  		
-			
+			browser.driver.manage().timeouts().implicitlyWait(30000);
 			return this.send_invitation_btn.isDisplayed();
 		}
 	},
 
 	sendInvitationButtonClick : {
 		value : function() {  
+			//browser.driver.sleep(2000);
 			return this.send_invitation_btn.click();
 		}
 	},
@@ -398,7 +399,8 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	clickOnClose : {
-		value : function() {  		
+		value : function() {  	
+			browser.driver.sleep(5000);
 			return this.close_btn.click();
 		}
 	},
