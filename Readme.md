@@ -9,9 +9,13 @@ npm 2.11.3
 Protractor 1.6.1
 
 Steps for execution:-
-    STEP 1: Open the initial folder containing file "testConfigration.js".
-    STEP 2: Open Command Prompt at the same location.
-    STEP 3: Type command "protractor testConfiguration.js" and press enter.
+
+    STEP 1: Open the initial folder containing file "testConfigration.js"
+    
+    STEP 2: Open Command Prompt at the same location
+    
+    STEP 3: Type command "protractor testConfiguration.js" and press enter
+    
     STEP 4: To run multiple test classes :- 
 Go to src/testCases/.  
 Copy the full path along with name of required test class(eg:   	 “./src/testCases/testMainSocialShareModuleWhenUserNotLoggedInAndAppNotInstalled.js" ).
