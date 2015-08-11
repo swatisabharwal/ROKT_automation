@@ -233,7 +233,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	getVisibiltyOfWidgetOverlay : {
 		value : function() {  		
-			browser.driver.sleep(3000);
+			browser.driver.sleep(5000);
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
