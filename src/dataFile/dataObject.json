@@ -1,11 +1,11 @@
 {
   "app":"Ticketmaster",
   "url":{
-    "AppUrl":"http://roktdemo.ticketmaster.com/tm/finish.htm",
-	"fbUrl" : "https://www.facebook.com/",
+    "AppUrl": "http://roktdemo.ticketmaster.com/tm/finish.htm",
+	"fbUrl" : "https://www.facebook.com",
 	"fbEventUrl" : "https://www.facebook.com/events/430132483807363",
     "ticketmasterUrl" : "https://www.facebook.com/Ticketmaster" 
-	   },
+	},
   "User":{
      "testuser":{
 			 "Id":"100009853330781",

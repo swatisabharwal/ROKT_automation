@@ -3,6 +3,7 @@ var mainModule = function () {
     var popup_handlers;
 	var parent_handlers;
 	var handlers={};
+//
 	};
                 
  mainModule.prototype = Object.create({}, {
@@ -69,18 +70,18 @@ var mainModule = function () {
     },
 
     verifyOffer:	{
-	    value: function () {browser.driver.sleep(5000);
+	    value: function () {
  		     return this.skip_btn.isDisplayed();
         }
     },
 
     skipOffers: {
-  	    value: function(){browser.driver.sleep(5000);
+  	    value: function(){
      	     this.question.then(function(elems){
   		     var len = elems.length;
   		     for(var i = 0; i<(len-1) ;i++){
   			     browser.driver.findElement(by.xpath('//div[@ class="ui_surveyQuestion_buttons"]/button')).click();
-  			     browser.driver.sleep(5000);
+  			     
   		        }
         	 });
   	         return true;

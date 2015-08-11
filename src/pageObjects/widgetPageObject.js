@@ -3,13 +3,14 @@ var WidgetPage = function() {
 	var popup_handlers;
 	var parent_handlers;
 	var handlers = {};
+//
 };
 
 WidgetPage.prototype = Object.create({}, {
 
 	// UI Objects of Widget
 	widgetFrame : {
-		get : function() {browser.driver.sleep(5000);
+		get : function() {
 			return browser.driver.findElement(by.css('.wdHolder>iframe'));
 		}
 	},
@@ -28,7 +29,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 	
 	widgetOverlay : {
-		get : function() {browser.driver.sleep(5000);
+		get : function() {
 			return browser.driver.findElement(by.css('.ui_smartsignup.ui_module.tween_opacity'));
 		}
 	},
@@ -177,7 +178,7 @@ WidgetPage.prototype = Object.create({}, {
 	// Methods around Object -- User actions
 
    verifyManageYourEventsWindow: {
-		value : function() {  	browser.driver.sleep(5000);	
+		value : function() {  		
 			return this.manage_your_events.isDisplayed();
 		}
 	},
@@ -190,15 +191,15 @@ WidgetPage.prototype = Object.create({}, {
 	},
 		
 	postMessage: {
-		value : function() { browser.driver.sleep(5000);
+		value : function() { 
 			return this.post_message.sendKeys(dataObject.message);
 		}
 	},
 
 	clickPostSend: {
 		value : function() { 
-			return this.post_send.click();
-		}
+			this.post_send.click();
+		    }
 	},
 
 	
@@ -224,7 +225,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 	
 	switchToWidgetFrame : {
-		value : function() {  	browser.driver.sleep(5000);	
+		value : function() { 	
 			return browser.driver.switchTo().frame(this.widgetFrame);
 		}
 	},
@@ -237,7 +238,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	switchToSendInvitationFrames : {
 		value : function() {  		
-			return browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
+		browser.driver.switchTo().frame(this.widgetFrame_sendinvitation);
 		}
 	},
 
@@ -256,15 +257,15 @@ WidgetPage.prototype = Object.create({}, {
 	
 	clickOnMiniAttendButton : {
 		value : function() {  		
-			return this.miniattendButton.click();
-		}
+			this.miniattendButton.click();
+		  }
 	},
 
 	
 	fbWindowHandler : {
 		value : function() {
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(3000);
+				
 				parent_handlers = handles[0];
 				popup_handlers = handles[1];
 				browser.driver.switchTo().window(popup_handlers);
@@ -304,7 +305,7 @@ WidgetPage.prototype = Object.create({}, {
 	
 
 	verifyInstallationPage : {
-		value : function() {  browser.driver.sleep(3000);   
+		value : function() {     
  		return this.installation_page.isDisplayed();
 		}
 	},
@@ -318,11 +319,11 @@ WidgetPage.prototype = Object.create({}, {
 	clickOkayToInstall : {
 		value : function() { 	
 			this.okay_to_install.click();
-			browser.driver.sleep(5000);
+			
 			browser.driver.getAllWindowHandles().then(function(handles) {
-				browser.driver.sleep(3000);
+				
 				browser.driver.switchTo().window(handles[0]);
-				browser.driver.sleep(3000);
+				
 			});
 		}
 	},
@@ -330,11 +331,11 @@ WidgetPage.prototype = Object.create({}, {
 	enterRecepient : {
 		value : function() {  		
      			this.recepients.sendKeys(dataObject.User.testuser.frnd).then(function() {
-				browser.driver.sleep(3000);
+				
 				browser.driver.actions().mouseMove(browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]'))).perform().then(function(){
-			    browser.driver.sleep(3000);		
+			    		
 						browser.driver.findElement(by.xpath('//ul[contains(@id,"typeahead_list")]//li/img[1]')).click();
-				browser.driver.sleep(3000);	
+					
 					});
 				});
 		}
@@ -342,14 +343,13 @@ WidgetPage.prototype = Object.create({}, {
 
 	clickOnSend : {
 		value : function() {  		
-			browser.driver.sleep(3000);
 			this.send_btn.click();
     	}
 	},
 
 	verifySendInvitationButton : {
 		value : function() {  		
-			browser.driver.sleep(3000);
+			
 			return this.send_invitation_btn.isDisplayed();
 		}
 	},
@@ -361,7 +361,7 @@ WidgetPage.prototype = Object.create({}, {
 	},
 
 	verifyPostOverlay : {
-		value : function() { browser.driver.sleep(3000);
+		value : function() { 
 			return this.post_overlay.isDisplayed();
 		}
 	},
@@ -406,13 +406,13 @@ WidgetPage.prototype = Object.create({}, {
 	installAppThroughMiniShareModule : {
 		value : function() {  		
 			this.clickOnMiniAttendButton();
-			browser.driver.sleep(3000);
+			
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				
 				browser.driver.switchTo().window(handles[1]);
 			});
 			this.okay_to_install.click();
-			browser.driver.sleep(5000);
+			
 			this.okay_to_install.click();
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				

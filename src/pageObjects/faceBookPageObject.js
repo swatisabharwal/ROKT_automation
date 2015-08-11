@@ -1,7 +1,7 @@
 var dataObject         = require('../dataFile/dataObject.json');
 var fbAuthentication = function() {
 	//Empty constructor for now, can add piece of code if required
-
+//
 };
 fbAuthentication.prototype = Object.create({}, {
    /***************************Facebook WEb Elements***************************/	
@@ -57,7 +57,7 @@ fbAuthentication.prototype = Object.create({}, {
 		value : function(){
 			this.fb_ticketmaster_fb_event_Liked_btn.then(function(elem){
             	browser.driver.actions().mouseMove(elem).perform();
-				browser.driver.sleep(5000);
+				
                 browser.driver.findElement(by.xpath('//span[contains(text(),"Unlike")]')).click();
 		});
 		
@@ -110,11 +110,12 @@ fbAuthentication.prototype = Object.create({}, {
 				}else{
 					console.log("[INFO] ; No Join button on facebook events page, need to remove user from the guest list");
 					browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img')).click().then(function(){
-						browser.driver.sleep(2000);
+						
 						browser.driver.findElement(by.xpath('//span[contains(text(),"Remove me from Guest List")]')).click().then(function(){
-							browser.driver.sleep(5000);
+							
 							browser.driver.findElement(by.xpath('//button[contains(text(), "OK")]')).click();
 							console.log("[INFO] : User removed from guest list");
+							browser.driver.sleep(3000);
 						});
 					});					
 				}
@@ -125,10 +126,10 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	
 	checkAppAlreadyInstalledOrNot : {  
-		value : function(nameOfApp) {browser.driver.sleep(5000); 
+		value : function(nameOfApp) { 
 			console.log("[INFO] : App to be searched on fb:- "+nameOfApp);
 			return browser.driver.findElements(by.xpath('//div[@id="SettingsPage_Content"]//div[text()="'+nameOfApp+'"]')).then(function(elem){
-				browser.driver.sleep(5000);
+				
 				return elem.length;
 			});
 		}
@@ -149,7 +150,8 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 	clickOnLoginBtn : {
 		value : function() {
-			return this.loginBtn.click();
+			 this.loginBtn.click();
+			
 		}
 	},
 
@@ -205,14 +207,18 @@ fbAuthentication.prototype = Object.create({}, {
 		value : function() {
 			this.logout_tab.then(function(element){
    				browser.driver.actions().mouseMove(element).perform();
-				browser.driver.findElement(by.css('#pageLoginAnchor')).click();
+				browser.driver.sleep(1000);
+				browser.driver.executeScript("arguments[0].scrollIntoView(true);",element);
+				return browser.driver.findElement(by.css('#pageLoginAnchor')).click();
 			});
 		}
 	},
 
 	logoutBtn : {
-		value : function() { 
-			this.logout_btn.click();
+		value : function() {
+			browser.driver.executeScript("arguments[0].scrollIntoView(true);",this.logout_btn);			
+			return this.logout_btn.click();
+		
 		}
 	},
 	
@@ -291,8 +297,7 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 	fbSettingsTab : {
-		value : function() {  
-		    		
+		value : function() { 
 			return this.fb_settings_tab.click();
 		}
 	},
@@ -311,11 +316,12 @@ fbAuthentication.prototype = Object.create({}, {
 	},
 
 	appRemove : {
-		 value: function (appName) {browser.driver.sleep(5000);
+		 value: function (appName) {
        	this.hidden_app_remove.then(function(elem){
    									browser.driver.actions().mouseMove(elem).perform().then(function(){
 									browser.driver.findElement(by.xpath('//div[text()="'+appName+'"]/../../preceding-sibling::span/a[@aria-label="Remove"]/i')).click();
-								    browser.driver.sleep(5000);});   
+									browser.driver.sleep(2000);
+								    });   
 					});
 			}	
 	},
@@ -323,7 +329,7 @@ fbAuthentication.prototype = Object.create({}, {
 	removeNow : {
 		value : function() {  		
 			this.remove_now.click();
-		    browser.driver.sleep(5000);
+			browser.driver.sleep(2000);
 		}
 	},
 

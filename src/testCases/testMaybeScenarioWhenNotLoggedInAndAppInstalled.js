@@ -130,8 +130,7 @@ var isAppInstalled;
 		Wpage.switchToSendInvitationFrames();
 		browser.driver.sleep(5000);
 		expect(Wpage.verifyPostOverlay()).toBe(true);
-		browser.driver.sleep(5000);
-		expect(fbPage.verifyWindowEvent()).toBe(true);
+		expect(Wpage.verifyWindowEvent()).toBe(true);
     });
 
 	it('STEP (9) : Enter friend name to share this event with on "Send a Message" window', function() {

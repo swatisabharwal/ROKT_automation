@@ -3,10 +3,12 @@ var HtmlReporter = require('protractor-html-screenshot-reporter');
 exports.config = {
   directConnect: true,
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./src/testCases/testMainSocialShareModuleWhenUserNotLoggedInAndAppNotInstalled.js'],
+  specs: ['./src/testCases/testMiniSocialShareModuleWhenUserNotAlreadyLoggedInAndAppNotInstalled.js'],
   capabilities: {
     browserName: 'chrome'
   },
+  getPageTimeout: 30000,
+  allScriptsTimeout: 30000,
 
   jasmineNodeOpts: {
     onComplete: null,
