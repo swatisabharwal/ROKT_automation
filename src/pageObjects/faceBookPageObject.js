@@ -56,8 +56,9 @@ fbAuthentication.prototype = Object.create({}, {
 	clickToUnlike:{
 		value : function(){
 			this.fb_ticketmaster_fb_event_Liked_btn.then(function(elem){
+				browser.driver.sleep(3000);
             	browser.driver.actions().mouseMove(elem).perform();
-				
+				browser.driver.sleep(1000);
                 browser.driver.findElement(by.xpath('//span[contains(text(),"Unlike")]')).click();
 		});
 		
@@ -103,6 +104,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	checkForJoinButtonOnEventsPageAndRemoveUserIfJoinedAlready : {  
 		value : function() {
+			browser.driver.manage().timeouts().implicitlyWait(10000);
 			var lengthOfEventBar;
 			this.list_eventButtons.then(function(elem){
 				lengthOfEventBar = elem.length;	
@@ -117,6 +119,7 @@ fbAuthentication.prototype = Object.create({}, {
 							browser.driver.findElement(by.xpath('//button[contains(text(), "OK")]')).click();
 							console.log("[INFO] : User removed from guest list");
 							browser.driver.sleep(3000);
+							browser.driver.manage().timeouts().implicitlyWait(30000);
 						});
 					});					
 				}
@@ -299,6 +302,7 @@ fbAuthentication.prototype = Object.create({}, {
 
 	fbSettingsTab : {
 		value : function() { 
+			browser.driver.sleep(3000);
 			return this.fb_settings_tab.click();
 		}
 	},

@@ -219,7 +219,7 @@ WidgetPage.prototype = Object.create({}, {
 	
 	clickLikeBtn: {
 	    value : function() {  	 	
-			this.widget_like_btn.click();
+		  this.widget_like_btn.click();
 	       browser.driver.switchTo().defaultContent();
 		}
 	},
@@ -233,7 +233,7 @@ WidgetPage.prototype = Object.create({}, {
 
 	getVisibiltyOfWidgetOverlay : {
 		value : function() {  		
-			browser.driver.sleep(5000);
+			browser.driver.sleep(3000);
 			return this.widgetOverlay.isDisplayed();
 		}
 	},
@@ -349,14 +349,13 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifySendInvitationButton : {
 		value : function() {  		
-			browser.driver.manage().timeouts().implicitlyWait(30000);
 			return this.send_invitation_btn.isDisplayed();
 		}
 	},
 
 	sendInvitationButtonClick : {
 		value : function() {  
-			//browser.driver.sleep(2000);
+
 			return this.send_invitation_btn.click();
 		}
 	},
@@ -394,13 +393,14 @@ WidgetPage.prototype = Object.create({}, {
 
 	verifyLinkToTicketmaster : {
 		value : function() {
+			browser.driver.sleep(3000);
 			return this.link_ticketmaster.isDisplayed();
 		}
 	},
 
 	clickOnClose : {
 		value : function() {  	
-			browser.driver.sleep(5000);
+			browser.driver.sleep(1000);
 			return this.close_btn.click();
 		}
 	},
@@ -414,7 +414,7 @@ WidgetPage.prototype = Object.create({}, {
 				browser.driver.switchTo().window(handles[1]);
 			});
 			this.okay_to_install.click();
-			
+			browser.driver.sleep(3000);
 			this.okay_to_install.click();
 			browser.driver.getAllWindowHandles().then(function(handles) {
 				

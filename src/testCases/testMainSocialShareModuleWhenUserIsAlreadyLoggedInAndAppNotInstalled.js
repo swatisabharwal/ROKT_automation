@@ -66,7 +66,7 @@ describe('ROKT Widget Demo Test Using Protractor -- File: testMainSocialShareMod
 	});
 	
 	it('STEP (2) : Verify Widget Overlay', function() {
-		expect(Wpage.widgetFrame.isDisplayed()).toBe(true);
+		
 		Wpage.switchToWidgetFrame();
 	    expect(Wpage.getVisibiltyOfWidgetOverlay()).toBe(true);
 	});

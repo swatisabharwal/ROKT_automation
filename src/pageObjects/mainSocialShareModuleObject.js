@@ -85,8 +85,8 @@ var mainModule = function () {
 	},
     verifyOffer:	{
 	    value: function () {
-	    	browser.driver.sleep(1000);
- 		     return this.skip_btn.isDisplayed();
+	    	browser.driver.sleep(5000);
+ 		    return this.skip_btn.isDisplayed();
         }
     },
 
