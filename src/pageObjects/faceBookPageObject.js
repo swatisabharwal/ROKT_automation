@@ -8,7 +8,7 @@ fbAuthentication.prototype = Object.create({}, {
 	home_tab : { get: function () {return browser.driver.findElement(by.xpath('//a[contains(@href,"https://www.facebook.com/?ref=tn_tnmn")]'));}},
 	click_join_page : {get : function() {return browser.driver.findElement(by.xpath('//div[@id="event_button_bar"]/a[1]'));}},
 	event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Going")]'));}},
-	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
+	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i'));}},
 	logout_tab : {get : function() {return browser.driver.findElement(by.css('#pageLoginAnchor'));}},
 	logout_btn : {get : function() {return browser.driver.findElement(by.xpath('//li[@class="_54ni navSubmenu __MenuItem"][9]'));}},
 	loginBtn : {get : function() {return browser.driver.findElement(by.xpath('//input[contains(@value,"Log In")]'));}},
@@ -19,7 +19,7 @@ fbAuthentication.prototype = Object.create({}, {
 	select_sender : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Automation shared a link.")]'));}},
 	verify_message : {get : function() {return browser.driver.findElement(by.xpath('(//ul[@id="webMessengerRecentMessages"]//div[contains(text(),"ticketmaster.com")])[last()]'));}}, 
 	message_settings : {get : function() {return browser.driver.findElement(by.xpath('//button[contains(.,"New Message")]/following-sibling::div[1]//button'));}}, 
-	clear_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Delete Conversation...")] '));}}, 
+	clear_messages : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Delete Conversation...")]'));}}, 
 	clear_conversation : {get : function() {return browser.driver.findElement(by.xpath('//label[contains(@class ,"uiButton uiButtonLarge uiButtonConfirm")]'));}},
 	undo_tab : {get : function() {return browser.driver.findElement(by.css('.mrs.fbEventSpriteIcon._347h._347i.img'));}},
 	undo_event : {get : function() {return browser.driver.findElement(by.xpath('//span[contains(text(),"Remove me from Guest List")]'));}},
@@ -33,7 +33,6 @@ fbAuthentication.prototype = Object.create({}, {
 	list_eventButtons : {get : function() {return browser.driver.findElements(by.css('#event_button_bar>a'));}},
 	event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@role="button"]/span[contains(text(),"Maybe")]'));}},
 	maybe_event:{get : function() {return browser.driver.findElement(by.css('._54ni.fbEventClassicButton.__MenuItem:nth-child(2)'));}},
-	user_event_status : {get : function() {return browser.driver.findElement(by.xpath('//a[ @href="https://www.facebook.com/profile.php?id=100009853330781"]/i[@class="_4dy6 img sp_Uxb4b5rwgIc sx_2bfef4"]'));}},
 	user_event_status_maybe : {get : function() {return browser.driver.findElement(by.xpath('//a[@aria-label="Automation TestAccount (Maybe)"]'));}},
     
 	user_profile: {get : function() {return browser.driver.findElement(by.xpath('//a[@title="Profile"]'));}},
@@ -173,6 +172,7 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	eventStatus : {
 		value : function() {
+			browser.driver.sleep(2000);
 			return this.event_status.isDisplayed();
 		}
 	},
@@ -266,12 +266,14 @@ fbAuthentication.prototype = Object.create({}, {
 	
 	messageSettings : {
 		value : function() {
+				
 			return this.message_settings.click();
 		}
 	},
 	
 	clearMessages : {
 		value : function() {
+
 			return this.clear_messages.click();
 		}
 	},

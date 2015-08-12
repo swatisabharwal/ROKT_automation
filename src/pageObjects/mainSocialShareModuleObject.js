@@ -118,6 +118,7 @@ var mainModule = function () {
    
     verifyMainAttendButton : {
 		value : function() {
+			 browser.driver.sleep(1000);
 			 return this.mainattendButton.isDisplayed();
 		}
 	},
